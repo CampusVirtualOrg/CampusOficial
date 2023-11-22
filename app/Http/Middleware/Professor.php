@@ -17,10 +17,13 @@ class Professor
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->tipo == "Professor") {
-            return redirect()->intended(RouteServiceProvider::HOME);
-        }
-        
-        return $next($request);
+		try {
+			if(Auth::user()->tipo == "Professor") {
+				return $next($request);
+			}
+		} catch (\Throwable $th) {
+			echo $th->getMessage();
+		}
+
     }
 }

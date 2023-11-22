@@ -6,8 +6,8 @@ use App\Http\Controllers\RequerimentosController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccessibleController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Api\AlunoController;
-use App\Http\Controllers\Api\AvisosController;
+use App\Http\Controllers\AlunoController;
+use App\Http\Controllers\AvisosController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CursosController;
@@ -89,13 +89,13 @@ Route::middleware('auth')->group(function () {
 				Route::get('/cursos','showAll')->name('cursos');
 				Route::get('/cursos/remove/{id}', 'remove');
 			});
-			
+
 			// DISCIPLINAS
 			Route::controller(DisciplinasController::class)->group(function() {
 				Route::get('/disciplinas','showAll')->name('disciplinas');
 				Route::get('/disciplinas/remove/{id}', 'remove');
 			});
-			
+
 			// TURMAS
 			Route::controller(TurmaController::class)->group(function() {
 				Route::get('/turmas','showAll')->name('turmas');

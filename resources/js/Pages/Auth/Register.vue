@@ -17,6 +17,7 @@ const form = useForm({
     sexo: '',
     endereco: '',
     data_nasc: '',
+    curso_id: '',
 });
 
 const submit = () => {
@@ -123,6 +124,15 @@ const submit = () => {
 
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
+
+			<div class="mt-4">
+                <InputLabel for="curso_id" value="Curso" />
+
+                <TextInput id="curso_id" type="number" class="mt-1 block w-full" v-model="form.curso_id" required />
+
+                <InputError class="mt-2" :message="form.errors.email" />
+            </div>
+
 
             <div class="flex items-center justify-end mt-4">
                 <Link :href="route('login')"

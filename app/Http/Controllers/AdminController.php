@@ -14,7 +14,8 @@ class AdminController extends Controller
 {
     public function home()
     {
-        return Inertia::render('DashboardAdmin');
+		$user = Auth::user();
+        return Inertia::render('DashboardAdmin', ['user' => $user]);
     }
 
     public function users()

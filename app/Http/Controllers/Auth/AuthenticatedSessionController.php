@@ -37,7 +37,7 @@ class AuthenticatedSessionController extends Controller
         //     return redirect()->intended(RouteServiceProvider::DASHBOARD_PROF);
         // }
 
-        return redirect()->intended(RouteServiceProvider::DASHBOARD);
+        return redirect('/logon');
 
     }
 

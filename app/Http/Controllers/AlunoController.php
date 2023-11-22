@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,13 +8,16 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Query\Builder;
 use App\Models\Disciplina;
 use App\Models\Usuario_turmas;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+
 
 class AlunoController extends Controller
 {
     public function index()
     {
-        return Inertia::render('DashboardAluno');
+		$user = Auth::user();
+        return Inertia::render('DashboardAluno', ['user' => $user]);
     }
 
     public function disciplinas(String $userId)

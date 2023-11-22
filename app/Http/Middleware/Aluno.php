@@ -17,10 +17,12 @@ class Aluno
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->tipo == "Aluno") {
-            return redirect()->intended(RouteServiceProvider::HOME);
-        }
-        
-        return $next($request);
-    }
+		try {
+			if(Auth::user()->tipo == "Aluno") {
+				return $next($request);
+			}
+		} catch (\Throwable $th) {
+			echo $th->getMessage();
+		}
+	}
 }
