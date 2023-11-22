@@ -12,13 +12,13 @@ const props = defineProps({
 
 <template>
 	<Link class="card" :href="route">
-		<div class="head">
-			<i :class="icon"></i>
-			<span class="card-title">{{ title }}</span>
-		</div>
-		<div class="texts">
-			<p>{{ description }}</p>
-		</div>
+	<div class="head">
+		<i :class="icon"></i>
+		<span class="card-title">{{ title }}</span>
+	</div>
+	<div class="texts">
+		<p>{{ description }}</p>
+	</div>
 	</Link>
 </template>
 
@@ -28,6 +28,7 @@ const props = defineProps({
 * {
 	font-family: "Inter", sans-serif;
 }
+
 .card {
 	display: flex;
 	flex-direction: column;
@@ -38,10 +39,10 @@ const props = defineProps({
 	background-color: #f8f8f8;
 	border: 1px solid #eeeeee;
 	box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
-		          rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+		rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 	border-radius: 12px;
 	padding: 1rem;
-  transition: all 0.5s;
+	transition: all 0.2s;
 }
 
 .card .head {
@@ -53,7 +54,7 @@ const props = defineProps({
 .card i {
 	color: #3065ac;
 	font-size: 26pt;
-  transition: all 0.4s;
+	
 }
 
 .card .card-title {
@@ -61,8 +62,9 @@ const props = defineProps({
 	text-decoration: none;
 	color: #3065ac;
 	font-weight: 700;
-  transition: all 0.4s;
+	
 }
+
 .card .texts {
 	display: flex;
 	flex-direction: column;
@@ -72,7 +74,7 @@ const props = defineProps({
 	font-weight: 500;
 	font-size: 16pt;
 	color: #252627;
-  transition: all 0.4s;
+	
 }
 
 .card p {
@@ -80,25 +82,23 @@ const props = defineProps({
 }
 
 .card:hover {
-  background-color: #3065ac;
-  border: #3065ac;
+	background-color: #3065ac;
+	border: #3065ac;
 
-  p {
-    color: #fff;
-  }
+	p {
+		color: #fff;
+	}
 
-  i {
-    color: #fff;
-  }
+	i {
+		color: #fff;
+	}
 
-  .texts {
-    color: #fff;
-  }
+	.texts {
+		color: #fff;
+	}
 
-  .card-title {
-    color: #fff;
-  }
+	.card-title {
+		color: #fff;
+	}
 }
-
-
 </style>

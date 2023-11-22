@@ -16,42 +16,40 @@ const props = defineProps({
     <Head title="Paniel Administrador" />
 
     <main class="mainAdmin">
-        <Aside :nome="user.name" />
+        <Aside :nome="user.name" :imagem="user.imagem" :tipo="user.tipo"/>
 
         <section>
             <Header />
             <div class="content">
-                <div class="myTable">
-                    <table class="styled-table">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>Email</th>
-                                <th>Matricula</th>
-                                <th>Tipo</th>
-                                <th>Observações</th>
-                                <th>Status</th>
-                                <!-- <th>Data</th> -->
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody v-for="requerimento in requerimentos" :key="requerimento.id">
-                            <tr>
-                                <td>{{ requerimento.nome_usuario }}</td>
-                                <td>{{ requerimento.email_usuario }}</td>
-                                <td>{{ requerimento.matricula_usuario }}</td>
-                                <td>{{ requerimento.tipo_requerimento }}</td>
-                                <td>{{ requerimento.observacoes }}</td>
-                                <td>{{ requerimento.status }}</td>
-                                <!-- <td>{{ requerimento.created_at }}</td> -->
-                                <td>
-                                    <Link :href="`/requerimentos/edit/${requerimento.id}`">EDIT</Link>
-                                    <Link :href="`/requerimentos/remove/${requerimento.id}`">DEL</Link>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Matricula</th>
+                            <th>Tipo</th>
+                            <th>Observações</th>
+                            <th>Status</th>
+                            <!-- <th>Data</th> -->
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody v-for="requerimento in requerimentos" :key="requerimento.id">
+                        <tr>
+                            <td>{{ requerimento.nome_usuario }}</td>
+                            <td>{{ requerimento.email_usuario }}</td>
+                            <td>{{ requerimento.matricula_usuario }}</td>
+                            <td>{{ requerimento.tipo_requerimento }}</td>
+                            <td>{{ requerimento.observacoes }}</td>
+                            <td>{{ requerimento.status }}</td>
+                            <!-- <td>{{ requerimento.created_at }}</td> -->
+                            <td>
+                                <Link :href="`/requerimentos/edit/${requerimento.id}`">EDIT</Link>
+                                <Link :href="`/requerimentos/remove/${requerimento.id}`">DEL</Link>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </section>
     </main>
@@ -92,7 +90,7 @@ section {
 
 
 table {
-    width: 75vw;
+    width: 100%;
     border: 1px solid #000;
     border-collapse: collapse;
 }

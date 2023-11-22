@@ -24,10 +24,8 @@ class PostController extends Controller
     {
 
 		$comments = Comment::where('post_id',$id)->get();
-		$user_id = $comments[0]["user_id"];
-		$user = User::where("id",$user_id);
         $post = Post::where('id',$id)->get();
-        return Inertia::render('AvisoAlunoOne' , ['post' => $post , 'comments' => $comments , 'user' => $user]);
+        return Inertia::render('AvisoAlunoOne' , ['post' => $post , 'comments' => $comments]);
     }
 
     /**

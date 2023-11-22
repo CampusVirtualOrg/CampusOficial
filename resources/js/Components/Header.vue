@@ -10,7 +10,7 @@ import { Link } from '@inertiajs/vue3';
   <div class="header-section">
 
     <div class="perfil">
-      <span style="color: #3065ac; font-weight: 700; font-size: 16pt;" class="mx-3">Painel Administrativo</span>
+      <Link :href="route('admin.home')" style="color: #3065ac; font-weight: 700; font-size: 16pt;" class="mx-3">Painel Administrativo</Link>
     </div>
 
     <div class="create">

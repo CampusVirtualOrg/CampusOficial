@@ -13,44 +13,42 @@ defineProps({ user: Object, users: Object })
     <Head title="Paniel Administrador" />
 
     <main class="mainAdmin">
-        <Aside :nome="user.name" />
+        <Aside :nome="user.name" :imagem="user.imagem" :tipo="user.tipo"/>
 
         <section>
             <Header />
             <div class="content">
-                <div class="myTable">
-                    <table class="styled-table">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>Email</th>
-                                <th>Tipo</th>
-                                <!-- <th>Matricula</th> -->
-                                <th>Telefone</th>
-                                <th>CPF</th>
-                                <th>Sexo</th>
-                                <th>Data</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody v-for="usuario in users">
-                            <tr>
-                                <td>{{ usuario.name }}</td>
-                                <td>{{ usuario.email }}</td>
-                                <td>{{ usuario.tipo }}</td>
-                                <!-- <td>{{ usuario.matricula }}</td> -->
-                                <td>{{ usuario.telefone }}</td>
-                                <td>{{ usuario.cpf }}</td>
-                                <td>{{ usuario.sexo }}</td>
-                                <td>{{ usuario.data_nasc }}</td>
-                                <td>
-                                    <Link :href="`/usuarios/edit/${usuario.id}`">EDIT</Link>
-                                    <Link :href="`/usuarios/remove/${usuario.id}`">DEL</Link>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Tipo</th>
+                            <!-- <th>Matricula</th> -->
+                            <th>Telefone</th>
+                            <th>CPF</th>
+                            <th>Sexo</th>
+                            <th>Data</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody v-for="usuario in users">
+                        <tr>
+                            <td>{{ usuario.name }}</td>
+                            <td>{{ usuario.email }}</td>
+                            <td>{{ usuario.tipo }}</td>
+                            <!-- <td>{{ usuario.matricula }}</td> -->
+                            <td>{{ usuario.telefone }}</td>
+                            <td>{{ usuario.cpf }}</td>
+                            <td>{{ usuario.sexo }}</td>
+                            <td>{{ usuario.data_nasc }}</td>
+                            <td>
+                                <Link :href="`/usuarios/edit/${usuario.id}`">EDIT</Link>
+                                <Link :href="`/usuarios/remove/${usuario.id}`">DEL</Link>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </section>
     </main>
@@ -91,7 +89,7 @@ section {
 
 
 table {
-    width: 75vw;
+    width: 100%;
     border: 1px solid #000;
     border-collapse: collapse;
 }
@@ -109,4 +107,5 @@ th {
     background-color: #3065ac;
     color: #ffffff;
     font-size: 14pt;
-}</style>
+}
+</style>
