@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('carga_horaria');
             $table->integer('periodos');
             $table->string('sigla');
+            $table->string('categoria');
+            $table->string('descricao');
             $table->timestamps();
         });
     }

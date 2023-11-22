@@ -14,5 +14,7 @@ class Curso extends Model
         'carga_horaria',
         'periodos',
         'sigla',
+        'categoria',
+        'descricao',
     ];
 }

@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Disciplina;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class DisciplinasController extends Controller
 {
     public function showAll()
     {
-        $subject = Disciplina::all();
-        return Inertia::render('DashboardDisciplinas', ['disciplinas' => $subject]);
+        $disciplinas = Disciplina::all();
+        $user = Auth::user();
+        return Inertia::render('Adm/Disciplinas/Disciplinas', ['disciplinas' => $disciplinas, 'user' => $user]);
     }
 
     public function create(Request $request){
@@ -35,7 +37,10 @@ class DisciplinasController extends Controller
             //MODELO RECEBE OS DADOS PARA SEREM
             $subject = new Disciplina([
                 'nome' => $credentials['nome'],
-                'carga_horaria' => $credentials['carga_horaria']
+                'sigla' => $credentials['sigla'],
+                'carga_horaria' => $credentials['carga_horaria'],
+                'pre_requisito_id' => $credentials['pre_requisito_id'],
+                'curso_id' => $credentials['curso_id'],
             ]);
             $subject->save();
 

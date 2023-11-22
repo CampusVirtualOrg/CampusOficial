@@ -28,8 +28,15 @@ class User extends Authenticatable
         'sexo',
         'endereco',
         'imagem',
-        'data_nasc'
+        'data_nasc',
+        'curso_id'
     ];
+
+    public function curso()
+    {
+        return $this->belongsTo(Curso::class);
+    }
+
 
     /**
      * The attributes that should be hidden for serialization.

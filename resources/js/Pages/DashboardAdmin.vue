@@ -4,7 +4,7 @@ import Aside from '@/Components/Aside.vue';
 import Card from '@/Components/Card.vue';
 import Header from '@/Components/Header.vue';
 
-defineProps({ user: Object })
+const props = defineProps({ user: Object });
 
 </script>
 
@@ -13,7 +13,7 @@ defineProps({ user: Object })
     <Head title="Paniel Administrador" />
 
     <main class="mainAdmin">
-        <Aside :nome="user.name" />
+        <Aside :nome="props.user.name" :imagem="props.user.imagem" :tipo="props.user.tipo"/>
 
         <section>
             <Header />

@@ -10,6 +10,7 @@ use App\Models\Usuario;
 use App\Models\Aluno_turma;
 use App\Models\User;
 use App\Models\Usuario_turmas;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use PhpParser\Node\Expr\Cast\String_;
 
@@ -21,7 +22,8 @@ class TurmaController extends Controller
     {
         $turmas = Turma::all();
         $professores = User::where('tipo', 'Professor')->get();
-        return Inertia::render('DashboardTurmas', ['turmas' => $turmas, 'professores' => $professores]);
+        $user = Auth::user();
+        return Inertia::render('Adm/Turmas/Turmas', ['turmas' => $turmas, 'professores' => $professores, 'user' => $user]);
     }
 
     public function addDisc(string $id)

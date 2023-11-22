@@ -74,9 +74,6 @@ Route::middleware('auth')->group(function () {
 				Route::get('/usuarios/remove/{id}', 'remove');
 			});
 
-			// AÇÕES DE CRIAÇÂO DE USUARIOS
-		
-
 			// REQUERIMENTOS
 			Route::controller(RequerimentosController::class)->group(function () {
 				Route::get('/dashboardRequerimentos', 'create')->name('dashboardRequerimentos');
@@ -85,6 +82,24 @@ Route::middleware('auth')->group(function () {
 				Route::get('/requerimentos/edit/{id}', 'updateIndex');
 				Route::post('/requerimentos/edit/{id}', 'update');
 				Route::get('/requerimentos/remove/{id}', 'remove');
+			});
+
+			// CURSOS
+			Route::controller(CursosController::class)->group(function() {
+				Route::get('/cursos','showAll')->name('cursos');
+				Route::get('/cursos/remove/{id}', 'remove');
+			});
+			
+			// DISCIPLINAS
+			Route::controller(DisciplinasController::class)->group(function() {
+				Route::get('/disciplinas','showAll')->name('disciplinas');
+				Route::get('/disciplinas/remove/{id}', 'remove');
+			});
+			
+			// TURMAS
+			Route::controller(TurmaController::class)->group(function() {
+				Route::get('/turmas','showAll')->name('turmas');
+				Route::get('/turmas/remove/{id}', 'remove');
 			});
 		});
 

@@ -43,17 +43,17 @@ const toggleMenu = () => {
             <Link :href="route('usuarios')" class="a-asclasse"><i class="bi bi-people-fill"></i><span
                 v-if="isExpanded">Usuários</span></Link>
 
-            <Link :href="route('requerimentos')" class="a-asclasse"><i class="bi bi-file-earmark-text-fill"></i><span
-                v-if="isExpanded">Requerimentos</span></Link>
-
-            <Link :href="route('turmas')" class="a-asclasse"><i class="bi bi-easel2-fill"></i><span
-                v-if="isExpanded">Turmas</span></Link>
+            <Link :href="route('cursos')" class="a-asclasse"><i class="bi bi-c-square-fill"></i><span
+                v-if="isExpanded">Cursos</span></Link>
 
             <Link :href="route('disciplinas')" class="a-asclasse"><i class="bi bi-book-half"></i><span
                 v-if="isExpanded">Disciplinas</span></Link>
 
-            <Link :href="route('cursos')" class="a-asclasse"><i class="bi bi-c-square-fill"></i><span
-                v-if="isExpanded">Cursos</span></Link>
+            <Link :href="route('turmas')" class="a-asclasse"><i class="bi bi-easel2-fill"></i><span
+                v-if="isExpanded">Turmas</span></Link>
+
+            <Link :href="route('requerimentos')" class="a-asclasse"><i class="bi bi-file-earmark-text-fill"></i><span
+                v-if="isExpanded">Requerimentos</span></Link>
 
             <Link :href="route('welcome')" class="logoAsclasse">
             <Logo />
@@ -105,10 +105,12 @@ aside {
 .text-perfil {
     line-height: normal;
 }
+
 .tipo-text {
     color: #140D4F;
     font-weight: 700;
 }
+
 .h2-asclasse {
     color: #140D4F;
     font-size: 16pt;

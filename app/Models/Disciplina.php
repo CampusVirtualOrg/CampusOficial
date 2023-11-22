@@ -11,6 +11,9 @@ class Disciplina extends Model
 
     protected $fillable = [
         'nome',
+        'sigla',
         'carga_horaria',
+        'pre_requisito_id',
+        'curso_id',
     ];
 }

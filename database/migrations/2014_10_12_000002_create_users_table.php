@@ -25,8 +25,11 @@ return new class extends Migration
             $table->string('endereco')->nullable();
             $table->string('imagem')->nullable();
             $table->date('data_nasc')->nullable();
+            $table->bigInteger('curso_id')->unsigned()->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('curso_id')->references('id')->on('cursos')->onDelete('cascade');
         });
     }
 

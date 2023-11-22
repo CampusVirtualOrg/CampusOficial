@@ -7,14 +7,16 @@ use Illuminate\Http\Request;
 use App\Models\Curso;
 use App\Models\Disciplina;
 use App\Models\Curso_disciplina;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class CursosController extends Controller
 {
     public function showAll()
     {
-        $course = Curso::all();
-        return Inertia::render('DashboardCursos', ['course' => $course]);
+        $cursos = Curso::all();
+        $user = Auth::user();
+        return Inertia::render('Adm/Cursos/Cursos', ['cursos' => $cursos, 'user' => $user]);
     }
 
     public function disciplinas(String $courseId)
@@ -58,41 +60,41 @@ class CursosController extends Controller
 
             //RETORNA A RESPOSTA
             return redirect('/cursos');
-
         } catch (\Throwable $th) {
             return response()->json(['success' => false, 'error' => $th->getMessage()], 302);
         }
     }
 
-    public function updateIndex(string $id){
-        $cursos = Curso::all()->where('id',$id)->first();
+    public function updateIndex(string $id)
+    {
+        $cursos = Curso::all()->where('id', $id)->first();
         return view('adm.cursos.editCursos', ['cursos' => $cursos]);
     }
 
     public function update(Request $request, string $id)
     {
-            try {
-                if (Curso::where('id', $id)->exists()) {
-                    $Curso = [
-                        'nome' => $request->nome,
-                        'carga_horaria' => $request->carga_horaria,
-                        'periodos' => $request->periodos,
-                        'sigla' => $request->sigla,
-                    ];
+        try {
+            if (Curso::where('id', $id)->exists()) {
+                $Curso = [
+                    'nome' => $request->nome,
+                    'carga_horaria' => $request->carga_horaria,
+                    'periodos' => $request->periodos,
+                    'sigla' => $request->sigla,
+                ];
 
-                    Curso::where('id', $id)->update($Curso);
-                    return redirect('/cursos');
-                } else {
-                    return response()->json([
-                        "success" => false
-                    ], 404);
-                }
-            } catch (\Throwable $e) {
+                Curso::where('id', $id)->update($Curso);
+                return redirect('/cursos');
+            } else {
                 return response()->json([
-                    "success" => false,
-                    "error" => $e->getMessage()
-                ], 400);
+                    "success" => false
+                ], 404);
             }
+        } catch (\Throwable $e) {
+            return response()->json([
+                "success" => false,
+                "error" => $e->getMessage()
+            ], 400);
+        }
     }
 
     public function remove(string $id)
@@ -113,9 +115,9 @@ class CursosController extends Controller
     public function search(Request $request)
     {
         $course = Curso::where('nome', 'LIKE', '%' . $request->text . '%')
-        ->orWhere('carga_horaria', 'LIKE', '%' . $request->text . '%')
-        ->orWhere('sigla', 'LIKE', '%' . $request->text . '%')
-        ->paginate(10);
+            ->orWhere('carga_horaria', 'LIKE', '%' . $request->text . '%')
+            ->orWhere('sigla', 'LIKE', '%' . $request->text . '%')
+            ->paginate(10);
         return view('adm.cursos.cursos', ['course' => $course]);
     }
 }
