@@ -18,6 +18,7 @@ defineProps({ user: Object, users: Object })
         <section>
             <Header />
             <div class="content">
+                <Link :href="route('register')" class="buttonAdd">+ Adicionar Novo Usuário</Link>
                 <table class="styled-table">
                     <thead>
                         <tr>
@@ -29,6 +30,7 @@ defineProps({ user: Object, users: Object })
                             <th>CPF</th>
                             <th>Sexo</th>
                             <th>Data</th>
+                            <th>Curso</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
@@ -42,6 +44,7 @@ defineProps({ user: Object, users: Object })
                             <td>{{ usuario.cpf }}</td>
                             <td>{{ usuario.sexo }}</td>
                             <td>{{ usuario.data_nasc }}</td>
+                            <td>{{ usuario.curso_id }}</td>
                             <td>
                                 <Link :href="`/usuarios/edit/${usuario.id}`">EDIT</Link>
                                 <Link :href="`/usuarios/remove/${usuario.id}`">DEL</Link>
@@ -65,26 +68,35 @@ defineProps({ user: Object, users: Object })
     display: flex;
     width: 100%;
     gap: 1rem;
-    padding: 2rem;
+    padding: 0rem 2rem;
     flex-wrap: wrap;
 }
 
 section {
     display: flex;
-    gap: 2rem;
     flex-direction: column;
     width: 100%;
 }
 
-.buttonbox {
-    width: 450px;
-    height: 150px;
-    flex-shrink: 0;
-    background: #3065AC;
-    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.30), 0px 0px 1px 0px rgba(0, 0, 0, 0.15);
-    color: #F7F2FA;
-    border-radius: 25px;
-    font-size: larger;
+.buttonAdd {
+    background: none;
+    text-align: center;
+    font-size: 14pt;
+    font-weight: 600;
+    color: var(--main-blue);
+    border-radius: 6px;
+    border: 2px solid var(--main-blue);
+    padding: 0.6rem;
+    width: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    transition: all 0.2s;
+}
+
+.buttonAdd:hover {
+    color: var(--white);
+    background-color: var(--main-blue);
+    cursor: pointer;
 }
 
 
@@ -100,6 +112,7 @@ th {
     border: 1px solid black;
     text-align: center;
     padding: 0.4rem;
+    background-color: #fff;
 }
 
 th {

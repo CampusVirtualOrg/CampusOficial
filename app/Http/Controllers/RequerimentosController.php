@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Requerimento;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -65,7 +66,8 @@ class RequerimentosController extends Controller
     public function updateIndex(String $id)
     {
         $requerimento = Requerimento::all()->where('id', $id)->first();
-        return Inertia::render('Adm/Requerimentos/EditRequerimentos', ['requerimento' => $requerimento]);
+        $user = Auth::user();
+        return Inertia::render('Adm/Requerimentos/EditRequerimentos', ['requerimento' => $requerimento, 'user' => $user]);
     }
 
     public function update(Request $request, string $id)

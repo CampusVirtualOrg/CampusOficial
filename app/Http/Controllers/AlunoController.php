@@ -21,11 +21,12 @@ class AlunoController extends Controller
         return Inertia::render('DashboardAluno', ['user' => $user]);
     }
 
-    public function disciplinas(String $userId)
-    {
-        $disciplinas = Usuario_turmas::where('aluno_id', $userId)->get();
-        $disciplinaIds = $disciplinas->pluck('disciplina_id');
-        $disciplinasEncontradas = Disciplina::whereIn('id', $disciplinaIds)->select('nome')->get();
+    public function disciplinas()
+    {   
+        $user = Auth::user();
+        $userCursoId = $user->curso_id;
+        $disciplinas = Disciplina::where('curso_id', $userCursoId)->get();
+        return Inertia::render('Aluno/Disciplinas', ['user' => $user, 'disciplinas' => $disciplinas]);
     }
 
     public function boletim()

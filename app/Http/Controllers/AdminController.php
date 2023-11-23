@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Curso;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Users;
@@ -68,6 +69,7 @@ class AdminController extends Controller
                 'endereco' => $credentials['endereco'],
                 'imagem' => $credentials['imagem'],
                 'data_nasc' => $credentials['data_nasc'],
+                'curso_id' => $credentials['curso_id'],
             ]);
 
             $User->save();
@@ -79,34 +81,37 @@ class AdminController extends Controller
 
     public function indexUpdate(String $id){
 
-        $User = User::all()->where('id', $id)->first();
-        return view('adm.users.editar', ['user' => $User]);
+        $user = User::all()->where('id', $id)->first();
+        $userAuth =  Auth::user();
+        $cursos = Curso::all();
+        return Inertia::render('Adm/Usuarios/EditUsuarios', ['user' => $user,  'userAuth' => $userAuth, 'cursos' => $cursos]);
 
     }
 
-    //ATUALIZA User
-    public function edit(Request $request)
+    public function edit(Request $request, string $id)
     {
         try {
-            $credentials = $request->only('nome', 'email', 'senha', 'tipo', 'matricula', 'telefone', 'cpf', 'sexo', 'endereco', 'data_nasc');
-            if (User::where('email', $request->email)->exists()) {
-                $aluno = [
-                    'nome' => $request->nome,
-                    'email' => $request->email,
-                    'senha' => $request->senha,
-                    'tipo' => $request->tipo,
-                    'matricula' => $request->matricula,
-                    'cpf' => $request->cpf,
-                    'sexo' => $request->sexo,
-                    'endereco' => $request->endereco,
-                    'data_nasc' => $request->data_nasc
+            $user = User::where('id', $id)->first();
+            if ($user->exists()) {
+                $data = [
+                    'name' => $request->name ? $request->name : $user->name,
+                    'email' => $request->email ? $request->email : $user->email,
+                    'password' => $request->password ? $request->password : $user->password,
+                    'tipo' => $request->tipo ? $request->tipo : $user->tipo,
+                    'matricula' => $request->matricula ? $request->matricula : $user->matricula,
+                    'cpf' => $request->cpf ? $request->cpf : $user->cpf,
+                    'sexo' => $request->sexo ? $request->sexo : $user->sexo, 
+                    'endereco' => $request->endereco ? $request->endereco : $user->endereco,
+                    'data_nasc' => $request->data_nasc ? $request->data_nasc : $user->data_nasc,
+                    'imagem' => $request->imagem ? $request->imagem : $user->imagem,
+                    'curso_id' => $request->curso_id ? $request->curso_id : $user->curso_id,
                 ];
 
-                User::where('email', $credentials['email'])->update($aluno);
-                return redirect('/users');
+                User::where('id', $id)->update($data);
+                return redirect('/usuarios');
             } else {
                 return response()->json([
-                    "success" => false
+                    "success" => "sem sucesso"
                 ], 404);
             }
         } catch (\Throwable $e) {

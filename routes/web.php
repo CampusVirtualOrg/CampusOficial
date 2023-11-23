@@ -65,12 +65,16 @@ Route::middleware('auth')->group(function () {
 		//-------------- ROTAS DO ADMINISTRADOR ---------------//
 
 		Route::middleware('administrador')->group(function () {
-
+			Route::controller(RegisteredUserController::class)->group(function () {
+				Route::get('/register', 'create')->name('register');
+				Route::post('/register', 'store');
+			});
+			
 			Route::controller(AdminController::class)->group(function () {
 				Route::get('/adm', 'home')->name('admin.home');
 				Route::get('/usuarios', 'users')->name('usuarios');
 				Route::get('/usuarios/edit/{id}', 'indexUpdate');
-				Route::post('/usuarios/edit/{id}', 'edit');
+				Route::put('/usuarios/update/{id}', 'edit');
 				Route::get('/usuarios/remove/{id}', 'remove');
 			});
 
@@ -94,6 +98,8 @@ Route::middleware('auth')->group(function () {
 			Route::controller(DisciplinasController::class)->group(function() {
 				Route::get('/disciplinas','showAll')->name('disciplinas');
 				Route::get('/disciplinas/remove/{id}', 'remove');
+				Route::get('/disciplinas/create', 'createIndex')->name('createDisciplinas');
+				Route::post('/disciplinas/create', 'create');
 			});
 
 			// TURMAS
@@ -110,6 +116,7 @@ Route::middleware('auth')->group(function () {
 			Route::controller(AlunoController::class)->group(function () {
 				Route::get('/aluno', 'index')->name('homeAluno');
 				Route::get('/boletim', 'boletim')->name('boletim');
+				Route::get('/minhasdisciplinas', 'disciplinas')->name('disciplinasAluno');
 			});
 		});
 
@@ -123,11 +130,11 @@ Route::middleware('auth')->group(function () {
 		});
 
 
-		Route::middleware(['administrador', 'professor'])->group(function () {
-			Route::get('/turmas', [TurmaController::class, 'showAll'])->name('turmas');
-			Route::get('/disciplinas', [DisciplinasController::class, 'showAll'])->name('disciplinas');
-			Route::get('/cursos', [CursosController::class, 'showAll'])->name('cursos');
-		});
+		// Route::middleware(['administrador', 'professor'])->group(function () {
+		// 	Route::get('/turmas', [TurmaController::class, 'showAll'])->name('turmas');
+		// 	Route::get('/disciplinas', [DisciplinasController::class, 'showAll'])->name('disciplinas');
+		// 	Route::get('/cursos', [CursosController::class, 'showAll'])->name('cursos');
+		// });
 	});
 });
 

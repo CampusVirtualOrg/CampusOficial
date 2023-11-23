@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Curso;
 use Illuminate\Http\Request;
 use App\Models\Disciplina;
 use Illuminate\Support\Facades\Auth;
@@ -17,24 +18,30 @@ class DisciplinasController extends Controller
         return Inertia::render('Adm/Disciplinas/Disciplinas', ['disciplinas' => $disciplinas, 'user' => $user]);
     }
 
-    public function create(Request $request){
+    public function createIndex()
+    {   
+        $user = Auth::user();
+        $cursos = Curso::all();
+        $disciplinas = Disciplina::all();
+        return Inertia::render('Adm/Disciplinas/CreateDisciplinas', ['user' => $user, 'cursos' => $cursos, 'disciplinas' => $disciplinas]);
+    }
+
+    public function create(Request $request)
+    {
 
         try {
-            $credentials = $request->only('nome','carga_horaria');
+            $credentials = $request->only('nome', 'sigla', 'carga_horaria', 'pre_requisito_id', 'curso_id');
 
-            //VALIDA DADOS
-            if(($credentials['nome'] == null ||
-                $credentials['carga_horaria'] == null
-            ))
-            {
-                return response()->json([
-                    'success' => false,
-                    'msg' => $credentials['carga_horaria'],
-                ],
-                301);
+            if ($credentials['nome'] == null) {
+                return response()->json(
+                    [
+                        'success' => false,
+                        'msg' => "Dados incompletos",
+                    ],
+                    301
+                );
             }
 
-            //MODELO RECEBE OS DADOS PARA SEREM
             $subject = new Disciplina([
                 'nome' => $credentials['nome'],
                 'sigla' => $credentials['sigla'],
@@ -42,23 +49,23 @@ class DisciplinasController extends Controller
                 'pre_requisito_id' => $credentials['pre_requisito_id'],
                 'curso_id' => $credentials['curso_id'],
             ]);
-            $subject->save();
 
-            //RETORNA A RESPOSTA
+            $subject->save();
             return redirect('/disciplinas');
 
         } catch (\Throwable $th) {
-            return response()->json(['success' => false, 'error' => $th->getMessage()],400);
+            return response()->json(['success' => false, 'error' => $th->getMessage()], 404);
         }
-
     }
 
-    public function updateIndex(String $id){
-        $disciplina = Disciplina::all()->where('id',$id)->first();
+    public function updateIndex(String $id)
+    {
+        $disciplina = Disciplina::all()->where('id', $id)->first();
         return view('adm.disciplinas.editDisciplina', ['disc' => $disciplina]);
     }
 
-    public function update(Request $request, String $id){
+    public function update(Request $request, String $id)
+    {
         try {
             $credentials = $request->only('nome', 'carga_horaria');
 
@@ -85,21 +92,17 @@ class DisciplinasController extends Controller
 
     public function remove(string $id)
     {
-        //VERIFICA SE ID EXISTE
-        $subject = Disciplina::all()->where('id',$id)->first();
+        $subject = Disciplina::all()->where('id', $id)->first();
 
-        //REMOVE User
         $subject->delete();
         return redirect('/disciplinas');
-
     }
 
     public function search(Request $request)
     {
         $subject = Disciplina::where('nome', 'LIKE', '%' . $request->text . '%')
-        ->orWhere('carga_horaria', 'LIKE', '%' . $request->text . '%')
-        ->paginate(10);
+            ->orWhere('carga_horaria', 'LIKE', '%' . $request->text . '%')
+            ->paginate(10);
         return view('adm.disciplinas.disciplinas', ['disc' => $subject]);
     }
-
 }

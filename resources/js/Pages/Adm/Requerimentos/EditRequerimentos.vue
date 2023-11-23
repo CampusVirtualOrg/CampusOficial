@@ -1,4 +1,6 @@
 <script setup>
+import Aside from '@/Components/Aside.vue';
+
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
@@ -7,7 +9,10 @@ import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { render } from 'vue';
 
-const props = defineProps(['requerimento']);
+const props = defineProps({
+    requerimento: Object,
+    user: Object,
+});
 
 const form = useForm({
     usuario_id: props.requerimento.usuario_id,
@@ -37,7 +42,8 @@ const submit = () => {
 </script>
 
 <template>
-    <GuestLayout>
+    <main>
+        <Aside :nome="user.name" :imagem="user.imagem" :tipo="user.tipo" />
 
         <Head title="Enviar Requerimento" />
         <form @submit.prevent="submit">
@@ -68,7 +74,7 @@ const submit = () => {
             <!-- MATRICULA TA NULL POR ENQUANTO -->
 
             <div class="mt-4" hidden>
-                <InputLabel for="matricula_usuario" value="Matricula do Usuario"/>
+                <InputLabel for="matricula_usuario" value="Matricula do Usuario" />
 
                 <TextInput id="matricula_usuario" type="text" class="mt-1 block w-full" v-model="form.matricula_usuario"
                     required :value="form.matricula_usuario" />
@@ -90,13 +96,13 @@ const submit = () => {
 
             <div class="mt-4" hidden>
                 <InputLabel for="observacoes" value="Observações do requerimento" />
-                
+
                 <TextInput id="observacoes" type="text" class="mt-1 block w-full" v-model="form.observacoes" required
-                :value="requerimento.observacoes" />
-                
+                    :value="requerimento.observacoes" />
+
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
-            
+
             <div class="mt-4">
                 <InputLabel for="status" value="Status do Requerimento" />
                 <select name="status" id="status" v-model="form.status">
@@ -114,4 +120,23 @@ const submit = () => {
                 </PrimaryButton>
             </div>
         </form>
-</GuestLayout></template>
+    </main>
+</template>
+<style scoped>
+main {
+    display: flex;
+}
+
+form {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+        rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    border-radius: 12px;
+    padding: 1rem;
+}
+</style>

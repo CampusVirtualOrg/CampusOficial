@@ -56,7 +56,7 @@ const toggleMenu = () => {
                 v-if="isExpanded">Requerimentos</span></Link>
 
             <Link :href="route('welcome')" class="logoAsclasse">
-            <Logo />
+                <img src="../../../public/assets/img/portal.png" alt="Campus Virtual" class="logoAsclasseImg">
             </Link>
         </div>
     </aside>

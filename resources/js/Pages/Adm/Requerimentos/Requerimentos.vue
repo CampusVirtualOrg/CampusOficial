@@ -77,18 +77,6 @@ section {
     width: 100%;
 }
 
-.buttonbox {
-    width: 450px;
-    height: 150px;
-    flex-shrink: 0;
-    background: #3065AC;
-    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.30), 0px 0px 1px 0px rgba(0, 0, 0, 0.15);
-    color: #F7F2FA;
-    border-radius: 25px;
-    font-size: larger;
-}
-
-
 table {
     width: 100%;
     border: 1px solid #000;
@@ -101,7 +89,7 @@ th {
     border: 1px solid black;
     text-align: center;
     padding: 0.4rem;
-    background-color: #ffffff;
+    background-color: #fff;
 }
 
 th {

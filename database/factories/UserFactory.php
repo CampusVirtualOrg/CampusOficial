@@ -18,15 +18,15 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'tipo' => fake()->randomElement(['Administrador', 'Professor', 'Aluno']),
-            'matricula' => fake()->unique()->numerify('#########'),
+            'name' => "Jośe Maria",
+            'email' => "admin@admin.com",
+            'password' => 'admin', // password
+            'tipo' => 'Administrador',
+            'matricula' => null,
             'telefone' => fake()->phoneNumber,
-            'cpf' => fake()->unique()->numerify('###########'),
-            'sexo' => fake()->randomElement(['Masculino', 'Feminino', 'Outro']),
-            'endereco' => fake()->address,
+            'cpf' => null,
+            'sexo' => 'Outro',
+            'endereco' => null,
             'imagem' => fake()->imageUrl(600, 400),
             'data_nasc' => fake()->dateTimeBetween('-30 years', '-18 years'),
             // 'curso_id' => Curso::inRandomOrder()->first()->id,

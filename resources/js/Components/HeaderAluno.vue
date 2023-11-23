@@ -34,7 +34,7 @@ const props = defineProps({
         <i class="bi bi-door-open-fill"></i>
       </Link>
       <Notificações />
-      <div class="select-wrapper"></div>
+      <!-- <div class="select-wrapper"></div> -->
     </div>
 
 </template>
