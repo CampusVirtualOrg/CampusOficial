@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id('id');
             $table->unsignedBigInteger('aluno_id');
             $table->unsignedBigInteger('turma_id');
+			$table->integer('faltas');
+			$table->float('notas');
             $table->timestamps();
 
             $table->foreign('aluno_id')->references('id')->on('users')->cascadeOnDelete();

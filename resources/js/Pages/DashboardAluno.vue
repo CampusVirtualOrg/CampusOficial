@@ -28,7 +28,7 @@ defineProps({ user: Object });
     <Button
       title="Boletim"
       description="Notas e faltas do semestre aparecerão aqui!"
-      route=""
+      route="/boletim"
       icon="bi bi-receipt"
     />
 

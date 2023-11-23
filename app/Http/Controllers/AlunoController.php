@@ -10,6 +10,7 @@ use App\Models\Disciplina;
 use App\Models\Usuario_turmas;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use App\Models\Curso;
 
 
 class AlunoController extends Controller
@@ -29,7 +30,12 @@ class AlunoController extends Controller
 
     public function boletim()
     {
+		$user = Auth::user();
 
+		$curso = $user->matricula;
+		$turmas = $user->turmas;
+
+		return Inertia::render('Aluno/Boletim', ['user' => $user, 'turmas' => $turmas ]);
     }
 
     public function aviso()

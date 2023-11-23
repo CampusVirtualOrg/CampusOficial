@@ -17,4 +17,9 @@ class Curso extends Model
         'categoria',
         'descricao',
     ];
+
+	public function matriculas()
+	{
+		return $this->hasMany(Matricula::class);
+	}
 }

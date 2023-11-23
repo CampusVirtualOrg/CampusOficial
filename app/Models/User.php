@@ -37,6 +37,17 @@ class User extends Authenticatable
         return $this->belongsTo(Curso::class);
     }
 
+	public function matricula()
+	{
+		return $this->hasMany(Matricula::class);
+	}
+
+	public function turmas()
+	{
+		return $this->belongsToMany(Turma::class, 'usuario_turmas'
+			, 'aluno_id'
+			, 'turma_id');
+	}
 
     /**
      * The attributes that should be hidden for serialization.

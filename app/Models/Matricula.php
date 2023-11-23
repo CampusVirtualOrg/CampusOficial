@@ -13,4 +13,14 @@ class Matricula extends Model
         'aluno_id',
         'curso_id'
     ];
+
+	public function user()
+	{
+		return $this->hasOne(User::class);
+	}
+
+	public function curso()
+	{
+		return $this->hasOne(Curso::class);
+	}
 }

@@ -15,4 +15,17 @@ class Turma extends Model
         'turno',
         'professor_id'
     ];
+
+	public function professor()
+	{
+		return $this->belongsTo(Professor::class);
+	}
+
+	public function alunos()
+	{
+		return $this->belongsToMany(Users::class,
+			'usuario_turmas',
+			'turma_id',
+			'aluno_id');
+	}
 }

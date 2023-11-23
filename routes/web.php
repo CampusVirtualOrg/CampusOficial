@@ -67,7 +67,7 @@ Route::middleware('auth')->group(function () {
 		Route::middleware('administrador')->group(function () {
 
 			Route::controller(AdminController::class)->group(function () {
-				Route::get('/adm',  'home')->name('admin.home');
+				Route::get('/adm', 'home')->name('admin.home');
 				Route::get('/usuarios', 'users')->name('usuarios');
 				Route::get('/usuarios/edit/{id}', 'indexUpdate');
 				Route::post('/usuarios/edit/{id}', 'edit');
@@ -109,6 +109,7 @@ Route::middleware('auth')->group(function () {
 		Route::middleware('aluno')->group(function () {
 			Route::controller(AlunoController::class)->group(function () {
 				Route::get('/aluno', 'index')->name('homeAluno');
+				Route::get('/boletim', 'boletim')->name('boletim');
 			});
 		});
 
