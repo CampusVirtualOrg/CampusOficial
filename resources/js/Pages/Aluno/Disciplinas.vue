@@ -17,6 +17,13 @@ defineProps({ user: Object, disciplinas: Object })
     </header>
     <section>
         <div class="content">
+            <div class="texts">
+                <h1>Disciplinas</h1>
+                <div class="side">
+                    <h2>Aluno: {{user.name}}</h2>
+                    <h3>Curso: {{user.curso_id}}</h3>
+                </div>
+            </div>
             <table class="styled-table">
                 <thead>
                     <tr>
@@ -65,6 +72,26 @@ section {
     margin-top: 1rem;
     width: 100%;
 }
+
+.texts {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+h1 {
+    font-size: 28pt;
+    font-weight: 800;
+    color: #3065ac;
+}
+
+h2, h3 {
+    font-size: 14pt;
+    color: #252627;
+    font-weight: 600;
+}
+
 
 
 table {

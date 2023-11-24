@@ -18,15 +18,20 @@ defineProps({ user: Object, turmas: Object })
         <section>
             <Header />
             <div class="content">
-                <Link :href="route('registerTurmas')" class="buttonAdd">+ Adicionar Nova Turma</Link>
+                <Link :href="route('createTurmas')" class="buttonAdd">+ Adicionar Nova Turma</Link>
                 <table class="styled-table">
                     <thead>
                         <tr>
                             <th>Nome</th>
                             <th>Semestre</th>
                             <th>Turno</th>
-                            <th>Professores e Alunos</th>
-                            <th>Ações</th>
+                            <th>Horário</th>
+                            <th>Disciplina</th>
+                            <th>Ver Professores e Alunos</th>
+                            <th>Adicionar Professor</th>
+                            <th>Adicionar Aluno</th>
+                            <th>Editar</th>
+                            <th>Deletar</th>
                         </tr>
                     </thead>
                     <tbody v-for="turma in turmas">
@@ -34,7 +39,11 @@ defineProps({ user: Object, turmas: Object })
                             <td>{{ turma.nome }}</td>
                             <td>{{ turma.semestre }}</td>
                             <td>{{ turma.turno }}</td>
-                            <td>{{ turma.professor_id }}</td>
+                            <td>{{ turma.horario }}</td>
+                            <td>{{ turma.disciplina_id }}</td>
+                            <td><Link :href="'/'">Ver</Link></td>
+                            <td><Link :href="'/'">Adicionar professor</Link></td>
+                            <td><Link :href="'/'">Adicionar aluno</Link></td>
                             <td>
                                 <Link :href="`/turmas/edit/${turma.id}`">EDIT</Link>
                                 <Link :href="`/turmas/remove/${turma.id}`">DEL</Link>

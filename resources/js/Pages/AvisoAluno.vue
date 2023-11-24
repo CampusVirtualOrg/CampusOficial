@@ -50,7 +50,7 @@ section {
   align-items: center;
   gap: 1rem;
   margin-top: 1rem;
-  margin: 1rem 4.5rem;
+  margin: 1rem 2.5rem;
   height: 100%;
 }
 

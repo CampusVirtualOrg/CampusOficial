@@ -48,7 +48,7 @@ const props = defineProps({
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 5%;
+  margin-left: 2rem;
 }
 
 .perfil {

@@ -13,8 +13,14 @@ class Turma extends Model
         'nome',
         'semestre',
         'turno',
-        'professor_id'
+        'horario',
+        'disciplina_id',
     ];
+
+	public function disciplina()
+	{
+		return $this->belongsTo(Disciplina::class);
+	}
 
 	public function professor()
 	{

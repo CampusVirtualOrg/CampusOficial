@@ -6,21 +6,22 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
-const props = defineProps({ user: Object, professores: Object, disciplinas: Object });
+const props = defineProps({ user: Object, disciplinas: Object });
 
 const form = useForm({
-    nome: '',
     semestre: '',
     turno: '',
-    professor_id: ''
+    horario: '',
+    disciplina_id: ''
 });
 
 const submit = () => {
-    form.post('/turma/create').then(response => {
+    form.post('/turma/create', form.data()).then(response => {
+        console.log(response.data);
         alert(response.data);
     }).catch(error => {
         console.error(error.data);
-        alert("Houve um erro ao criar disciplina.");
+        alert("Houve um erro ao criar turma.");
     });
 };
 </script>
@@ -33,20 +34,19 @@ const submit = () => {
         <form @submit.prevent="submit">
             <div class="lado">
 
-                <div>
+                <!-- <div>
                     <InputLabel for="nome" value="Nome" />
 
-                    <TextInput id="nome" type="text" class="mt-1 block w-full" v-model="form.nome" required autofocus
-                        autocomplete="nome" />
+                    <TextInput id="nome" type="text" class="mt-1 block w-full" v-model="form.nome" required/>
 
                     <InputError class="mt-2" :message="form.errors.text" />
-                </div>
+                </div> -->
 
                 <div class="mt-4">
-                    <InputLabel for="semestre" value="semestre" />
+                    <InputLabel for="semestre" value="Semestre letivo" />
 
                     <TextInput id="semestre" type="text" class="mt-1 block w-full" v-model="form.semestre" required
-                        maxlength="4" />
+                        maxlength="7" placeholder="ex: 2023.2" />
 
                     <InputError class="mt-2" :message="form.errors.text" />
                 </div>
@@ -54,8 +54,11 @@ const submit = () => {
                 <div class="mt-4">
                     <InputLabel for="turno" value="Turno" />
 
-                    <TextInput id="turno" type="number" class="mt-1 block w-full" v-model="form.turno"
-                        maxlength="180" minlength="20" required />
+                    <select id="turno" class="mt-1 block w-full" v-model="form.turno">
+                        <option value="Manhã">Manhã</option>
+                        <option value="Tarde">Tarde</option>
+                        <option value="Noite">Noite</option>
+                    </select>
 
                     <InputError class="mt-2" :message="form.errors.text" />
                 </div>
@@ -64,12 +67,19 @@ const submit = () => {
             <div class="lado2">
 
                 <div class="mt-4">
-                    <InputLabel for="professor_id" value="Pré Requisito" />
+                    <InputLabel for="horario" value="Horário das aulas" />
 
-                    <select name="professor_id" class="mt-1 block w-full" id="professor_id"
-                        v-model="form.pre_requisito_id">
-                        <option v-for="professores in props.professor" :value="professor_id"> {{ professor.name }}
-                        </option>
+                    <TextInput id="horario" type="text" class="mt-1 block w-full" v-model="form.horario" required
+                        maxlength="20" placeholder="ex: SEG 09:00 - 11:30" />
+
+                    <InputError class="mt-2" :message="form.errors.text" />
+                </div>
+
+                <div class="mt-4">
+                    <InputLabel for="disciplina_id" value="Disciplina da turma" />
+
+                    <select name="disciplina_id" class="mt-1 block w-full" id="disciplina_id" v-model="form.disciplina_id">
+                        <option v-for="disciplina in props.disciplinas" :key="disciplina.id" :value="disciplina.id"> {{ disciplina.nome }}</option>
                     </select>
 
                     <InputError class="mt-2" :message="form.errors.text" />
@@ -96,4 +106,5 @@ form {
     align-items: baseline;
     justify-content: center;
     width: 100%;
-}</style>
+}
+</style>

@@ -15,7 +15,10 @@ return new class extends Migration
             $table->id('id');
             $table->string('nome');
             $table->string('semestre');
-            $table->string('turno');
+            $table->enum('turno', ['Manhã', 'Tarde', 'Noite']);
+            $table->string('horario');
+            $table->bigInteger('disciplina_id')->unsigned();
+            $table->foreign('disciplina_id')->references('id')->on('disciplinas')->onDelete('cascade');
             $table->timestamps();
         });
     }

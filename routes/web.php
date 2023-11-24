@@ -107,7 +107,7 @@ Route::middleware('auth')->group(function () {
 			// TURMAS
 			Route::controller(TurmaController::class)->group(function() {
 				Route::get('/turmas','showAll')->name('turmas');
-				// Route::get('/turma/create','createIndex')->name('registerTurmas');
+				Route::get('/turma/create','createIndex')->name('createTurmas');
 				Route::post('/turma/create','create');
 				Route::get('/turmas/remove/{id}', 'remove');
 			});
