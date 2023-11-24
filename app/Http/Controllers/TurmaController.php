@@ -90,35 +90,31 @@ class TurmaController extends Controller
 
 
     public function createIndex(){
+
         $disciplinas = Disciplina::all();
-        $professores = Usuario::where('tipo','Professor')->get();
-        return view('adm.turmas.createTurmas', ['disciplinas' => $disciplinas, 'professores' => $professores]);
+        $professores = User::where('tipo','Professor')->get();
+
+        return Inertia::render('Turmas/CreateTurmas', ['disciplinas' => $disciplinas, 'professores' => $professores]);
     }
 
     public function create(Request $request)
     {
 
         try {
-            $credentials = $request->only('nome', 'semestre', 'turno','disciplina_id', 'professor_id');
+            $credentials = $request->only('nome', 'semestre', 'turno', 'disciplina_id');
 
             if (($credentials['nome'] == null ||
                 $credentials['semestre'] == null ||
                 $credentials['turno'] == null ||
-                $credentials['disciplina_id'] == null ||
-                $credentials['professor_id'] == null)) {
-                return response()->json(
-                    [
-                        'msg' => 'dados incompletos!',
-                    ],
-                    301
-                );
+				$credentials['disciplina_id'] == null )) {
+
+				echo 'Dados incompletos';
             }
             //MODELO RECEBE OS DADOS PARA SEREM
             $turma = new Turma([
                 'nome' => $credentials['nome'],
                 'semestre' => $credentials['semestre'],
                 'turno' => $credentials['turno'],
-                'professor_id' => $credentials['professor_id'],
             ]);
             $turma->save();
 
@@ -127,20 +123,21 @@ class TurmaController extends Controller
                 'turmas_id' => $turma->id,
 
             ]);
-          $inner->save();
+
+          	$inner->save();
 
 
             //RETORNA A RESPOSTA
             return redirect('/turmas');
 
         } catch (\Throwable $th) {
-            return response()->json(['success' => false, 'error' => $th->getMessage()], 302);
+            echo 'Ops!  ' . $th->getMessage();
         }
     }
 
     public function updateIndex(string $id){
         $disciplinas = Disciplina::all();
-        $professores = Usuario::where('tipo','=', 2)->get();
+        $professores = User::where('tipo','=', 2)->get();
         $turmas = Turma::all()->where('id',$id)->first();
         return view('adm.turmas.editTurmas', ['turmas' => $turmas, 'disciplinas' => $disciplinas, 'professores' => $professores]);
     }

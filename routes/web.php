@@ -25,6 +25,8 @@ use App\Http\Middleware\Professor;
 
 Route::get('/', [AccessibleController::class, 'index'])->name('welcome');
 
+Route::get('/turma/create',[TurmaController::class,'createIndex'])->name('registerTurmas');
+
 Route::middleware('auth')->group(function () {
 
 	Route::get('/logon', [LogonController::class, 'create']); // Redireciona conforme tipo de Usuário
@@ -69,7 +71,7 @@ Route::middleware('auth')->group(function () {
 				Route::get('/register', 'create')->name('register');
 				Route::post('/register', 'store');
 			});
-			
+
 			Route::controller(AdminController::class)->group(function () {
 				Route::get('/adm', 'home')->name('admin.home');
 				Route::get('/usuarios', 'users')->name('usuarios');
@@ -105,6 +107,8 @@ Route::middleware('auth')->group(function () {
 			// TURMAS
 			Route::controller(TurmaController::class)->group(function() {
 				Route::get('/turmas','showAll')->name('turmas');
+				// Route::get('/turma/create','createIndex')->name('registerTurmas');
+				Route::post('/turma/create','create');
 				Route::get('/turmas/remove/{id}', 'remove');
 			});
 		});

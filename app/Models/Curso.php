@@ -10,12 +10,12 @@ class Curso extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nome',
-        'carga_horaria',
-        'periodos',
-        'sigla',
-        'categoria',
-        'descricao',
+			'nome',
+			'carga_horaria',
+			'periodos',
+			'sigla',
+			'categoria',
+			'descricao',
     ];
 
 	public function matriculas()

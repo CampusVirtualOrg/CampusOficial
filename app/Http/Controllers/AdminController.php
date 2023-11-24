@@ -32,6 +32,12 @@ class AdminController extends Controller
         return Inertia::render('', ['']);
     }
 
+	public function createUser()
+	{
+		$user = Auth::user();
+		return Inertia::render('Auth/Register');
+	}
+
     public function register(Request $request)
     {
         try {
@@ -100,7 +106,7 @@ class AdminController extends Controller
                     'tipo' => $request->tipo ? $request->tipo : $user->tipo,
                     'matricula' => $request->matricula ? $request->matricula : $user->matricula,
                     'cpf' => $request->cpf ? $request->cpf : $user->cpf,
-                    'sexo' => $request->sexo ? $request->sexo : $user->sexo, 
+                    'sexo' => $request->sexo ? $request->sexo : $user->sexo,
                     'endereco' => $request->endereco ? $request->endereco : $user->endereco,
                     'data_nasc' => $request->data_nasc ? $request->data_nasc : $user->data_nasc,
                     'imagem' => $request->imagem ? $request->imagem : $user->imagem,

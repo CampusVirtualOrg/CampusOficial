@@ -22,7 +22,7 @@ class AlunoController extends Controller
     }
 
     public function disciplinas()
-    {   
+    {
         $user = Auth::user();
         $userCursoId = $user->curso_id;
         $disciplinas = Disciplina::where('curso_id', $userCursoId)->get();
@@ -35,8 +35,9 @@ class AlunoController extends Controller
 
 		$curso = $user->matricula;
 		$turmas = $user->turmas;
+		$disciplinas = Disciplina::all();
 
-		return Inertia::render('Aluno/Boletim', ['user' => $user, 'turmas' => $turmas ]);
+		return Inertia::render('Aluno/Boletim', ['user' => $user, 'turmas' => $turmas, 'disc' => $disciplinas]);
     }
 
     public function aviso()

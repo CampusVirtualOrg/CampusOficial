@@ -18,7 +18,7 @@ defineProps({ user: Object, turmas: Object })
         <section>
             <Header />
             <div class="content">
-                <Link :href="route('register')" class="buttonAdd">+ Adicionar Nova Turma</Link>
+                <Link :href="route('registerTurmas')" class="buttonAdd">+ Adicionar Nova Turma</Link>
                 <table class="styled-table">
                     <thead>
                         <tr>
