@@ -45,9 +45,9 @@ defineProps({ user: Object, users: Object })
                             <td>{{ usuario.sexo }}</td>
                             <td>{{ usuario.data_nasc }}</td>
                             <td>{{ usuario.curso_id }}</td>
-                            <td>
-                                <Link :href="`/usuarios/edit/${usuario.id}`">EDIT</Link>
-                                <Link :href="`/usuarios/remove/${usuario.id}`">DEL</Link>
+                            <td style="color: #3065ac;">
+                                <Link :href="`/usuarios/edit/${usuario.id}`"><i class="bi bi-pencil-fill mx-2"></i></Link>
+                                <Link :href="`/usuarios/remove/${usuario.id}`"><i class="bi bi-trash-fill mx-2"></i></Link>
                             </td>
                         </tr>
                     </tbody>

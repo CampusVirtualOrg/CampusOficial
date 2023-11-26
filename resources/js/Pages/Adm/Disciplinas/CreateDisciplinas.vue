@@ -5,6 +5,7 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import { ref } from 'vue';
 
 const props = defineProps({ user: Object, cursos: Object, disciplinas: Object });
 
@@ -38,16 +39,16 @@ const submit = () => {
                     <InputLabel for="nome" value="Nome" />
 
                     <TextInput id="nome" type="text" class="mt-1 block w-full" v-model="form.nome" required autofocus
-                        autocomplete="nome" />
+                      style="text-transform: uppercase;"   />
 
                     <InputError class="mt-2" :message="form.errors.text" />
                 </div>
 
                 <div class="mt-4">
-                    <InputLabel for="sigla" value="sigla" />
+                    <InputLabel for="sigla" value="Sigla" />
 
                     <TextInput id="sigla" type="text" class="mt-1 block w-full" v-model="form.sigla" required
-                        maxlength="4" />
+                        v-mask="'AAAAA'" />
 
                     <InputError class="mt-2" :message="form.errors.text" />
                 </div>

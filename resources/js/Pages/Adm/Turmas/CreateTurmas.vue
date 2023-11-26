@@ -5,6 +5,8 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import {TheMask} from 'vue-the-mask'
+
 
 const props = defineProps({ user: Object, disciplinas: Object });
 
@@ -12,11 +14,11 @@ const form = useForm({
     semestre: '',
     turno: '',
     horario: '',
-    disciplina_id: ''
+    disciplina_id: '',
 });
 
 const submit = () => {
-    form.post('/turma/create', form.data()).then(response => {
+    form.post('/turma/register', form.data()).then(response => {
         console.log(response.data);
         alert(response.data);
     }).catch(error => {
@@ -34,19 +36,11 @@ const submit = () => {
         <form @submit.prevent="submit">
             <div class="lado">
 
-                <!-- <div>
-                    <InputLabel for="nome" value="Nome" />
-
-                    <TextInput id="nome" type="text" class="mt-1 block w-full" v-model="form.nome" required/>
-
-                    <InputError class="mt-2" :message="form.errors.text" />
-                </div> -->
-
                 <div class="mt-4">
                     <InputLabel for="semestre" value="Semestre letivo" />
 
                     <TextInput id="semestre" type="text" class="mt-1 block w-full" v-model="form.semestre" required
-                        maxlength="7" placeholder="ex: 2023.2" />
+                        placeholder="ex: 2023.2" v-mask="'####.#'"/>
 
                     <InputError class="mt-2" :message="form.errors.text" />
                 </div>
@@ -70,7 +64,7 @@ const submit = () => {
                     <InputLabel for="horario" value="Horário das aulas" />
 
                     <TextInput id="horario" type="text" class="mt-1 block w-full" v-model="form.horario" required
-                        maxlength="20" placeholder="ex: SEG 09:00 - 11:30" />
+                        maxlength="20" placeholder="ex: SEG 09:00 - 11:30" v-mask="'AAA ##:## - ##:##'"/>
 
                     <InputError class="mt-2" :message="form.errors.text" />
                 </div>

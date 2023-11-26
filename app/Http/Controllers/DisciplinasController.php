@@ -19,7 +19,7 @@ class DisciplinasController extends Controller
     }
 
     public function createIndex()
-    {   
+    {
         $user = Auth::user();
         $cursos = Curso::all();
         $disciplinas = Disciplina::all();
@@ -43,7 +43,7 @@ class DisciplinasController extends Controller
             }
 
             $subject = new Disciplina([
-                'nome' => $credentials['nome'],
+                'nome' => strtoupper($credentials['nome']),
                 'sigla' => $credentials['sigla'],
                 'carga_horaria' => $credentials['carga_horaria'],
                 'pre_requisito_id' => $credentials['pre_requisito_id'],

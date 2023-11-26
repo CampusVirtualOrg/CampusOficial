@@ -30,8 +30,7 @@ defineProps({ user: Object, turmas: Object })
                             <th>Ver Professores e Alunos</th>
                             <th>Adicionar Professor</th>
                             <th>Adicionar Aluno</th>
-                            <th>Editar</th>
-                            <th>Deletar</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody v-for="turma in turmas">
@@ -44,9 +43,9 @@ defineProps({ user: Object, turmas: Object })
                             <td><Link :href="'/'">Ver</Link></td>
                             <td><Link :href="'/'">Adicionar professor</Link></td>
                             <td><Link :href="'/'">Adicionar aluno</Link></td>
-                            <td>
-                                <Link :href="`/turmas/edit/${turma.id}`">EDIT</Link>
-                                <Link :href="`/turmas/remove/${turma.id}`">DEL</Link>
+                            <td style="color: #3065ac;">
+                                <Link :href="`/turmas/edit/${turma.id}`"><i class="bi bi-pencil-fill mx-2"></i></Link>
+                                <Link :href="`/turmas/remove/${turma.id}`"><i class="bi bi-trash-fill mx-2"></i></Link>
                             </td>
                         </tr>
                     </tbody>

@@ -24,7 +24,9 @@ class TurmaController extends Controller
         $turmas = Turma::all();
         $professores = User::where('tipo', 'Professor')->get();
         $user = Auth::user();
-        return Inertia::render('Adm/Turmas/Turmas', ['turmas' => $turmas, 'professores' => $professores, 'user' => $user]);
+		$disciplinas = Disciplina::all();
+		
+        return Inertia::render('Adm/Turmas/Turmas', ['turmas' => $turmas, 'professores' => $professores, 'user' => $user, 'disciplinas' => $disciplinas]);
     }
 
     public function createIndex()
@@ -37,48 +39,42 @@ class TurmaController extends Controller
         return Inertia::render('Adm/Turmas/CreateTurmas', ['disciplinas' => $disciplinas, 'professores' => $professores, 'user' => $user]);
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
         try {
             $credentials = $request->only('semestre', 'turno', 'disciplina_id', 'horario');
 
-            if ($credentials['semestre'] == null || $credentials['turno'] == null) {
-                return response()->json(
-                    [
-                        'success' => false,
-                        'data' => "Dados incompletos",
-                    ],
-                    301
-                );
+            if ($credentials['semestre'] == null ||
+				$credentials['turno'] == null ||
+				$credentials['disciplina_id'] == null ||
+				$credentials['horario'] == null
+				){
+                 echo "Dados Incompletos!";
             }
 
             $disciplina = Disciplina::where('id', $credentials['disciplina_id'])->first();
             if ($disciplina) {
                 $siglaDisciplina = $disciplina->sigla;
-                $nomeBase = "{$siglaDisciplina}.{$credentials['semestre']}.{$credentials['turno']}";
+                $nomeBase = "{$siglaDisciplina}-{$credentials['semestre']}-{$credentials['turno']}";
                 // Verifica se o nome já existe e incrementa um contador se precisar
                 $count = Turma::where('nome', 'like', "$nomeBase%")->count();
                 $nome = $count > 0 ? "$nomeBase-$count" : $nomeBase;
-                
-                $turma = new Turma([
-                    'nome' => "$nome",
-                    'semestre' => $credentials['semestre'],
-                    'turno' => $credentials['turno'],
-                    'horario' => $credentials['horario'],
-                    'disciplina_id' => $credentials['disciplina_id'],
-                ]);
-                
-                $turma->save();
-                return redirect('/turmas');
             } else {
-                return response()->json(
-                    [
-                        'success' => false,
-                        'data' => "Disciplina não encontrada",
-                    ],
-                    301
-                );
+                echo "Turma não cadastrada.";
             }
+
+			$turma = new Turma([
+				'nome' => $nome,
+				'semestre' => $credentials['semestre'],
+				'turno' => $credentials['turno'],
+				'horario' => $credentials['horario'],
+				'disciplina_id' => $credentials['disciplina_id']
+			]);
+
+			echo 'chegou';
+			$turma->save();
+			return redirect('/turmas');
+
         } catch (\Throwable $th) {
             echo 'Ops!  ' . $th->getMessage();
         }
@@ -178,23 +174,22 @@ class TurmaController extends Controller
 
     public function remove(string $id)
     {
-        //VERIFICA SE ID EXISTE
-        $course = Turma::all()->where('id', $id)->first();
-        if (!$course) {
+        $turma = Turma::all()->where('id', $id)->first();
+        if (!$turma) {
             return response([
                 'msg' => 'turma não removida',
-                'data' => $course
+                'data' => $turma
             ]);
         }
-        //REMOVE User
-        $course->delete();
+
+        $turma->delete();
         return redirect('/turmas');
     }
 
     public function alunoIndex(String $id)
     {
         $turma = Turma::where('id', $id)->first();
-        $alunos = Usuario::where('tipo', 'Aluno')->get();
+        $alunos = User::where('tipo', 'Aluno')->get();
         return view('adm.turmas.addAluno', ['turma' => $turma, 'alunos' => $alunos]);
     }
 
@@ -217,7 +212,7 @@ class TurmaController extends Controller
             ->orWhere('semestre', 'LIKE', '%' . $request->text . '%')
             ->orWhere('turno', 'LIKE', '%' . $request->text . '%')
             ->paginate(10);
-        $professores = Usuario::all();
+        $professores = User::all();
         return view('adm.turmas.turmas', ['turmas' => $turmas, 'professores' => $professores]);
     }
 }

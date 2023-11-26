@@ -16,4 +16,8 @@ class Disciplina extends Model
         'pre_requisito_id',
         'curso_id',
     ];
+
+	public function turma(){
+		return $this->hasMany(Turma::class);
+	}
 }

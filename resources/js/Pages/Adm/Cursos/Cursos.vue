@@ -37,9 +37,9 @@ defineProps({ user: Object, cursos: Object })
                             <td>{{ curso.sigla }}</td>
                             <td>{{ curso.categoria }}</td>
                             <td>{{ curso.descricao }}</td>
-                            <td>
-                                <Link :href="`/cursos/edit/${curso.id}`">EDIT</Link>
-                                <Link :href="`/cursos/remove/${curso.id}`">DEL</Link>
+                            <td style="color: #3065ac;">
+                                <Link :href="`/cursos/edit/${curso.id}`"><i class="bi bi-pencil-fill mx-2"></i></Link>
+                                <Link :href="`/cursos/remove/${curso.id}`"><i class="bi bi-trash-fill mx-2"></i></Link>
                             </td>
                         </tr>
                     </tbody>
