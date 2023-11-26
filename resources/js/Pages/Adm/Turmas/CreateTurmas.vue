@@ -5,20 +5,19 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
-import {TheMask} from 'vue-the-mask'
 
-
-const props = defineProps({ user: Object, disciplinas: Object });
+const props = defineProps({ user: Object, disciplinas: Object, professores: Object});
 
 const form = useForm({
     semestre: '',
     turno: '',
     horario: '',
     disciplina_id: '',
+	professor_id:''
 });
 
 const submit = () => {
-    form.post('/turma/register', form.data()).then(response => {
+    form.post('/turma/create', form.data()).then(response => {
         console.log(response.data);
         alert(response.data);
     }).catch(error => {
@@ -35,12 +34,11 @@ const submit = () => {
         <Head title="Campus Virtual" />
         <form @submit.prevent="submit">
             <div class="lado">
-
                 <div class="mt-4">
                     <InputLabel for="semestre" value="Semestre letivo" />
 
                     <TextInput id="semestre" type="text" class="mt-1 block w-full" v-model="form.semestre" required
-                        placeholder="ex: 2023.2" v-mask="'####.#'"/>
+                        maxlength="7" placeholder="ex: 2023.2" />
 
                     <InputError class="mt-2" :message="form.errors.text" />
                 </div>
@@ -64,7 +62,7 @@ const submit = () => {
                     <InputLabel for="horario" value="Horário das aulas" />
 
                     <TextInput id="horario" type="text" class="mt-1 block w-full" v-model="form.horario" required
-                        maxlength="20" placeholder="ex: SEG 09:00 - 11:30" v-mask="'AAA ##:## - ##:##'"/>
+                        maxlength="20" placeholder="ex: SEG 09:00 - 11:30" />
 
                     <InputError class="mt-2" :message="form.errors.text" />
                 </div>
@@ -74,6 +72,16 @@ const submit = () => {
 
                     <select name="disciplina_id" class="mt-1 block w-full" id="disciplina_id" v-model="form.disciplina_id">
                         <option v-for="disciplina in props.disciplinas" :key="disciplina.id" :value="disciplina.id"> {{ disciplina.nome }}</option>
+                    </select>
+
+                    <InputError class="mt-2" :message="form.errors.text" />
+                </div>
+
+				<div class="mt-4">
+                    <InputLabel for="professor_id" value="Professor da turma" />
+
+                    <select name="professor_id" class="mt-1 block w-full" id="professor_id" v-model="form.professor_id">
+                        <option v-for="professor in props.professores" :key="professor.id" :value="professor.id"> {{ professor.name }}</option>
                     </select>
 
                     <InputError class="mt-2" :message="form.errors.text" />

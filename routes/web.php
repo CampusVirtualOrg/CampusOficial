@@ -108,7 +108,7 @@ Route::middleware('auth')->group(function () {
 			Route::controller(TurmaController::class)->group(function() {
 				Route::get('/turmas','showAll')->name('turmas');
 				Route::get('/turma/create','createIndex')->name('createTurmas');
-				Route::post('/turma/register','store');
+				Route::post('/turma/create','create');
 				Route::get('/turmas/remove/{id}', 'remove');
 			});
 		});
@@ -131,14 +131,11 @@ Route::middleware('auth')->group(function () {
 			Route::controller(ProfessorController::class)->group(function () {
 				Route::get('/professor', 'index')->name('homeProfessor');
 			});
+
+			Route::controller(TurmaController::class)->group(function(){
+				Route::get('/professor/turmas', 'turmaProfessor')->name('turmaProfessor');
+			});
 		});
-
-
-		// Route::middleware(['administrador', 'professor'])->group(function () {
-		// 	Route::get('/turmas', [TurmaController::class, 'showAll'])->name('turmas');
-		// 	Route::get('/disciplinas', [DisciplinasController::class, 'showAll'])->name('disciplinas');
-		// 	Route::get('/cursos', [CursosController::class, 'showAll'])->name('cursos');
-		// });
 	});
 });
 

@@ -18,8 +18,11 @@ return new class extends Migration
             $table->enum('turno', ['Manhã', 'Tarde', 'Noite']);
             $table->string('horario');
             $table->bigInteger('disciplina_id')->unsigned();
-            $table->foreign('disciplina_id')->references('id')->on('disciplinas')->onDelete('cascade');
+			$table->bigInteger('professor_id')->unsigned();
             $table->timestamps();
+
+			$table->foreign('disciplina_id')->references('id')->on('disciplinas')->onDelete('cascade');
+			$table->foreign('professor_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -24,9 +24,7 @@ class TurmaController extends Controller
         $turmas = Turma::all();
         $professores = User::where('tipo', 'Professor')->get();
         $user = Auth::user();
-		$disciplinas = Disciplina::all();
-		
-        return Inertia::render('Adm/Turmas/Turmas', ['turmas' => $turmas, 'professores' => $professores, 'user' => $user, 'disciplinas' => $disciplinas]);
+        return Inertia::render('Adm/Turmas/Turmas', ['turmas' => $turmas, 'professores' => $professores, 'user' => $user]);
     }
 
     public function createIndex()
@@ -39,42 +37,42 @@ class TurmaController extends Controller
         return Inertia::render('Adm/Turmas/CreateTurmas', ['disciplinas' => $disciplinas, 'professores' => $professores, 'user' => $user]);
     }
 
-    public function store(Request $request)
+    public function create(Request $request)
     {
-        try {
-            $credentials = $request->only('semestre', 'turno', 'disciplina_id', 'horario');
+       	try {
+            $credentials = $request->only('semestre', 'turno', 'disciplina_id', 'horario', 'professor_id');
 
-            if ($credentials['semestre'] == null ||
-				$credentials['turno'] == null ||
-				$credentials['disciplina_id'] == null ||
-				$credentials['horario'] == null
-				){
-                 echo "Dados Incompletos!";
+            if ($credentials['semestre'] == null || $credentials['turno'] == null) {
+                echo 'Dados incompletos!';
             }
 
             $disciplina = Disciplina::where('id', $credentials['disciplina_id'])->first();
             if ($disciplina) {
                 $siglaDisciplina = $disciplina->sigla;
-                $nomeBase = "{$siglaDisciplina}-{$credentials['semestre']}-{$credentials['turno']}";
-                // Verifica se o nome já existe e incrementa um contador se precisar
+                $nomeBase = "{$siglaDisciplina}.{$credentials['semestre']}.{$credentials['turno']}";
                 $count = Turma::where('nome', 'like', "$nomeBase%")->count();
                 $nome = $count > 0 ? "$nomeBase-$count" : $nomeBase;
+
+                $turma = new Turma([
+                    'nome' => "$nome",
+                    'semestre' => $credentials['semestre'],
+                    'turno' => $credentials['turno'],
+                    'horario' => $credentials['horario'],
+                    'disciplina_id' => $credentials['disciplina_id'],
+                    'professor_id' => $credentials['professor_id'],
+                ]);
+
+                $turma->save();
+                return redirect('/turmas');
             } else {
-                echo "Turma não cadastrada.";
+                return response()->json(
+                    [
+                        'success' => false,
+                        'data' => "Disciplina não encontrada",
+                    ],
+                    301
+                );
             }
-
-			$turma = new Turma([
-				'nome' => $nome,
-				'semestre' => $credentials['semestre'],
-				'turno' => $credentials['turno'],
-				'horario' => $credentials['horario'],
-				'disciplina_id' => $credentials['disciplina_id']
-			]);
-
-			echo 'chegou';
-			$turma->save();
-			return redirect('/turmas');
-
         } catch (\Throwable $th) {
             echo 'Ops!  ' . $th->getMessage();
         }
@@ -124,7 +122,7 @@ class TurmaController extends Controller
                 array_push($ids, $disciplinas[$i]->disciplina_id);
             }
 
-            $turmas = DB::table('disciplinas') // Substitua 'sua_tabela' pelo nome da tabela do seu Model
+            $turmas = DB::table('disciplinas')
                 ->whereIn('id', $ids)
                 ->get();
 
@@ -174,15 +172,16 @@ class TurmaController extends Controller
 
     public function remove(string $id)
     {
-        $turma = Turma::all()->where('id', $id)->first();
-        if (!$turma) {
+        //VERIFICA SE ID EXISTE
+        $course = Turma::all()->where('id', $id)->first();
+        if (!$course) {
             return response([
                 'msg' => 'turma não removida',
-                'data' => $turma
+                'data' => $course
             ]);
         }
-
-        $turma->delete();
+        //REMOVE User
+        $course->delete();
         return redirect('/turmas');
     }
 
@@ -215,4 +214,12 @@ class TurmaController extends Controller
         $professores = User::all();
         return view('adm.turmas.turmas', ['turmas' => $turmas, 'professores' => $professores]);
     }
+
+	public function turmaProfessor()
+	{
+		$user = Auth::user();
+		$turmas = Turma::where('professor_id', $user->id)->get();
+		return Inertia::render('Professor/Turmas', ['turmas' => $turmas, 'user' => $user]);
+
+	}
 }

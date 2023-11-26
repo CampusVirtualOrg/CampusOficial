@@ -17,6 +17,7 @@ class Turma extends Model
         'turno',
         'horario',
         'disciplina_id',
+		'professor_id'
     ];
 
 	public function disciplina()
