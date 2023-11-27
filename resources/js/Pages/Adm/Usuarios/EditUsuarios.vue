@@ -147,6 +147,7 @@ const submit = () => {
                         <InputLabel for="curso_id" value="Curso" />
 
                         <select name="curso_id" id="curso_id" class="mt-1 block w-full" v-model="form.curso_id">
+                            <option value="">Nenhum</option>
                             <option v-for="curso in props.cursos" :value="curso.id">{{ curso.nome }}</option>
                         </select>
 

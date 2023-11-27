@@ -11,25 +11,24 @@ defineProps({ user: Object, alunos: Object, turma: Object });
 	<section>
 		<Aside :nome="user.name" :imagem="user.imagem" :tipo="user.tipo" />
 		<main>
-			<h1>Alunos na turma: </h1>
+			<h1>Alunos na turma: {{ turma.nome }}</h1>
+            <h2>Professor: {{ turma.professor.name }}</h2>
+            <h2>Disciplina: {{ turma.disciplina.nome }}</h2>
 			<table>
 				<thead>
 					<tr>
+						<th>Id do Aluno</th>
 						<th>Nome</th>
-						<th>Curso</th>
-						<th>Matrícular</th>
+                        <th>Faltas</th>
+                        <th>Notas</th>
 					</tr>
 				</thead>
 				<tbody v-for="aluno in alunos">
 					<tr>
+						<td>{{ aluno.id }}</td>
 						<td>{{ aluno.name }}</td>
-						<td>{{ aluno.curso.nome }}</td>
-						<td style="color: #3065ac;">
-							<form :action="`/turmas/alunos/${turma.id}`" method="post">
-								<input type="hidden" name="aluno_id" :value="aluno.id">
-								<button type="submit" class="btn btn-primary">Registrar</button>
-							</form>
-						</td>
+                        <td>{{ aluno.faltas }}</td>
+                        <td>{{ aluno.notas }}</td>
 					</tr>
 				</tbody>
 			</table>

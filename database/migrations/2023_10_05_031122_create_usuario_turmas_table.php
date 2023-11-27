@@ -15,12 +15,14 @@ return new class extends Migration
             $table->id('id');
             $table->unsignedBigInteger('aluno_id');
             $table->unsignedBigInteger('turma_id');
-			$table->integer('faltas');
-			$table->float('notas');
+			$table->integer('faltas')->nullable();
+			$table->float('nota_unidade1')->nullable();
+            $table->float('nota_unidade2')->nullable();
+            $table->float('media_final')->nullable();
             $table->timestamps();
 
             $table->foreign('aluno_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->foreign('turma_id')->references('id')->on('turmas')->cascadeOnDelete();
+            $table->foreign('turma_id')->references('id')->on('turmas')->cascadeOnDeleste();
         });
     }
 

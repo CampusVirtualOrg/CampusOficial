@@ -23,7 +23,7 @@ class AdminController extends Controller
     {
         $users = User::with('curso')->get();
         $user = Auth::user();
-        return Inertia::render('Adm/Usuarios/Usuarios', ['users' => $users, 'user' => $user]);
+        return Inertia::render('Adm/Usuarios/Usuarios', ['users' => $users, 'user' => $user,'cursos' => Auth::user()->curso]);
     }
 
     public function showOne(string $id)

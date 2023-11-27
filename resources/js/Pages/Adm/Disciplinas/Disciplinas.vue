@@ -35,7 +35,8 @@ defineProps({ user: Object, disciplinas: Object })
                             <td>{{ disciplina.nome }}</td>
                             <td>{{ disciplina.sigla }}</td>
                             <td>{{ disciplina.carga_horaria }}</td>
-                            <td>{{ disciplina.pre_requisito }}</td>
+                            <td v-if="disciplina.pre_requisito == null">Sem Pré Requisito</td>
+                            <td v-else>{{ disciplina.pre_requisito.nome }}</td>
                             <td>{{ disciplina.curso.nome }}</td>
                             <td style="color: #3065ac;">
                                 <Link :href="`/disciplinas/edit/${disciplina.id}`"><i class="bi bi-pencil-fill mx-2"></i></Link>

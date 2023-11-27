@@ -4,7 +4,7 @@ import Aside from '@/Components/Aside.vue';
 import Card from '@/Components/Card.vue';
 import Header from '@/Components/Header.vue';
 
-defineProps({ user: Object, users: Object })
+defineProps({ user: Object, users: Object,cursos: Object })
 
 </script>
 
@@ -44,7 +44,9 @@ defineProps({ user: Object, users: Object })
                             <td>{{ usuario.cpf }}</td>
                             <td>{{ usuario.sexo }}</td>
                             <td>{{ usuario.data_nasc }}</td>
-                            <td>{{ usuario.curso }}</td>
+
+                            <td v-if="usuario.curso == null">Sem Curso</td>
+                            <td v-else>{{ usuario.curso.nome }}</td>
                             <td style="color: #3065ac;">
                                 <Link :href="`/usuarios/edit/${usuario.id}`"><i class="bi bi-pencil-fill mx-2"></i></Link>
                                 <Link :href="`/usuarios/remove/${usuario.id}`"><i class="bi bi-trash-fill mx-2"></i></Link>

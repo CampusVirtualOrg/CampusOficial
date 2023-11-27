@@ -96,6 +96,9 @@ Route::middleware('auth')->group(function () {
 			Route::controller(CursosController::class)->group(function() {
 				Route::get('/cursos','showAll')->name('cursos');
 				Route::get('/cursos/remove/{id}', 'remove');
+				Route::get('/cursos/edit/{id}', 'edit')->name('editCursos');
+				Route::put('/cursos/update/{id}', 'update')->name('editCursos');
+				Route::get('/cursos/create', 'create')->name('createCursos');
 			});
 
 			// DISCIPLINAS
@@ -112,8 +115,9 @@ Route::middleware('auth')->group(function () {
 				Route::get('/turma/create','createIndex')->name('createTurmas');
 				Route::post('/turma/create','create');
 				Route::get('/turmas/remove/{id}', 'remove');
-				Route::get('/turmas/alunos/{id}', 'alunos')->name('turmaAlunos');
+				Route::get('/turmas/addalunos/{id}', 'alunos')->name('turmaAlunos');
 				Route::post('/turmas/alunos/{id}', 'addAlunos');
+				Route::get('/turmas/alunos/{id}', 'turmaAlunos');
 			});
 		});
 

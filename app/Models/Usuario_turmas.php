@@ -11,7 +11,11 @@ class Usuario_turmas extends Model
 
     protected $fillable = [
         'aluno_id',
-        'turma_id'
+        'turma_id',
+        'faltas',
+        'nota_unidade1',
+        'nota_unidade2',
+        'media_final',
     ];
 
     protected $table = 'usuario_turmas';

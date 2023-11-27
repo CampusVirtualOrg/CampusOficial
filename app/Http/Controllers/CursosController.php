@@ -55,6 +55,8 @@ class CursosController extends Controller
                 'carga_horaria' => $credentials['carga_horaria'],
                 'periodos' => $credentials['periodos'],
                 'sigla' => $credentials['sigla'],
+                'categoria' => $credentials['categoria'],
+                'descricao' => $credentials['descricao'],
             ]);
             $course->save();
 
@@ -65,10 +67,11 @@ class CursosController extends Controller
         }
     }
 
-    public function updateIndex(string $id)
-    {
-        $cursos = Curso::all()->where('id', $id)->first();
-        return view('adm.cursos.editCursos', ['cursos' => $cursos]);
+    public function edit(string $id)
+    {   
+        $user = Auth::user();
+        $curso = Curso::all()->where('id', $id)->first();
+        return Inertia::render('Adm/Cursos/EditCursos', ['curso' => $curso, 'user' => $user]);
     }
 
     public function update(Request $request, string $id)
@@ -80,6 +83,8 @@ class CursosController extends Controller
                     'carga_horaria' => $request->carga_horaria,
                     'periodos' => $request->periodos,
                     'sigla' => $request->sigla,
+                    'categoria' => $request->categoria,
+                    'descricao' => $request->descricao,
                 ];
 
                 Curso::where('id', $id)->update($Curso);
