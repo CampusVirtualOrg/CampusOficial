@@ -42,7 +42,7 @@ defineProps({ user: Object, turmas: Object })
                             <td>{{ turma.disciplina_id }}</td>
                             <td><Link :href="'/'">Ver</Link></td>
                             <td><Link :href="'/'">Adicionar professor</Link></td>
-                            <td><Link :href="'/'">Adicionar aluno</Link></td>
+                            <td><Link :href="`/turmas/alunos/${turma.id}`">Adicionar aluno</Link></td>
                             <td style="color: #3065ac;">
                                 <Link :href="`/turmas/edit/${turma.id}`"><i class="bi bi-pencil-fill mx-2"></i></Link>
                                 <Link :href="`/turmas/remove/${turma.id}`"><i class="bi bi-trash-fill mx-2"></i></Link>

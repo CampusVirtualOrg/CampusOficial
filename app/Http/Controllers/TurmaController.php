@@ -222,4 +222,29 @@ class TurmaController extends Controller
 		return Inertia::render('Professor/Turmas', ['turmas' => $turmas, 'user' => $user]);
 
 	}
+
+	public function alunos(string $id)
+	{
+		$user = Auth::user();
+		$alunos = User::where('tipo', 'Aluno')->get();
+		$turma = Turma::where('id', $id)->get();
+        // $usuariosId = $alunos->pluck('aluno_id');
+        // $alunosEncontrados = User::whereIn('id', $usuariosId)->select('name', 'id')->get();
+
+
+		return Inertia::render('Adm/Turmas/Alunos', ['alunos' => $alunos, 'user' => $user, 'turma' =>  $turma]);
+	}
+
+	public function addAlunos(Request $request)
+	{
+		$credentials = $request->only('aluno_id', 'turma');
+		echo $credentials['aluno_id'], $credentials['turma'];
+		exit();
+        $register = new Usuario_turmas([
+            'aluno_id' => $credentials['aluno_id'],
+            'disciplina_id' => $credentials['disciplina_id'],
+        ]);
+
+        $register->save();
+	}
 }

@@ -38,9 +38,6 @@ defineProps({ user: Object, disciplinas: Object })
 					<tr v-for="disciplina in disciplinas" :key="disciplina.id">
 						<td>{{ disciplina.nome }}</td>
 					</tr>
-					<!-- <tr v-for="(user, id) in dados" :key="user.id">
-						<td></td>
-					</tr> -->
 				</tbody>
 			</table>
 		</div>

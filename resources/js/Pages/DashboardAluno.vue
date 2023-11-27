@@ -17,7 +17,7 @@ defineProps({ user: Object });
     <Button title="Disciplina" description="Veja as disciplinas do seu curso!" route="/minhasdisciplinas"
       icon="bi bi-layout-text-window" />
 
-    <Button title="Boletim" description="Notas e faltas do semestre aparecerão aqui!" route="/boletim"
+    <Button title="Boletim" description="Notas e faltas do semestre aparecerão aqui!" route="boletim"
       icon="bi bi-receipt" />
 
     <Button title="Requerimentos" description="Faça seus requerimentos pro bloco administrativo!" route="requerimento"

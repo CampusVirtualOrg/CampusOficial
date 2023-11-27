@@ -110,6 +110,8 @@ Route::middleware('auth')->group(function () {
 				Route::get('/turma/create','createIndex')->name('createTurmas');
 				Route::post('/turma/create','create');
 				Route::get('/turmas/remove/{id}', 'remove');
+				Route::get('/turmas/alunos/{id}', 'alunos')->name('turmaAlunos');
+				Route::post('/turmas/alunos/{id}', 'addAlunos');
 			});
 		});
 
