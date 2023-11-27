@@ -21,7 +21,7 @@ class TurmaController extends Controller
 {
     public function showAll()
     {
-        $turmas = Turma::all();
+        $turmas = Turma::with(['disciplina', 'professor'])->get();
         $professores = User::where('tipo', 'Professor')->get();
         $user = Auth::user();
         return Inertia::render('Adm/Turmas/Turmas', ['turmas' => $turmas, 'professores' => $professores, 'user' => $user]);
@@ -226,13 +226,15 @@ class TurmaController extends Controller
 	public function alunos(string $id)
 	{
 		$user = Auth::user();
-		$alunos = User::where('tipo', 'Aluno')->get();
-		$turma = Turma::where('id', $id)->get();
+		$turma = Turma::where('id', $id)->first();
+        $disciplina = Disciplina::where('id', $turma->disciplina_id)->first();
+		$alunos = User::where('tipo', 'Aluno');
+        $alunosHabilitados = $alunos->where('curso_id', $disciplina->curso_id)->with('curso')->get();
         // $usuariosId = $alunos->pluck('aluno_id');
         // $alunosEncontrados = User::whereIn('id', $usuariosId)->select('name', 'id')->get();
 
 
-		return Inertia::render('Adm/Turmas/Alunos', ['alunos' => $alunos, 'user' => $user, 'turma' =>  $turma]);
+		return Inertia::render('Adm/Turmas/Alunos', ['alunos' => $alunosHabilitados, 'user' => $user, 'turma' =>  $turma]);
 	}
 
 	public function addAlunos(Request $request)

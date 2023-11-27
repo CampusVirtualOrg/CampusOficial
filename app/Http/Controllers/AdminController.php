@@ -21,7 +21,7 @@ class AdminController extends Controller
 
     public function users()
     {
-        $users = User::all();
+        $users = User::with('curso')->get();
         $user = Auth::user();
         return Inertia::render('Adm/Usuarios/Usuarios', ['users' => $users, 'user' => $user]);
     }
@@ -144,17 +144,19 @@ class AdminController extends Controller
     }
 
     public function search(Request $request)
-    {
-        $users = User::where('nome', 'LIKE', '%' . $request->text . '%')
+    {   
+        $user = Auth::user();
+        $users = User::where('name', 'LIKE', '%' . $request->text . '%')
         ->orWhere('email', 'LIKE', '%' . $request->text . '%')
-        ->orWhere('matricula', 'LIKE', '%' . $request->text . '%')
+        ->orWhere('cpf', 'LIKE', '%' . $request->text . '%')
         ->orWhere('telefone', 'LIKE', '%' . $request->text . '%')
         ->paginate(10);
-        return view('adm.users.alunos', ['users' => $users]);
+        return Inertia::render('Adm/Usuarios/Usuarios', ['users' => $users, 'user' => $user]);
     }
 
-    public function searchNome(){
-        $users = User::orderBy('nome', 'DESC');
-        return view('adm.users.alunos', ['users' => $users]);
+    public function searchName(){
+        $user = Auth::user();
+        $users = User::orderBy('name', 'ASC')->get();
+        return Inertia::render('Adm/Usuarios/Usuarios', ['users' => $users, 'user' => $user]);
     }
 }

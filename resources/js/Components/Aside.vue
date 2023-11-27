@@ -27,7 +27,9 @@ const toggleMenu = () => {
             </div>
         </div>
         <div class="perfil" v-else>
-            <img src="../../../public/assets/img/perfil-default.png" alt="" class="img-perfil mx-2" />
+            <div class="img-perfil">
+                <img src="../../../public/assets/img/perfil-default.png" alt="" class="mx-2" />
+            </div>
             <div v-if="isExpanded" class="text-perfil">
                 <p class="text-white">Olá, <span style="color: white; font-weight: 700;">{{ nome }}</span></p>
                 <span class="tipo-text">{{ tipo }}</span>
@@ -39,7 +41,7 @@ const toggleMenu = () => {
             <i v-else class="bi bi-arrow-right-circle-fill"></i>
         </div>
 
-        <div class="anchors">
+        <div v-if="isExpanded" class="anchorsExpanded">
             <Link :href="route('usuarios')" class="a-asclasse"><i class="bi bi-people-fill"></i><span
                 v-if="isExpanded">Usuários</span></Link>
 
@@ -56,7 +58,28 @@ const toggleMenu = () => {
                 v-if="isExpanded">Requerimentos</span></Link>
 
             <Link :href="route('welcome')" class="logoAsclasse">
-                <img src="../../../public/assets/img/portal.png" alt="Campus Virtual" class="logoAsclasseImg">
+            <img src="../../../public/assets/img/portal.png" alt="Campus Virtual" class="logoAsclasseImg">
+            </Link>
+        </div>
+
+        <div v-else class="anchors">
+            <Link :href="route('usuarios')" class="a-asclasse"><i class="bi bi-people-fill"></i><span
+                v-if="isExpanded">Usuários</span></Link>
+
+            <Link :href="route('cursos')" class="a-asclasse"><i class="bi bi-c-square-fill"></i><span
+                v-if="isExpanded">Cursos</span></Link>
+
+            <Link :href="route('disciplinas')" class="a-asclasse"><i class="bi bi-book-half"></i><span
+                v-if="isExpanded">Disciplinas</span></Link>
+
+            <Link :href="route('turmas')" class="a-asclasse"><i class="bi bi-easel2-fill"></i><span
+                v-if="isExpanded">Turmas</span></Link>
+
+            <Link :href="route('requerimentos')" class="a-asclasse"><i class="bi bi-file-earmark-text-fill"></i><span
+                v-if="isExpanded">Requerimentos</span></Link>
+
+            <Link :href="route('welcome')" class="logoAsclasse" alt="ass">
+            <img src="../../../public/assets/img/portal.png" alt="Campus Virtual" class="logoAsclasseImg">
             </Link>
         </div>
     </aside>
@@ -70,13 +93,14 @@ aside {
     padding: 1rem;
     background-color: #3065ac;
     min-height: 100vh;
-    width: calc(2rem + 48px);
+    width: calc(2rem + 56px);
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
     font-family: 'Inter', sans-serif;
     transition: ease-out 0.6s;
 
     &.isExpanded {
         width: 28%;
+        align-items: start;
     }
 }
 
@@ -96,10 +120,18 @@ aside {
     font-size: 14pt;
 }
 
-.perfil img {
-    width: 3rem;
+.img-perfil {
     border-radius: 50%;
-    background-color: #3065ac;
+    width: 2.4rem;
+    height: 2.4rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.img-perfil img {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 .text-perfil {
@@ -120,6 +152,16 @@ aside {
 .h3-asclasse {
     font-size: 20pt;
     font-weight: 700;
+}
+
+.anchorsExpanded {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    display: flex;
+    align-items: start;
+    font-size: 16pt;
+    font-weight: 500;
 }
 
 .anchors {

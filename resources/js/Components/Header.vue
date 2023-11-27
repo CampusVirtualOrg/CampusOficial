@@ -1,25 +1,22 @@
 <script setup>
 import { Link } from '@inertiajs/vue3';
 
-// const props = defineProps({
-//     route: String,
-// })
+defineProps({
+  action: String
+})
+
 </script>
 
 <template>
   <div class="header-section">
 
     <div class="perfil">
-      <Link :href="route('admin.home')" style="color: #3065ac; font-weight: 700; font-size: 16pt;" class="mx-3">Painel Administrativo</Link>
-    </div>
-
-    <div class="create">
-      <!-- <Link :href="route">Cadastrar Usuario</Link> -->
+      <Link :href="route('admin.home')" style="color: #3065ac; font-weight: 700; font-size: 18pt;" class="mx-3">Painel Administrativo</Link>
     </div>
 
     <div class="box">
-      <form name="search">
-        <input type="text" class="input" name="txt" />
+      <form :action="action" name="search" method="POST">
+        <input type="text" class="input" name="text" />
         <i class="bi bi-search"></i>
       </form>
     </div>

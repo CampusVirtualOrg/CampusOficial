@@ -27,12 +27,12 @@ class Turma extends Model
 
 	public function professor()
 	{
-		return $this->belongsTo(Professor::class);
+		return $this->belongsTo(User::class);
 	}
 
 	public function alunos()
 	{
-		return $this->belongsToMany(Users::class,
+		return $this->belongsToMany(User::class,
 			'usuario_turmas',
 			'turma_id',
 			'aluno_id');

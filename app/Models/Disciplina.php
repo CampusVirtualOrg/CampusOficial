@@ -17,6 +17,16 @@ class Disciplina extends Model
         'curso_id',
     ];
 
+    public function pre_requisito()
+	{
+		return $this->belongsTo(Disciplina::class);
+	}
+
+	public function curso()
+	{
+		return $this->belongsTo(Curso::class);
+	}
+
 	public function turma(){
 		return $this->hasMany(Turma::class);
 	}

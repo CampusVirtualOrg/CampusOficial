@@ -13,7 +13,7 @@ class DisciplinasController extends Controller
 {
     public function showAll()
     {
-        $disciplinas = Disciplina::all();
+        $disciplinas = Disciplina::with(['curso', 'pre_requisito'])->get();
         $user = Auth::user();
         return Inertia::render('Adm/Disciplinas/Disciplinas', ['disciplinas' => $disciplinas, 'user' => $user]);
     }

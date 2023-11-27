@@ -27,8 +27,8 @@ defineProps({ user: Object, turmas: Object })
                             <th>Turno</th>
                             <th>Horário</th>
                             <th>Disciplina</th>
-                            <th>Ver Professores e Alunos</th>
-                            <th>Adicionar Professor</th>
+                            <th>Professor</th>
+                            <th>Ver Alunos</th>
                             <th>Adicionar Aluno</th>
                             <th>Ações</th>
                         </tr>
@@ -39,9 +39,9 @@ defineProps({ user: Object, turmas: Object })
                             <td>{{ turma.semestre }}</td>
                             <td>{{ turma.turno }}</td>
                             <td>{{ turma.horario }}</td>
-                            <td>{{ turma.disciplina_id }}</td>
+                            <td>{{ turma.disciplina.nome}}</td>
+                            <td>{{ turma.professor.name}}</td>
                             <td><Link :href="'/'">Ver</Link></td>
-                            <td><Link :href="'/'">Adicionar professor</Link></td>
                             <td><Link :href="`/turmas/alunos/${turma.id}`">Adicionar aluno</Link></td>
                             <td style="color: #3065ac;">
                                 <Link :href="`/turmas/edit/${turma.id}`"><i class="bi bi-pencil-fill mx-2"></i></Link>
@@ -101,6 +101,7 @@ table {
     width: 100%;
     border: 1px solid #000;
     border-collapse: collapse;
+    margin-bottom: 2rem;
 }
 
 tr,

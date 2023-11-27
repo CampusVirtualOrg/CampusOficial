@@ -81,6 +81,7 @@ table {
     width: 100%;
     border: 1px solid #000;
     border-collapse: collapse;
+    margin-bottom: 2rem;
 }
 
 tr,

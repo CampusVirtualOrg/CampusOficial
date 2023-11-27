@@ -33,19 +33,9 @@ class User extends Authenticatable
     ];
 
     public function curso()
-    {
-        return $this->belongsTo(Curso::class);
-    }
-
-    public function getNomeCurso($cursoId) {
-        $curso = Curso::find($cursoId);
-        return $curso->nome;
-    }
-    
-
-    public function nomeCurso() {
-        return $this->curso->nome;
-    }
+	{
+		return $this->belongsTo(Curso::class);
+	}
 
     public function matricula()
     {

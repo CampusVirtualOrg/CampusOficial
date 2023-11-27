@@ -78,6 +78,8 @@ Route::middleware('auth')->group(function () {
 				Route::get('/usuarios/edit/{id}', 'indexUpdate');
 				Route::put('/usuarios/update/{id}', 'edit');
 				Route::get('/usuarios/remove/{id}', 'remove');
+				Route::post('/usuarios/search', 'search');
+				Route::get('/usuarios/search', 'searchName');
 			});
 
 			// REQUERIMENTOS

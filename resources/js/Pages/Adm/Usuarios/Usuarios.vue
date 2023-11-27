@@ -16,13 +16,13 @@ defineProps({ user: Object, users: Object })
         <Aside :nome="user.name" :imagem="user.imagem" :tipo="user.tipo"/>
 
         <section>
-            <Header />
+            <Header :action="'/usuarios/search'"/>
             <div class="content">
                 <Link :href="route('register')" class="buttonAdd">+ Adicionar Novo Usuário</Link>
                 <table class="styled-table">
                     <thead>
                         <tr>
-                            <th>Nome</th>
+                            <th><Link :href="'usuarios/search'">Nome<i class="bi bi-arrow-up"></i></Link></th>
                             <th>Email</th>
                             <th>Tipo</th>
                             <!-- <th>Matricula</th> -->
@@ -44,7 +44,7 @@ defineProps({ user: Object, users: Object })
                             <td>{{ usuario.cpf }}</td>
                             <td>{{ usuario.sexo }}</td>
                             <td>{{ usuario.data_nasc }}</td>
-                            <td>{{ usuario.curso_id }}</td>
+                            <td>{{ usuario.curso }}</td>
                             <td style="color: #3065ac;">
                                 <Link :href="`/usuarios/edit/${usuario.id}`"><i class="bi bi-pencil-fill mx-2"></i></Link>
                                 <Link :href="`/usuarios/remove/${usuario.id}`"><i class="bi bi-trash-fill mx-2"></i></Link>
@@ -104,6 +104,7 @@ table {
     width: 100%;
     border: 1px solid #000;
     border-collapse: collapse;
+    margin-bottom: 2rem;
 }
 
 tr,

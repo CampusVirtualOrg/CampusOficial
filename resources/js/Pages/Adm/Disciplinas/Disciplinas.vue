@@ -35,8 +35,8 @@ defineProps({ user: Object, disciplinas: Object })
                             <td>{{ disciplina.nome }}</td>
                             <td>{{ disciplina.sigla }}</td>
                             <td>{{ disciplina.carga_horaria }}</td>
-                            <td>{{ disciplina.pre_requisito_id }}</td>
-                            <td>{{ disciplina.curso_id }}</td>
+                            <td>{{ disciplina.pre_requisito }}</td>
+                            <td>{{ disciplina.curso.nome }}</td>
                             <td style="color: #3065ac;">
                                 <Link :href="`/disciplinas/edit/${disciplina.id}`"><i class="bi bi-pencil-fill mx-2"></i></Link>
                                 <Link :href="`/disciplinas/remove/${disciplina.id}`"><i class="bi bi-trash-fill mx-2"></i></Link>
