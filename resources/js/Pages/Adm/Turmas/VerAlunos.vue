@@ -20,7 +20,9 @@ defineProps({ user: Object, alunos: Object, turma: Object });
 						<th>Id do Aluno</th>
 						<th>Nome</th>
                         <th>Faltas</th>
-                        <th>Notas</th>
+                        <th>Unidade 1</th>
+                        <th>Unidade 2</th>
+                        <th>Média Final</th>
 					</tr>
 				</thead>
 				<tbody v-for="aluno in alunos">
@@ -28,7 +30,9 @@ defineProps({ user: Object, alunos: Object, turma: Object });
 						<td>{{ aluno.id }}</td>
 						<td>{{ aluno.name }}</td>
                         <td>{{ aluno.faltas }}</td>
-                        <td>{{ aluno.notas }}</td>
+                        <td>{{ aluno.nota_unidade1 }}</td>
+                        <td>{{ aluno.nota_unidade2 }}</td>
+                        <td>{{ aluno.media_final }}</td>
 					</tr>
 				</tbody>
 			</table>

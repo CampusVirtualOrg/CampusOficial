@@ -228,10 +228,29 @@ class TurmaController extends Controller
         $turma = Turma::where('id', $id)->with(['disciplina', 'professor'])->first();
         $alunos = DB::table('usuario_turmas')
             ->join('users', 'users.id', '=', 'usuario_turmas.aluno_id')
-            ->select('users.*', 'usuario_turmas.notas', 'usuario_turmas.faltas')
+            ->select('users.*', 'usuario_turmas.faltas', 'usuario_turmas.nota_unidade1', 'usuario_turmas.nota_unidade2', 'usuario_turmas.media_final')
             ->get();
         return Inertia::render('Professor/Turmas/TurmaIndex', ['turma' => $turma, 'user' => $user, 'alunos' => $alunos]);
     }
+
+    public function atualizarBoletim(Request $request)
+    {
+        // Processar os dados do formulário
+        foreach ($request->alunos as $aluno) {
+            // Atualizar os dados do boletim do aluno
+            DB::table('usuario_turmas')
+                ->where('id', $aluno['id'])
+                ->update([
+                    'faltas' => $aluno['faltas'],
+                    'nota_unidade1' => $aluno['nota_unidade1'],
+                    'nota_unidade2' => $aluno['nota_unidade2'],
+                    'media_final' => $aluno['media_final'],
+                ]);
+        }
+
+        return redirect('/turmas'); // Redirecionar após a atualização
+    }
+
 
     public function alunos(string $id)
     {
@@ -247,7 +266,7 @@ class TurmaController extends Controller
         return Inertia::render('Adm/Turmas/Alunos', ['alunos' => $alunosHabilitados, 'user' => $user, 'turma' =>  $turma]);
     }
 
-    public function addAlunos(Request $request, String $id)
+    public function addAlunos(Request $request, string $id)
     {
         $credentials = $request->only('aluno_id');
         $register = new Usuario_turmas([
@@ -268,7 +287,8 @@ class TurmaController extends Controller
         $turma = Turma::where('id', $id)->with(['professor', 'disciplina'])->first();
         $boletimAluno = DB::table('usuario_turmas')
             ->join('users', 'users.id', '=', 'usuario_turmas.aluno_id')
-            ->select('users.*', 'usuario_turmas.notas', 'usuario_turmas.faltas')
+            ->join('turmas', 'turmas.id', '=', 'usuario_turmas.turma_id')
+            ->select('users.*', 'usuario_turmas.faltas', 'usuario_turmas.nota_unidade1', 'usuario_turmas.nota_unidade2', 'usuario_turmas.media_final')
             ->get();
         return Inertia::render('Adm/Turmas/VerAlunos', ['alunos' => $boletimAluno, 'user' => $user, 'turma' =>  $turma]);
     }

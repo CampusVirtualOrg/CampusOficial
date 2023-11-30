@@ -19,20 +19,25 @@ defineProps({
 			<h1>Minhas Turmas</h1>
 		</div>
 
-		<div class="turmas" v-for="turma in turmas">
-			<div class="card">
-				<h4>{{ turma.nome }}</h4>
-				<p>
-					{{ turma.horario }}
-				</p>
-				<Link :href="`/professor/turmas/${turma.id}`" class="anc">Exibir turma</Link>
+		<div class="todasTurmas">
+
+			<div class="turmas" v-for="turma in turmas">
+				<div class="card">
+					<h4>{{ turma.nome }}</h4>
+					<p>
+						{{ turma.horario }}
+					</p>
+					<Link :href="`/professor/turmas/${turma.id}`" class="anc">Exibir turma</Link>
+				</div>
 			</div>
+
 		</div>
 	</section>
 </template>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 header {
 	display: flex;
 	align-items: center;
@@ -46,7 +51,7 @@ header {
 section {
 	font-family: 'Inter', sans-serif;
 	display: flex;
-	margin: 0rem 2.5rem;
+	padding: 0rem 2.5rem;
 	flex-direction: column;
 	align-items: start;
 	width: 100%;
@@ -62,15 +67,18 @@ section {
 	color: #3065ac;
 }
 
-.turmas {
-	display: inline-block;
+.todasTurmas {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	width: 100%;
 }
 
 .card {
 	font-size: 14pt;
 	font-weight: 500;
 	background-color: #3065ac;
-	width: 20rem;
+	width: 16rem;
 	height: 8rem;
 	color: white;
 	padding: 1rem;
@@ -78,6 +86,7 @@ section {
 	border-radius: 15px;
 	transition: all 0.3s ease;
 }
+
 .anc {
 	font-weight: 700;
 }
