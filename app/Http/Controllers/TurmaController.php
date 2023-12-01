@@ -253,15 +253,15 @@ class TurmaController extends Controller
 
 
 			// Atualizar os dados do boletim do aluno
-			$update = new Usuario_turmas([
+			$update =  Usuario_turmas::all()->where('id',$credentials['turma_id']);
+			$update->update([
 				'aluno_id' => $id,
 				'turma_id' => $credentials['turma_id'],
 				'nota_unidade1' => $credentials['nu1'],
 				'nota_unidade2' => $credentials['nu2'],
 				'faltas' => $credentials['faltas'],
-				'media_final' => ($credentials['nu1']+$credentials['nu2'])/2,
-			]);
-			$update->save();
+				'media_final' => ($credentials['nu1']+$credentials['nu2'])/2,]
+			);
 
 
 
