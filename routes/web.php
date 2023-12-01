@@ -143,6 +143,9 @@ Route::middleware('auth')->group(function () {
 			Route::controller(TurmaController::class)->group(function(){
 				Route::get('/professor/turmas', 'turmaProfessor')->name('turmaProfessor');
 				Route::get('/professor/turmas/{id}', 'turmaProfessorIndex')->name('turmaProfessorIndex');
+				Route::get('/professor/turmas/editarview/{id}', 'turmaProfessorIndexOne')->name('turmaProfessorIndexOne');
+				Route::post('/professor/turmas/editar/{id}', 'atualizarBoletim');
+
 				Route::post('/professor/turmas/atualizar', 'atualizarBoletim')->name('atualizarBoletim');
 			});
 		});

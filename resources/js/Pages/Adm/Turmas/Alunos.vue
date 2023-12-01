@@ -3,11 +3,12 @@ import Aside from '@/Components/Aside.vue';
 import HeaderAluno from "@/Components/HeaderAluno.vue";
 import { defineProps } from "vue";
 
-defineProps({ user: Object, alunos: Object, turma: Object });
+defineProps({ curso: Object ,user: Object, alunos: Object, turma: Object });
 
 </script>
 
 <template>
+
 	<section>
 		<Aside :nome="user.name" :imagem="user.imagem" :tipo="user.tipo" />
 		<main>
@@ -18,12 +19,13 @@ defineProps({ user: Object, alunos: Object, turma: Object });
 						<th>Nome</th>
 						<th>Curso</th>
 						<th>Matrícular</th>
+
 					</tr>
 				</thead>
 				<tbody v-for="aluno in alunos">
 					<tr>
 						<td>{{ aluno.name }}</td>
-						<td>{{ aluno.curso.nome }}</td>
+						<td v-for="c in curso">{{ c.nome }}</td>
 						<td style="color: #3065ac;">
 							<form :action="`/turmas/alunos/${turma.id}`" method="post">
 								<input type="hidden" name="aluno_id" :value="aluno.id">

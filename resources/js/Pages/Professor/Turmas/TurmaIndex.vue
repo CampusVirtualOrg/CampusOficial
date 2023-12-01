@@ -9,6 +9,7 @@ defineProps({
 
 
 <template>
+
     <Head title="Turmas Professor" />
     <header>
         <HeaderAluno :nome="user.name" />
@@ -27,6 +28,8 @@ defineProps({
                         <th>Unidade 1</th>
                         <th>Unidade 2</th>
                         <th>Média Final</th>
+						<th>config</th>
+
                     </tr>
                 </thead>
                 <tbody v-for="aluno in alunos">
@@ -34,22 +37,27 @@ defineProps({
                         <td>{{ aluno.id }}</td>
                         <td>{{ aluno.name }}</td>
                         <td>
-                            <form action="" method="post">
-                                <input type="number" :value="aluno.faltas">
-                            </form>
+
+
+								{{ aluno.faltas }}
                         </td>
                         <td>
-                            <form action="" method="post">
-                                <input type="number" :value="aluno.nota_unidade1">
-                            </form>
+
+							{{ aluno.nota_unidade1 }}
+
                         </td>
                         <td>
-                            <form action="" method="post">
-                                <input type="number" :value="aluno.nota_unidade2">
-                            </form>
+
+
+							{{ aluno.nota_unidade2 }}
+
                         </td>
                         <td class="media" v-if="aluno.media_final >= 7"><span class="text-green-800">{{ aluno.media_final }}</span></td>
                         <td class="media" v-else><span class="text-red-800">{{ aluno.media_final }}</span></td>
+						<td><form :action="'/professor/turmas/editarview/'+aluno.id" method="get">
+							<input name="turma_id" hidden :value="turma.id">
+							<button type="submit">ir</button>
+						</form></td>
                     </tr>
                 </tbody>
             </table>
@@ -68,6 +76,11 @@ header {
     position: relative;
     top: 0;
     margin-top: 1rem;
+}
+button{
+	text-align: center;
+	color:red;
+	font-weight: bolder;
 }
 
 section {
