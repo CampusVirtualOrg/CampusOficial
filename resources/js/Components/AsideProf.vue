@@ -33,9 +33,9 @@ const props = defineProps({
 
             <Link :href="route('cursos')" class="a-asclasse"><i class="bi bi-c-square-fill"></i>Cursos</Link>
 
-            <Link :href="route('welcome')" class="logoAsclasse">
+            <!-- <Link :href="route('welcome')" class="logoAsclasse">
                 <Logo />
-            </Link>
+            </Link> -->
         </div>
     </aside>
 </template>

@@ -78,9 +78,9 @@ const toggleMenu = () => {
             <Link :href="route('requerimentos')" class="a-asclasse"><i class="bi bi-file-earmark-text-fill"></i><span
                 v-if="isExpanded">Requerimentos</span></Link>
 
-            <Link :href="route('welcome')" class="logoAsclasse" alt="ass">
-            <img src="../../../public/assets/img/portal.png" alt="Campus Virtual" class="logoAsclasseImg">
-            </Link>
+            <!-- <Link :href="route('welcome')" class="logoAsclasse" alt="ass"> -->
+                <!-- </Link> -->
+                <img src="../../../public/assets/img/portal.png" alt="Campus Virtual" class="logoAsclasseImg">
         </div>
     </aside>
 </template>
@@ -99,7 +99,7 @@ aside {
     transition: ease-out 0.6s;
 
     &.isExpanded {
-        width: 28%;
+        width: 17%;
         align-items: start;
     }
 }
@@ -196,8 +196,12 @@ aside {
 }
 
 .logoAsclasse {
-    width: 3rem;
-    margin-top: 20%;
+    width: 4rem;
+    margin-top: 60%;
+    text-align: center;
+    margin-left: 37%;
+    display: block;
+    justify-content: end;
 }
 
 .a-asclasse span:hover {
