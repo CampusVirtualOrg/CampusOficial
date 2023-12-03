@@ -15,6 +15,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\TurmaController;
 use App\Http\Controllers\TurmaMethodsController;
+use App\Http\Controllers\BoletimController;
+
 
 
 /*
@@ -115,9 +117,11 @@ Route::middleware(['auth','professor'])->group(function () {
 
 	// Turmas routes
 	Route::get('/professor/turmas', [TurmaMethodsController::class, 'index'])->name('professor.turma');
+
+	// Boletim routes
 	Route::get('/professor/turmas/{id}', [ProfessorController::class, 'boletim'])->name('professor.boletim.view');
 	Route::get('/professor/turmas/editar/{id}', [ProfessorController::class, 'boletimAluno'])->name('professor.boletim.aluno');
-	Route::post('/professor/turmas/editar/{id}', [TurmaMethodsController::class, 'update'])->name('professor.turma.boletim');
+	Route::post('/professor/turmas/editar/{id}', [BoletimController::class, 'update'])->name('professor.turma.boletim');
 });
 
 require __DIR__ . '/auth.php';
