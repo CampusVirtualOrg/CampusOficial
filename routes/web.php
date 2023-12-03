@@ -63,7 +63,7 @@ Route::middleware(['auth','administrador'])->group(function () {
 	// Users routes
 	Route::get('/register', [UserController::class, 'create'])->name('users.register.view');
 	Route::post('/register', [UserController::class, 'store'])->name('users.register');
-	Route::get('/users', [UserController::class, 'show'])->name('users.show');
+	Route::get('/users', [UserController::class, 'show'])->name('users');
 	Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('users.edit.view');
 	Route::put('/users/update/{id}', [UserController::class, 'update'])->name('users.update');
 	Route::get('/users/remove/{id}', [UserController::class, 'remove'])->name('users.remove');
@@ -71,7 +71,7 @@ Route::middleware(['auth','administrador'])->group(function () {
 	Route::post('/users/search', [UserController::class, 'search'])->name('users.search');
 
 	// Requeriments routes
-	Route::get('/requerimentos', [RequerimentosController::class, 'show'])->name('requerimentos.show');
+	Route::get('/requerimentos', [RequerimentosController::class, 'show'])->name('requerimentos');
 	Route::get('requerimmentos/search', [RequerimentosController::class, 'search'])->name('requerimentos.search');
 	Route::get('/requerimentos/edit/{id}', [RequerimentosController::class, 'edit'])->name('requerimentos.update.view');
 	Route::post('/requerimentos/edit/{id}', [RequerimentosController::class, 'update'])->name('requerimentos.update');
@@ -85,13 +85,13 @@ Route::middleware(['auth','administrador'])->group(function () {
 	Route::put('/cursos/update/{id}', [CursosController::class, 'update'])->name('cursos.update');
 
 	// Disciplinas routes
-	Route::get('/disciplinas', [DisciplinasController::class, 'show'])->name('disciplinas.show');
+	Route::get('/disciplinas', [DisciplinasController::class, 'show'])->name('disciplinas');
 	Route::get('/disciplinas/create', [DisciplinasController::class, 'index'])->name('disciplinas.create.view');
 	Route::post('/disciplinas/create', [DisciplinasController::class, 'create'])->name('disciplinas.create');
 	Route::get('/disciplinas/remove/{id}', [DisciplinasController::class, 'remove'])->name('disciplinas.remove');
 
 	// Turmas routes
-	Route::get('/turmas', [TurmaController::class, 'show'])->name('turmas.show');
+	Route::get('/turmas', [TurmaController::class, 'show'])->name('turmas');
 	Route::get('/turmas/create', [TurmaController::class, 'index'])->name('turmas.create.view');
 	Route::post('/turmas/create', [TurmaController::class, 'create'])->name('turmas.create');
 	Route::get('/turmas/remove/{id}', [TurmaController::class, 'remove'])->name('turmas.remove');
@@ -119,8 +119,8 @@ Route::middleware(['auth','professor'])->group(function () {
 	Route::get('/professor/turmas', [TurmaMethodsController::class, 'index'])->name('professor.turma');
 
 	// Boletim routes
-	Route::get('/professor/turmas/{id}', [ProfessorController::class, 'boletim'])->name('professor.boletim.view');
-	Route::get('/professor/turmas/editar/{id}', [ProfessorController::class, 'boletimAluno'])->name('professor.boletim.aluno');
+	Route::get('/professor/turmas/{id}', [BoletimController::class, 'boletim'])->name('professor.boletim.view');
+	Route::get('/professor/turmas/editar/{id}', [BoletimController::class, 'boletimAluno'])->name('professor.boletim.aluno');
 	Route::post('/professor/turmas/editar/{id}', [BoletimController::class, 'update'])->name('professor.turma.boletim');
 });
 

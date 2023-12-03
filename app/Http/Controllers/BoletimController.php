@@ -7,6 +7,7 @@ use App\Models\Turma;
 use App\Models\Usuario_turmas;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 use Inertia\Inertia;
 
 class BoletimController extends Controller
@@ -17,11 +18,30 @@ class BoletimController extends Controller
 		$turma = Turma::where('id', $id)->with(['professor', 'disciplina'])->first();
 		$boletimAluno = DB::table('usuario_turmas')
 			->join('users', 'users.id', '=', 'usuario_turmas.aluno_id')
-			->where('usuario_turmas.turma_id', '=', $id) // Adiciona a condição para o curso desejado
+			->where('usuario_turmas.turma_id', '=', $id)
 			->join('turmas', 'turmas.id', '=', 'usuario_turmas.turma_id')
 			->select('users.*', 'usuario_turmas.faltas', 'usuario_turmas.nota_unidade1', 'usuario_turmas.nota_unidade2', 'usuario_turmas.media_final')
 			->get();
 		return Inertia::render('Adm/Turmas/VerAlunos', ['alunos' => $boletimAluno, 'user' => $user, 'turma' =>  $turma]);
+	}
+
+	public function boletim( String $id)
+	{
+		$user = Auth::user();
+		$turma = Turma::where('id', $id)->with(['disciplina', 'professor'])->first();
+		$alunos = DB::table('usuario_turmas')
+			->join('users', 'users.id', '=', 'usuario_turmas.aluno_id')
+			->select('users.*', 'usuario_turmas.faltas', 'usuario_turmas.nota_unidade1', 'usuario_turmas.nota_unidade2', 'usuario_turmas.media_final')
+			->get();
+
+		return Inertia::render('Professor/Turmas/Boletim', ['turma' => $turma, 'user' => $user, 'alunos' => $alunos]);
+	}
+
+	public function boletimAluno(Request $request ,String $id)
+	{
+		$turma_id = $request->only('turma_id');
+		$alunos = User::all()->where('id',$id);
+		return Inertia::render('Professor/Turmas/BoletimAluno', ["turma" => $turma_id, 'user' => $id ,'alunos' => $alunos]);
 	}
 
 	public function update(Request $request ,String $id)
@@ -40,4 +60,5 @@ class BoletimController extends Controller
 
 		return redirect('/professor/turmas');
 	}
+
 }
