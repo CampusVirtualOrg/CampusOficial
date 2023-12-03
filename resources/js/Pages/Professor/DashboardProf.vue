@@ -14,7 +14,7 @@ defineProps({ user: Object })
         <Button
             title="Avisos"
             description="Veja e publique seus avisos mais recentes!"
-            route="/aviso"
+            route="aviso"
             icon="bi bi-app-indicator"
         />
 
@@ -26,16 +26,9 @@ defineProps({ user: Object })
         />
 
         <Button
-            title="Boletim"
-            description="Publique as notas dos seus alunos!"
-            route=""
-            icon="bi bi-receipt"
-        />
-
-        <Button
             title="Turmas"
             description="Suas turmas estão aqui!"
-            route="/professor/turmas"
+            route="professor/turmas"
             icon="bi bi-check-square"
         />
 

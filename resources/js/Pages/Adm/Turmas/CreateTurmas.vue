@@ -6,7 +6,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
-const props = defineProps({ user: Object, disciplinas: Object, professores: Object });
+defineProps({ user: Object, disciplinas: Object, professores: Object });
 
 const form = useForm({
     semestre: '',
@@ -29,7 +29,7 @@ const submit = () => {
 
 <template>
     <main>
-        <Aside :nome="props.user.name" :imagem="props.user.imagem" :tipo="props.user.tipo" />
+        <Aside :nome="user.name" :imagem="user.imagem" :tipo="user.tipo"/>
 
         <Head title="Campus Virtual" />
         <form @submit.prevent="submit">

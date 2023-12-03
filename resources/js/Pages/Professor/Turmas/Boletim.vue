@@ -36,22 +36,9 @@ defineProps({
                     <tr>
                         <td>{{ aluno.id }}</td>
                         <td>{{ aluno.name }}</td>
-                        <td>
-
-
-								{{ aluno.faltas }}
-                        </td>
-                        <td>
-
-							{{ aluno.nota_unidade1 }}
-
-                        </td>
-                        <td>
-
-
-							{{ aluno.nota_unidade2 }}
-
-                        </td>
+                        <td>{{ aluno.faltas }}</td>
+                        <td>{{ aluno.nota_unidade1 }}</td>
+                        <td>{{ aluno.nota_unidade2 }}</td>
                         <td class="media" v-if="aluno.media_final >= 7"><span class="text-green-800">{{ aluno.media_final }}</span></td>
                         <td class="media" v-else><span class="text-red-800">{{ aluno.media_final }}</span></td>
 						<td><form :action="'/professor/turmas/editarview/'+aluno.id" method="get">

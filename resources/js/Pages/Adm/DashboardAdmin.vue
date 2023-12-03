@@ -19,7 +19,7 @@ const props = defineProps({ user: Object });
             <Header />
 
             <div class="content">
-				<Card title="Usuarios" description="Veja aqui tudo sobre alunos" route="usuarios"
+				<Card title="Usuarios" description="Veja aqui tudo sobre alunos" route="users"
                     icon="bi bi-people-fill" />
 
                 <Card title="Cursos" description="Veja todos os cursos" route="cursos" icon="bi bi-c-square-fill" />

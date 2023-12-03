@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
 
 	// Logon routes
 	Route::get('/logon', [LogonController::class, 'create']);
+	Route::get('/logout', [AccessibleController::class, 'index'])->name('logout');
 
 	// Profile routes
 	Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -38,7 +39,7 @@ Route::middleware('auth')->group(function () {
 	Route::delete('/profile',[ProfileController::class, 'destroy'])->name('profile.destroy');
 
 	// reports routes
-	Route::get('/aviso', [PostController::class, 'index'])->name('avisos');
+	Route::get('/avisos', [PostController::class, 'index'])->name('avisos');
 	Route::get('/aviso/{id}', [PostController::class, 'show'])->name('avisos.show');
 	Route::get('/aviso/create/view', [PostController::class, 'create'])->name('avisos.create.view');
 	Route::post('/aviso/create', [PostController::class, 'store'])->name('avisos.create');
@@ -89,6 +90,8 @@ Route::middleware(['auth','administrador'])->group(function () {
 	Route::get('/disciplinas/create', [DisciplinasController::class, 'index'])->name('disciplinas.create.view');
 	Route::post('/disciplinas/create', [DisciplinasController::class, 'create'])->name('disciplinas.create');
 	Route::get('/disciplinas/remove/{id}', [DisciplinasController::class, 'remove'])->name('disciplinas.remove');
+	Route::get('/disciplinas/edit/{id}', [DisciplinasController::class, 'edit'])->name('disciplinas.edit.view'); // Concluir rota
+	Route::put('/disciplinas/update/{id}', [DisciplinasController::class, 'update'])->name('disciplinas.update'); // Concluir rota
 
 	// Turmas routes
 	Route::get('/turmas', [TurmaController::class, 'show'])->name('turmas');
@@ -116,7 +119,7 @@ Route::middleware(['auth','professor'])->group(function () {
 	Route::get('/professor', [ProfessorController::class, 'index'])->name('professor.index');
 
 	// Turmas routes
-	Route::get('/professor/turmas', [TurmaMethodsController::class, 'index'])->name('professor.turma');
+	Route::get('/professor/turmas', [TurmaMethodsController::class, 'professor'])->name('professor.turma');
 
 	// Boletim routes
 	Route::get('/professor/turmas/{id}', [BoletimController::class, 'boletim'])->name('professor.boletim.view');

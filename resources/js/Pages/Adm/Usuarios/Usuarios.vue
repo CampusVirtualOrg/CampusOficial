@@ -18,7 +18,7 @@ defineProps({ user: Object, users: Object,cursos: Object })
         <section>
             <Header :action="'/usuarios/search'"/>
             <div class="content">
-                <Link :href="route('register')" class="buttonAdd">+ Adicionar Novo Usuário</Link>
+                <Link :href="route('users.register.view')" class="buttonAdd">+ Adicionar Novo Usuário</Link>
                 <table class="styled-table">
                     <thead>
                         <tr>

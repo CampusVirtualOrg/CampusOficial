@@ -55,7 +55,7 @@ class UserController extends Controller
 
         event(new Registered($user));
 
-        return redirect('/usuarios');
+        return redirect('/users');
     }
 
 	public function edit(String $id){

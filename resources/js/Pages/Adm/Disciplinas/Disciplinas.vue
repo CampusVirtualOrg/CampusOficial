@@ -18,7 +18,7 @@ defineProps({ user: Object, disciplinas: Object })
         <section>
             <Header />
             <div class="content">
-                <Link :href="route('createDisciplinas')" class="buttonAdd">+ Adicionar Nova Disciplina</Link>
+                <Link :href="route('disciplinas.create.view')" class="buttonAdd">+ Adicionar Nova Disciplina</Link>
                 <table class="styled-table">
                     <thead>
                         <tr>

@@ -60,10 +60,10 @@ class DisciplinasController extends Controller
         }
     }
 
-    public function updateIndex(String $id)
+    public function edit(String $id)
     {
         $disciplina = Disciplina::all()->where('id', $id)->first();
-        return view('adm.disciplinas.editDisciplina', ['disc' => $disciplina]);
+        echo "concluir Rota!";
     }
 
     public function update(Request $request, String $id)

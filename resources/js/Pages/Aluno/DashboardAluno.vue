@@ -11,16 +11,16 @@ defineProps({ user: Object });
   </header>
 
   <section>
-    <Button title="Avisos" description="Veja os avisos mais recentes publicados pelos professores!" route="/aviso"
+    <Button title="Avisos" description="Veja os avisos mais recentes publicados pelos professores!" route="avisos"
       icon="bi bi-app-indicator" />
 
-    <Button title="Disciplina" description="Veja as disciplinas do seu curso!" route="/minhasdisciplinas"
+    <Button title="Disciplina" description="Veja as disciplinas do seu curso!" route="aluno.disciplinas"
       icon="bi bi-layout-text-window" />
 
-    <Button title="Boletim" description="Notas e faltas do semestre aparecerão aqui!" route="boletim"
+    <Button title="Boletim" description="Notas e faltas do semestre aparecerão aqui!" route="aluno.boletim"
       icon="bi bi-receipt" />
 
-    <Button title="Requerimentos" description="Faça seus requerimentos pro bloco administrativo!" route="requerimento"
+    <Button title="Requerimentos" description="Faça seus requerimentos pro bloco administrativo!" route="requerimento.index"
       icon="bi bi-pencil-square" />
 
     <Button title="Registro" description="Seus registros estão aqui!" route="" icon="bi bi-check-square" />

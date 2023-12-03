@@ -14,7 +14,8 @@ class CursosController extends Controller
 {
 	public function index()
     {
-        return view('adm.cursos.createCursos');
+		$user = Auth::user();
+        return Inertia::render('Adm/Cursos/CreateCursos', ['user' => $user]);
     }
 
     public function show()
