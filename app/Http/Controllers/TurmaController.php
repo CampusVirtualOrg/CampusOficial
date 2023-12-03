@@ -2,40 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use App\Models\Disciplina;
-use App\Models\Disciplina_turmas;
 use Illuminate\Http\Request;
 use App\Models\Turma;
-use App\Models\Usuario;
-use App\Models\Aluno_turma;
-use App\Models\Curso;
 use App\Models\User;
-use App\Models\Usuario_turmas;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
-use PhpParser\Node\Expr\Cast\String_;
-
-use function Psy\debug;
 
 class TurmaController extends Controller
 {
-	public function showAll()
-	{
-		$turmas = Turma::with(['disciplina', 'professor'])->get();
-		$professores = User::where('tipo', 'Professor')->get();
-		$user = Auth::user();
-		return Inertia::render('Adm/Turmas/Turmas', ['turmas' => $turmas, 'professores' => $professores, 'user' => $user]);
-	}
 
-	public function createIndex()
+	public function index()
 	{
-
 		$user = Auth::user();
 		$disciplinas = Disciplina::all();
 		$professores = User::where('tipo', 'Professor')->get();
 
 		return Inertia::render('Adm/Turmas/CreateTurmas', ['disciplinas' => $disciplinas, 'professores' => $professores, 'user' => $user]);
+	}
+
+	public function show()
+	{
+		$turmas = Turma::with(['disciplina', 'professor'])->get();
+		$professores = User::where('tipo', 'Professor')->get();
+		$user = Auth::user();
+		return Inertia::render('Adm/Turmas/Turmas', ['turmas' => $turmas, 'professores' => $professores, 'user' => $user]);
 	}
 
 	public function create(Request $request)
@@ -79,71 +70,6 @@ class TurmaController extends Controller
 		}
 	}
 
-	public function addDisc(string $id)
-	{
-
-		$disciplinas = Disciplina::all();
-
-		return view('adm.turmas.createTurmasDisc', ['disciplinas' => $disciplinas, 'turmas_id' => $id]);
-	}
-
-	public function addDiscCreate(Request $request)
-	{
-		$credentials = $request->only('disciplina_id', 'turmas_id');
-
-		$resp = new Disciplina_turmas([
-			'disciplina_id' => $credentials['disciplina_id'],
-			'turmas_id' => $credentials['turmas_id'],
-
-		]);
-		$resp->save();
-		return redirect('/turmas');
-	}
-
-	public function showOne(String $id)
-	{
-
-		try {
-
-			if ($id == null) {
-				echo 'vazioo';
-			}
-
-
-			$disciplinas = DB::table('disciplina_turmas')
-				->join('turmas', 'disciplina_turmas.turmas_id', '=', 'turmas.id')
-				->select('disciplina_turmas.disciplina_id')
-				->where('turmas_id', '=', $id) // Substitua 1 pelo ID da turma desejada
-				->get();
-
-
-			$ids = [];
-			$tamanho = count($disciplinas);
-			for ($i = 0; $i < $tamanho; $i++) {
-				array_push($ids, $disciplinas[$i]->disciplina_id);
-			}
-
-			$turmas = DB::table('disciplinas')
-				->whereIn('id', $ids)
-				->get();
-
-			$usersIds = Usuario_turmas::where('turma_id', $id)->pluck('aluno_id')->all();
-			$alunos = User::whereIn('id', $usersIds)->select('nome')->get();
-
-			return view('adm.turmas.turmaone', ['disciplinas' => $turmas, 'alunos' => $alunos]);
-		} catch (\Throwable $th) {
-			echo 'erro';
-		}
-	}
-
-	public function updateIndex(string $id)
-	{
-		$disciplinas = Disciplina::all();
-		$professores = User::where('tipo', '=', 2)->get();
-		$turmas = Turma::all()->where('id', $id)->first();
-		return view('adm.turmas.editTurmas', ['turmas' => $turmas, 'disciplinas' => $disciplinas, 'professores' => $professores]);
-	}
-
 	public function update(Request $request, string $id)
 	{
 		try {
@@ -173,7 +99,6 @@ class TurmaController extends Controller
 
 	public function remove(string $id)
 	{
-		//VERIFICA SE ID EXISTE
 		$course = Turma::all()->where('id', $id)->first();
 		if (!$course) {
 			return response([
@@ -181,31 +106,11 @@ class TurmaController extends Controller
 				'data' => $course
 			]);
 		}
-		//REMOVE User
+
 		$course->delete();
 		return redirect('/turmas');
 	}
 
-	public function alunoIndex(String $id)
-	{
-		$turma = Turma::where('id', $id)->first();
-		$alunos = User::where('tipo', 'Aluno')->get();
-		return view('adm.turmas.addAluno', ['turma' => $turma, 'alunos' => $alunos]);
-	}
-
-	public function addAluno(Request $request)
-	{
-		$credentials = $request->only('aluno_id', 'turma_id');
-
-		$register = new Usuario_turmas([
-			'aluno_id' => $credentials['aluno_id'],
-			'turma_id' => $credentials['turma_id']
-		]);
-
-		$register->save();
-
-		return redirect('/turmas');
-	}
 	public function search(Request $request)
 	{
 		$turmas = Turma::where('nome', 'LIKE', '%' . $request->text . '%')
@@ -216,115 +121,48 @@ class TurmaController extends Controller
 		return view('adm.turmas.turmas', ['turmas' => $turmas, 'professores' => $professores]);
 	}
 
-	public function turmaProfessor()
-	{
-		$user = Auth::user();
-		$turmas = Turma::where('professor_id', $user->id)->get();
-		return Inertia::render('Professor/Turmas/Turmas', ['turmas' => $turmas, 'user' => $user]);
-	}
-
-	public function turmaProfessorIndex( String $id)
-	{
+	// public function edit(string $id)
+	// {
+	// 	$disciplinas = Disciplina::all();
+	// 	$professores = User::where('tipo', '=', 2)->get();
+	// 	$turmas = Turma::all()->where('id', $id)->first();
+	// 	return view('adm.turmas.editTurmas', ['turmas' => $turmas, 'disciplinas' => $disciplinas, 'professores' => $professores]);
+	// }
 
 
+	// public function showOne(String $id)
+	// {
 
-		$user = Auth::user();
-		$turma = Turma::where('id', $id)->with(['disciplina', 'professor'])->first();
-		$alunos = DB::table('usuario_turmas')
-			->join('users', 'users.id', '=', 'usuario_turmas.aluno_id')
-			->select('users.*', 'usuario_turmas.faltas', 'usuario_turmas.nota_unidade1', 'usuario_turmas.nota_unidade2', 'usuario_turmas.media_final')
-			->get();
+	// 	try {
 
-		return Inertia::render('Professor/Turmas/TurmaIndex', ['turma' => $turma, 'user' => $user, 'alunos' => $alunos]);
-	}
-	public function turmaProfessorIndexOne(Request $request ,String $id)
-	{
-		$turma_id = $request->only('turma_id');
-		$alunos = User::all()->where('id',$id);
-		return Inertia::render('Professor/Turmas/TurmaIndexOne', ["turma" => $turma_id, 'user' => $id ,'alunos' => $alunos]);
-	}
-
-	public function atualizarBoletim(Request $request ,String $id)
-	{
+	// 		if ($id == null) {
+	// 			echo 'vazioo';
+	// 		}
 
 
-		// Processar os dados do formulário
-		$credentials = $request->only('faltas','nu1','nu2','turma_id');
+	// 		$disciplinas = DB::table('disciplina_turmas')
+	// 			->join('turmas', 'disciplina_turmas.turmas_id', '=', 'turmas.id')
+	// 			->select('disciplina_turmas.disciplina_id')
+	// 			->where('turmas_id', '=', $id)
+	// 			->get();
 
 
-			// Atualizar os dados do boletim do aluno
-			$update =  Usuario_turmas::all()->where('id',$credentials['turma_id']);
-			$update->update([
-				'aluno_id' => $id,
-				'turma_id' => $credentials['turma_id'],
-				'nota_unidade1' => $credentials['nu1'],
-				'nota_unidade2' => $credentials['nu2'],
-				'faltas' => $credentials['faltas'],
-				'media_final' => ($credentials['nu1']+$credentials['nu2'])/2,]
-			);
+	// 		$ids = [];
+	// 		$tamanho = count($disciplinas);
+	// 		for ($i = 0; $i < $tamanho; $i++) {
+	// 			array_push($ids, $disciplinas[$i]->disciplina_id);
+	// 		}
 
+	// 		$turmas = DB::table('disciplinas')
+	// 			->whereIn('id', $ids)
+	// 			->get();
 
+	// 		$usersIds = Usuario_turmas::where('turma_id', $id)->pluck('aluno_id')->all();
+	// 		$alunos = User::whereIn('id', $usersIds)->select('nome')->get();
 
-		return redirect('/professor/turmas'); // Redirecionar após a atualização
-	}
-
-
-	public function alunos(string $id)
-	{
-
-
-		$user = Auth::user();
-		$turma = Turma::where('id', $id)->first();
-		$disciplina = Disciplina::where('id', $turma->disciplina_id)->first();
-		$curso = Curso::all()->where('id', $disciplina->curso_id);
-
-		$alunos = DB::table('users')
-			->leftJoin('usuario_turmas', 'users.id', '=', 'usuario_turmas.aluno_id')
-			->whereNull('usuario_turmas.aluno_id') // Garante que não existem correspondências na tabela usuario_turmas
-			->where('users.curso_id', '=', $disciplina->curso_id) // Adiciona a condição para o curso desejado
-			->select('users.*')
-			->get();
-
-		// dd($alunos);
-
-
-
-
-
-		// $alunos = User::where('tipo', 'Aluno');
-		// $alunosHabilitados = $alunos->where('curso_id', $disciplina->curso_id)->with('curso')->get();
-		// $usuariosId = $alunos->pluck('aluno_id');
-		// $alunosEncontrados = User::whereIn('id', $usuariosId)->select('name', 'id')->get();
-
-
-		return Inertia::render('Adm/Turmas/Alunos', ['alunos' => $alunos, 'user' => $user, 'turma' =>  $turma, 'curso' => $curso]);
-	}
-
-	public function addAlunos(Request $request, string $id)
-	{
-		$credentials = $request->only('aluno_id');
-		$register = new Usuario_turmas([
-			'aluno_id' => $credentials['aluno_id'],
-			'turma_id' => $id,
-			'nota_unidade1' => null,
-			'nota_unidade2' => null,
-			'media_final' => null,
-		]);
-
-		$register->save();
-		return redirect('/turmas');
-	}
-
-	public function turmaAlunos(String $id)
-	{
-		$user = Auth::user();
-		$turma = Turma::where('id', $id)->with(['professor', 'disciplina'])->first();
-		$boletimAluno = DB::table('usuario_turmas')
-			->join('users', 'users.id', '=', 'usuario_turmas.aluno_id')
-			->where('usuario_turmas.turma_id', '=', $id) // Adiciona a condição para o curso desejado
-			->join('turmas', 'turmas.id', '=', 'usuario_turmas.turma_id')
-			->select('users.*', 'usuario_turmas.faltas', 'usuario_turmas.nota_unidade1', 'usuario_turmas.nota_unidade2', 'usuario_turmas.media_final')
-			->get();
-		return Inertia::render('Adm/Turmas/VerAlunos', ['alunos' => $boletimAluno, 'user' => $user, 'turma' =>  $turma]);
-	}
+	// 		return view('adm.turmas.turmaone', ['disciplinas' => $turmas, 'alunos' => $alunos]);
+	// 	} catch (\Throwable $th) {
+	// 		echo 'erro';
+	// 	}
+	// }
 }

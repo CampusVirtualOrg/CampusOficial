@@ -11,7 +11,7 @@ defineProps({
   <div class="header-section">
 
     <div class="perfil">
-      <Link :href="route('admin.home')" style="color: #3065ac; font-weight: 700; font-size: 18pt;" class="mx-3">Painel Administrativo</Link>
+      <Link :href="route('adm.index')" style="color: #3065ac; font-weight: 700; font-size: 18pt;" class="mx-3">Painel Administrativo</Link>
     </div>
 
     <div class="box">

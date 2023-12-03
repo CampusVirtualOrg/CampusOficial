@@ -20,7 +20,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('enviarRequerimento'), {
+    form.post(route('requerimento.create'), {
         onFinish: () => alert("Requerimento Enviado com Sucesso!!!"),
     });
 };

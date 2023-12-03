@@ -11,20 +11,22 @@ use Inertia\Inertia;
 
 class DisciplinasController extends Controller
 {
-    public function showAll()
+
+	public function index()
+	{
+		$user = Auth::user();
+		$cursos = Curso::all();
+		$disciplinas = Disciplina::all();
+		return Inertia::render('Adm/Disciplinas/CreateDisciplinas', ['user' => $user, 'cursos' => $cursos, 'disciplinas' => $disciplinas]);
+	}
+
+    public function show()
     {
         $disciplinas = Disciplina::with(['curso', 'pre_requisito'])->get();
         $user = Auth::user();
         return Inertia::render('Adm/Disciplinas/Disciplinas', ['disciplinas' => $disciplinas, 'user' => $user]);
     }
 
-    public function createIndex()
-    {
-        $user = Auth::user();
-        $cursos = Curso::all();
-        $disciplinas = Disciplina::all();
-        return Inertia::render('Adm/Disciplinas/CreateDisciplinas', ['user' => $user, 'cursos' => $cursos, 'disciplinas' => $disciplinas]);
-    }
 
     public function create(Request $request)
     {

@@ -11,17 +11,17 @@ use Inertia\Inertia;
 
 class RequerimentosController extends Controller
 {
-    public function showAll()
+	public function index()
+	{
+		$user = Auth::user();
+		return Inertia::render('CreatePages/createRequerimento', ['user' => $user]);
+	}
+
+    public function show()
     {
         $requerimentos = Requerimento::all();
         $user = Auth::user();
         return Inertia::render('Adm/Requerimentos/Requerimentos', ['user' => $user, 'requerimentos' => $requerimentos]);
-    }
-
-    public function createIndex()
-    {
-        $user = Auth::user();
-        return Inertia::render('CreatePages/createRequerimento', ['user' => $user]);
     }
 
     public function create(Request $request)
@@ -63,7 +63,7 @@ class RequerimentosController extends Controller
         }
     }
 
-    public function updateIndex(String $id)
+    public function edit(String $id)
     {
         $requerimento = Requerimento::all()->where('id', $id)->first();
         $user = Auth::user();

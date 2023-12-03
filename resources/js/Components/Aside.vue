@@ -42,7 +42,7 @@ const toggleMenu = () => {
         </div>
 
         <div v-if="isExpanded" class="anchorsExpanded">
-            <Link :href="route('usuarios')" class="a-asclasse"><i class="bi bi-people-fill"></i><span
+            <Link :href="route('adm.users')" class="a-asclasse"><i class="bi bi-people-fill"></i><span
                 v-if="isExpanded">Usuários</span></Link>
 
             <Link :href="route('cursos')" class="a-asclasse"><i class="bi bi-c-square-fill"></i><span
@@ -63,7 +63,7 @@ const toggleMenu = () => {
         </div>
 
         <div v-else class="anchors">
-            <Link :href="route('usuarios')" class="a-asclasse"><i class="bi bi-people-fill"></i><span
+            <Link :href="route('adm.users')" class="a-asclasse"><i class="bi bi-people-fill"></i><span
                 v-if="isExpanded">Usuários</span></Link>
 
             <Link :href="route('cursos')" class="a-asclasse"><i class="bi bi-c-square-fill"></i><span

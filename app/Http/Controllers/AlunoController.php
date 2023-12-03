@@ -18,11 +18,11 @@ class AlunoController extends Controller
     public function index()
     {
 		$user = Auth::user();
-        return Inertia::render('DashboardAluno', ['user' => $user]);
+        return Inertia::render('Aluno/DashboardAluno', ['user' => $user]);
     }
 
     public function disciplinas()
-    {   
+    {
         $user = Auth::user();
         $userCursoId = $user->curso_id;
         $disciplinas = Disciplina::where('curso_id', $userCursoId)->get();

@@ -11,16 +11,15 @@ use Inertia\Inertia;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         $post = Post::all();
         $user = Auth::user();
         return Inertia::render('AvisoAluno' , ['post' => $post, 'user' => $user]);
     }
-	public function showOne(String $id)
+
+	public function show(String $id)
     {
 
 		$comments = Comment::where('post_id',$id)->get();
@@ -28,17 +27,11 @@ class PostController extends Controller
         return Inertia::render('AvisoAlunoOne' , ['post' => $post , 'comments' => $comments]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
 		return Inertia::render('CreatePost');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $credentials = $request->only('titulo','subtitulo','descr','url');
@@ -50,21 +43,9 @@ class PostController extends Controller
 		]);
 		$post->save();
 
-		//RETORNA A RESPOSTA
 		return redirect('/aviso');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Post $post)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
 		$post = Post::where('id',$id)->get();
@@ -72,9 +53,6 @@ class PostController extends Controller
         return Inertia::render('CreatePostEdit' , ['post' => $post , 'ident' => $id, 'user' => $user]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
 
@@ -103,12 +81,9 @@ class PostController extends Controller
 		}
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
 	public function remove(string $id)
     {
-        //VERIFICA SE ID EXISTE
+
         $post = Post::all()->where('id', $id)->first();
         if (!$post) {
             return response([
@@ -116,7 +91,7 @@ class PostController extends Controller
                 'data' => $post
             ]);
         }
-        //REMOVE User
+
         $post->delete();
         return redirect('/aviso');
     }

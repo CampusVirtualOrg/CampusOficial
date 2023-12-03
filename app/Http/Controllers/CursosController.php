@@ -12,26 +12,16 @@ use Inertia\Inertia;
 
 class CursosController extends Controller
 {
-    public function showAll()
+	public function index()
+    {
+        return view('adm.cursos.createCursos');
+    }
+
+    public function show()
     {
         $cursos = Curso::all();
         $user = Auth::user();
         return Inertia::render('Adm/Cursos/Cursos', ['cursos' => $cursos, 'user' => $user]);
-    }
-
-    public function disciplinas(String $courseId)
-    {
-        $disciplinas = Curso_disciplina::where('curso_id', $courseId)->get();
-        $disciplinaIds = $disciplinas->pluck('disciplina_id');
-
-        $disciplinasEncontradas = Disciplina::whereIn('id', $disciplinaIds)->select('nome')->get();
-
-        return redirect('/cursos', ['disciplinas' => $disciplinasEncontradas]);
-    }
-
-    public function createIndex()
-    {
-        return view('adm.cursos.createCursos');
     }
 
     public function create(Request $request)
@@ -68,7 +58,7 @@ class CursosController extends Controller
     }
 
     public function edit(string $id)
-    {   
+    {
         $user = Auth::user();
         $curso = Curso::all()->where('id', $id)->first();
         return Inertia::render('Adm/Cursos/EditCursos', ['curso' => $curso, 'user' => $user]);
@@ -125,4 +115,15 @@ class CursosController extends Controller
             ->paginate(10);
         return view('adm.cursos.cursos', ['course' => $course]);
     }
+
+	public function disciplinas(String $courseId)
+    {
+        $disciplinas = Curso_disciplina::where('curso_id', $courseId)->get();
+        $disciplinaIds = $disciplinas->pluck('disciplina_id');
+
+        $disciplinasEncontradas = Disciplina::whereIn('id', $disciplinaIds)->select('nome')->get();
+
+        return redirect('/cursos', ['disciplinas' => $disciplinasEncontradas]);
+    }
+
 }
