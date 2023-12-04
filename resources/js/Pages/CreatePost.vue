@@ -19,7 +19,7 @@ export default {
 	},
 	methods: {
 		handleSubmit() {
-			fetch("/dadaaviso/create", {
+			fetch("/aviso/create", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

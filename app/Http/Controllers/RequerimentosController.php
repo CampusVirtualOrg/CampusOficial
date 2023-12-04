@@ -57,7 +57,7 @@ class RequerimentosController extends Controller
             $requerimento->save();
 
             // RETORNA A RESPOSTA
-            return redirect('/requerimento');
+            return redirect('/requerimento/create');
         } catch (\Throwable $th) {
             return response()->json(['success' => false, 'error' => $th->getMessage()], 400);
         }

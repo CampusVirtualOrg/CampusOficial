@@ -51,7 +51,7 @@ const submit = () => {
                 </div>
 
                 <div class="mt-4">
-                    <InputLabel for="carga_horaria" value="carga_horaria" />
+                    <InputLabel for="carga_horaria" value="Carga_horaria" />
 
                     <TextInput id="carga_horaria" type="number" class="mt-1 block w-full" v-model="form.carga_horaria" required
                         v-mask="'##:##'" />
@@ -81,13 +81,13 @@ const submit = () => {
                 </div>
 
 				<div class="mt-4">
-                    <InputLabel for="categoria" value="categoria" />
+                    <InputLabel for="categoria" value="Categoria" />
 
                     <select name="categoria" class="mt-1 block w-full" id="categoria"
                         v-model="form.categoria">
                         <option value="Técnico">Técnico</option>
                         <option value="Superior">Superior</option>
-                        <option value="Pós-Graduação">PósGraduação</option>
+                        <option value="Pós-Graduação">Pós-Graduação</option>
                     </select>
 
                     <InputError class="mt-2" :message="form.errors.text" />

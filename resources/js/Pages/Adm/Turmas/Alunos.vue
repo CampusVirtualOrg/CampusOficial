@@ -27,9 +27,9 @@ defineProps({ curso: Object ,user: Object, alunos: Object, turma: Object });
 						<td>{{ aluno.name }}</td>
 						<td v-for="c in curso">{{ c.nome }}</td>
 						<td style="color: #3065ac;">
-							<form :action="`/turmas/alunos/${turma.id}`" method="post">
+							<form :action="`/turma/alunos/${turma.id}`" method="post">
 								<input type="hidden" name="aluno_id" :value="aluno.id">
-								<button type="submit" class="btn btn-primary">Registrar</button>
+								<button type="submit" class="btn btn-primary">Matrícular</button>
 							</form>
 						</td>
 					</tr>

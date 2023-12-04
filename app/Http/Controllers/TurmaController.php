@@ -8,6 +8,7 @@ use App\Models\Turma;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use App\Models\Disciplina_turmas;
 
 class TurmaController extends Controller
 {
@@ -51,10 +52,11 @@ class TurmaController extends Controller
 					'turno' => $credentials['turno'],
 					'horario' => $credentials['horario'],
 					'disciplina_id' => $credentials['disciplina_id'],
-					'professor_id' => $credentials['professor_id'],
+					'professor_id' => $credentials['professor_id']
 				]);
 
 				$turma->save();
+
 				return redirect('/turmas');
 			} else {
 				return response()->json(
@@ -111,15 +113,15 @@ class TurmaController extends Controller
 		return redirect('/turmas');
 	}
 
-	public function search(Request $request)
-	{
-		$turmas = Turma::where('nome', 'LIKE', '%' . $request->text . '%')
-			->orWhere('semestre', 'LIKE', '%' . $request->text . '%')
-			->orWhere('turno', 'LIKE', '%' . $request->text . '%')
-			->paginate(10);
-		$professores = User::all();
-		return view('adm.turmas.turmas', ['turmas' => $turmas, 'professores' => $professores]);
-	}
+	// public function search(Request $request)
+	// {
+	// 	$turmas = Turma::where('nome', 'LIKE', '%' . $request->text . '%')
+	// 		->orWhere('semestre', 'LIKE', '%' . $request->text . '%')
+	// 		->orWhere('turno', 'LIKE', '%' . $request->text . '%')
+	// 		->paginate(10);
+	// 	$professores = User::all();
+	// 	return view('adm.turmas.turmas', ['turmas' => $turmas, 'professores' => $professores]);
+	// }
 
 	// public function edit(string $id)
 	// {

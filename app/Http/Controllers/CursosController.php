@@ -29,7 +29,7 @@ class CursosController extends Controller
     {
 
         try {
-            $credentials = $request->only('nome', 'carga_horaria', 'periodos', 'sigla');
+            $credentials = $request->only('nome', 'carga_horaria', 'periodos', 'sigla', 'categoria', 'descricao');
 
             if (($credentials['nome'] == null ||
                 $credentials['carga_horaria'] == null)) {

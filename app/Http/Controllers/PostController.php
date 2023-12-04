@@ -43,7 +43,7 @@ class PostController extends Controller
 		]);
 		$post->save();
 
-		return redirect('/aviso');
+		return redirect('/avisos');
     }
 
     public function edit(string $id)

@@ -14,15 +14,8 @@ defineProps({ user: Object })
         <Button
             title="Avisos"
             description="Veja e publique seus avisos mais recentes!"
-            route="aviso"
+            route="/avisos"
             icon="bi bi-app-indicator"
-        />
-
-        <Button
-            title="Disciplina"
-            description="Veja quais turmas você está!"
-            route=""
-            icon="bi bi-layout-text-window"
         />
 
         <Button
@@ -35,7 +28,7 @@ defineProps({ user: Object })
         <Button
             title="Requerimentos"
             description="Faça seus requerimentos pro bloco administrativo!"
-            route="requerimento"
+            route="/requerimento/create"
             icon="bi bi-pencil-square"
         />
     </section>

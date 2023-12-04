@@ -41,8 +41,8 @@ defineProps({ user: Object, turmas: Object })
                             <td>{{ turma.horario }}</td>
                             <td>{{ turma.disciplina.nome}}</td>
                             <td>{{ turma.professor.name}}</td>
-                            <td><Link :href="`/turmas/alunos/${turma.id}`">Ver</Link></td>
-                            <td><Link :href="`/turmas/addalunos/${turma.id}`">Adicionar aluno</Link></td>
+                            <td><Link :href="`/turmas/alunos/cadastrados/${turma.id}`">Ver</Link></td>
+                            <td><Link :href="`/turma/alunos/${turma.id}`">Adicionar aluno</Link></td>
                             <td style="color: #3065ac;">
                                 <Link :href="`/turmas/edit/${turma.id}`"><i class="bi bi-pencil-fill mx-2"></i></Link>
                                 <Link :href="`/turmas/remove/${turma.id}`"><i class="bi bi-trash-fill mx-2"></i></Link>

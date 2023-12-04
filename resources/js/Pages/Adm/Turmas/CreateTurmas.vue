@@ -17,7 +17,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post('/turma/create', form.data()).then(response => {
+    form.post('/turmas/create', form.data()).then(response => {
         console.log(response.data);
         alert(response.data);
     }).catch(error => {
@@ -71,7 +71,7 @@ const submit = () => {
                     <InputLabel for="disciplina_id" value="Disciplina da turma" />
 
                     <select name="disciplina_id" class="mt-1 block w-full" id="disciplina_id" v-model="form.disciplina_id">
-                        <option v-for="disciplina in props.disciplinas" :key="disciplina.id" :value="disciplina.id">
+                        <option v-for="disciplina in disciplinas" :key="disciplina.id" :value="disciplina.id">
                             {{ disciplina.nome }}</option>
                     </select>
 
@@ -82,7 +82,7 @@ const submit = () => {
                     <InputLabel for="professor_id" value="Professor da turma" />
 
                     <select name="professor_id" class="mt-1 block w-full" id="professor_id" v-model="form.professor_id">
-                        <option v-for="professor in props.professores" :key="professor.id" :value="professor.id">
+                        <option v-for="professor in professores" :key="professor.id" :value="professor.id">
                             {{ professor.name }}</option>
                     </select>
 

@@ -31,6 +31,7 @@ class TurmaMethodsController extends Controller
 		return Inertia::render('Adm/Turmas/Alunos', ['alunos' => $alunos, 'user' => $user, 'turma' =>  $turma, 'curso' => $curso]);
 	}
 
+
 	public function addAlunos(Request $request, string $id)
 	{
 		$credentials = $request->only('aluno_id');
