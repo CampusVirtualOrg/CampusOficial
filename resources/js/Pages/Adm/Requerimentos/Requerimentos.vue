@@ -26,11 +26,10 @@ const props = defineProps({
                         <tr>
                             <th>Nome</th>
                             <th>Email</th>
-                            <th>Matricula</th>
                             <th>Tipo</th>
                             <th>Observações</th>
                             <th>Status</th>
-                            <!-- <th>Data</th> -->
+                            <th>Data</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
@@ -38,14 +37,15 @@ const props = defineProps({
                         <tr>
                             <td>{{ requerimento.nome_usuario }}</td>
                             <td>{{ requerimento.email_usuario }}</td>
-                            <td>{{ requerimento.matricula_usuario }}</td>
                             <td>{{ requerimento.tipo_requerimento }}</td>
                             <td>{{ requerimento.observacoes }}</td>
-                            <td>{{ requerimento.status }}</td>
-                            <!-- <td>{{ requerimento.created_at }}</td> -->
-                            <td>
-                                <Link :href="`/requerimentos/edit/${requerimento.id}`">EDIT</Link>
-                                <Link :href="`/requerimentos/remove/${requerimento.id}`">DEL</Link>
+                            <td v-if="requerimento.status == 'Aceito'"><span class="text-green-800 font-bold">{{ requerimento.status }}</span></td>
+                            <td v-else-if="requerimento.status == 'Pendente'"><span class="text-yellow-600 font-bold">{{ requerimento.status }}</span></td>
+                            <td v-else><span class="text-red-600 font-bold">{{ requerimento.status }}</span></td>
+                            <td>{{ requerimento.created_at }}</td>
+                            <td style="color: #3065ac;">
+                                <Link :href="`/requerimentos/edit/${requerimento.id}`"><i class="bi bi-pencil-fill mx-2"></i></Link>
+                                <Link :href="`/requerimentos/remove/${requerimento.id}`"><i class="bi bi-trash-fill mx-2"></i></Link>
                             </td>
                         </tr>
                     </tbody>

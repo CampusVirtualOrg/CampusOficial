@@ -34,8 +34,9 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        $credentials = $request->only('titulo','subtitulo','descr','url');
+        $credentials = $request->only('user_id', 'titulo','subtitulo','descr','url');
 		$post = new Post([
+			'user_id' => $credentials['user_id'],
 			'titulo' => $credentials['titulo'],
 			'subtitulo' => $credentials['subtitulo'],
 			'descr' => $credentials['descr'],
@@ -57,9 +58,10 @@ class PostController extends Controller
     {
 
 		try {
-			$credentials = $request->only('titulo','subtitulo','descr','url');
+			$credentials = $request->only('user_id','titulo','subtitulo','descr','url');
 			if (Post::where('id', $id)->exists()) {
 				$Post = [
+					'user_id' => $credentials['user_id'],
 					'titulo' => $credentials['titulo'],
 					'subtitulo' => $credentials['subtitulo'],
 					'descr' => $credentials['descr'],
@@ -93,6 +95,6 @@ class PostController extends Controller
         }
 
         $post->delete();
-        return redirect('/aviso');
+        return redirect('/avisos');
     }
 }

@@ -12,13 +12,13 @@ use Inertia\Inertia;
 class DisciplinasController extends Controller
 {
 
-	public function index()
-	{
-		$user = Auth::user();
-		$cursos = Curso::all();
-		$disciplinas = Disciplina::all();
-		return Inertia::render('Adm/Disciplinas/CreateDisciplinas', ['user' => $user, 'cursos' => $cursos, 'disciplinas' => $disciplinas]);
-	}
+    public function index()
+    {
+        $user = Auth::user();
+        $cursos = Curso::all();
+        $disciplinas = Disciplina::all();
+        return Inertia::render('Adm/Disciplinas/CreateDisciplinas', ['user' => $user, 'cursos' => $cursos, 'disciplinas' => $disciplinas]);
+    }
 
     public function show()
     {
@@ -54,7 +54,6 @@ class DisciplinasController extends Controller
 
             $subject->save();
             return redirect('/disciplinas');
-
         } catch (\Throwable $th) {
             return response()->json(['success' => false, 'error' => $th->getMessage()], 404);
         }
@@ -62,19 +61,25 @@ class DisciplinasController extends Controller
 
     public function edit(String $id)
     {
-        $disciplina = Disciplina::all()->where('id', $id)->first();
-        echo "concluir Rota!";
+        $disciplina = Disciplina::where('id', $id)->with(['curso', 'pre_requisito'])->first();
+        $disciplinas = Disciplina::all();
+        $cursos = Curso::all();
+        $user = Auth::user();
+        return Inertia::render('Adm/Disciplinas/EditDisciplinas', ['user' => $user, 'disciplina' => $disciplina, 'disciplinas' => $disciplinas, 'cursos' => $cursos]);
     }
 
     public function update(Request $request, String $id)
     {
         try {
-            $credentials = $request->only('nome', 'carga_horaria');
+            $credentials = $request->only('nome', 'sigla', 'carga_horaria', 'pre_requisito_id', 'curso_id');
 
             if (Disciplina::where('id', $id)->exists()) {
                 $Disciplina = [
-                    'nome' => $request->nome,
-                    'carga_horaria' => $request->carga_horaria,
+                    'nome' => strtoupper($credentials['nome']),
+                    'sigla' => $credentials['sigla'],
+                    'carga_horaria' => $credentials['carga_horaria'],
+                    'pre_requisito_id' => $credentials['pre_requisito_id'],
+                    'curso_id' => $credentials['curso_id'],
                 ];
 
                 Disciplina::where('id', $id)->update($Disciplina);

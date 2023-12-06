@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('subtitulo');
             $table->string('descr');
             $table->string('url');
+            $table->bigInteger('user_id')->unsigned()->nullable();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

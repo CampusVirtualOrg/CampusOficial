@@ -27,6 +27,7 @@ class TurmaController extends Controller
 		$turmas = Turma::with(['disciplina', 'professor'])->get();
 		$professores = User::where('tipo', 'Professor')->get();
 		$user = Auth::user();
+
 		return Inertia::render('Adm/Turmas/Turmas', ['turmas' => $turmas, 'professores' => $professores, 'user' => $user]);
 	}
 
@@ -72,16 +73,35 @@ class TurmaController extends Controller
 		}
 	}
 
+	public function edit(string $id)
+	{
+		$user = Auth::user();
+		$turma = Turma::where('id', $id)->first();
+		$disciplinas = Disciplina::all();
+		$professores = User::where('tipo', 'Professor')->get();
+
+		return Inertia::render('Adm/Turmas/EditTurmas', ['turma' => $turma, 'disciplinas' => $disciplinas, 'professores' => $professores, 'user' => $user]);
+	}
+
 	public function update(Request $request, string $id)
 	{
 		try {
-			if (Turma::where('id', $id)->exists()) {
-				$turma = [
-					'nome' => $request->nome,
-					'semestre' => $request->semestre,
-					'turno' => $request->turno,
+			$credentials = $request->only('semestre', 'turno', 'disciplina_id', 'horario', 'professor_id');
 
-					'professor_id' => $request->professor_id,
+			if (Turma::where('id', $id)->exists()) {
+				$disciplina = Disciplina::where('id', $credentials['disciplina_id'])->first();
+				$siglaDisciplina = $disciplina->sigla;
+				$nomeBase = "{$siglaDisciplina}.{$credentials['semestre']}.{$credentials['turno']}";
+				$count = Turma::where('nome', 'like', "$nomeBase%")->count();
+				$nome = $count > 0 ? "$nomeBase-$count" : $nomeBase;
+
+				$turma = [
+					'nome' => "$nome",
+					'semestre' => $credentials['semestre'],
+					'turno' => $credentials['turno'],
+					'horario' => $credentials['horario'],
+					'disciplina_id' => $credentials['disciplina_id'],
+					'professor_id' => $credentials['professor_id']
 				];
 
 				Turma::where('id', $id)->update($turma);

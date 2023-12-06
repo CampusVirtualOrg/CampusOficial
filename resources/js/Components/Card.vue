@@ -42,7 +42,6 @@ const props = defineProps({
 		rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 	border-radius: 12px;
 	padding: 1rem;
-	transition: all 0.2s;
 }
 
 .card .head {
@@ -82,23 +81,6 @@ const props = defineProps({
 }
 
 .card:hover {
-	background-color: #3065ac;
-	border: #3065ac;
-
-	p {
-		color: #fff;
-	}
-
-	i {
-		color: #fff;
-	}
-
-	.texts {
-		color: #fff;
-	}
-
-	.card-title {
-		color: #fff;
-	}
+	outline: 2px solid #3065ac;
 }
 </style>

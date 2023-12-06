@@ -29,7 +29,7 @@ Route::middleware('administrador')->group(function () {
 		Route::get('/requerimentos', [RequerimentosController::class, 'show'])->name('requerimentos');
 		Route::get('requerimmentos/search', [RequerimentosController::class, 'search'])->name('requerimentos.search');
 		Route::get('/requerimentos/edit/{id}', [RequerimentosController::class, 'edit'])->name('requerimentos.update.view');
-		Route::post('/requerimentos/edit/{id}', [RequerimentosController::class, 'update'])->name('requerimentos.update');
+		Route::put('/requerimentos/update/{id}', [RequerimentosController::class, 'update'])->name('requerimentos.update');
 		Route::get('/requerimentos/remove/{id}', [RequerimentosController::class, 'remove'])->name('requerimentos.remove');
 
 		// Cursos routes
@@ -52,6 +52,8 @@ Route::middleware('administrador')->group(function () {
 		Route::get('/turmas', [TurmaController::class, 'show'])->name('turmas');
 		Route::get('/turmas/create', [TurmaController::class, 'index'])->name('turmas.create.view');
 		Route::post('/turmas/create', [TurmaController::class, 'create'])->name('turmas.create');
+		Route::get('/turmas/edit/{id}', [TurmaController::class, 'edit'])->name('turmas.edit.view');
+		Route::put('/turmas/update/{id}', [TurmaController::class, 'update'])->name('turmas.edit.update');
 		Route::get('/turmas/remove/{id}', [TurmaController::class, 'remove'])->name('turmas.remove');
 		Route::get('/turmas/alunos/cadastrados/{id}', [BoletimController::class, 'index'])->name('turmas.alunos.all');
 		Route::get('/turma/alunos/{id}', [TurmaMethodsController::class, 'alunos'])->name('turmas.alunos.all');

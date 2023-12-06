@@ -42,45 +42,45 @@ const toggleMenu = () => {
         </div>
 
         <div v-if="isExpanded" class="anchorsExpanded">
-            <Link :href="route('users')" class="a-asclasse"><i class="bi bi-people-fill"></i><span
+            <Link :href="route('users')" title="Usuários" class="a-asclasse"><i class="bi bi-people-fill"></i><span
                 v-if="isExpanded">Usuários</span></Link>
 
-            <Link :href="route('cursos')" class="a-asclasse"><i class="bi bi-c-square-fill"></i><span
+            <Link :href="route('cursos')" title="Cursos" class="a-asclasse"><i class="bi bi-c-square-fill"></i><span
                 v-if="isExpanded">Cursos</span></Link>
 
-            <Link :href="route('disciplinas')" class="a-asclasse"><i class="bi bi-book-half"></i><span
+            <Link :href="route('disciplinas')" title="Disciplinas" class="a-asclasse"><i class="bi bi-book-half"></i><span
                 v-if="isExpanded">Disciplinas</span></Link>
 
-            <Link :href="route('turmas')" class="a-asclasse"><i class="bi bi-easel2-fill"></i><span
+            <Link :href="route('turmas')" title="Turmas" class="a-asclasse"><i class="bi bi-easel2-fill"></i><span
                 v-if="isExpanded">Turmas</span></Link>
 
-            <Link :href="route('requerimentos')" class="a-asclasse"><i class="bi bi-file-earmark-text-fill"></i><span
-                v-if="isExpanded">Requerimentos</span></Link>
+            <Link :href="route('requerimentos')" title="Requerimentos" class="a-asclasse"><i
+                class="bi bi-file-earmark-text-fill"></i><span v-if="isExpanded">Requerimentos</span></Link>
 
-            <Link :href="route('welcome')" class="logoAsclasse">
-            <img src="../../../public/assets/img/portal.png" alt="Campus Virtual" class="logoAsclasseImg">
+            <Link :href="route('welcome')" title="Campus Virtual" class="logoAsclasse">
+            <img src="../../../public/assets/img/portal.png" alt="Campus Virtual" class="logoAsclasseExpanded">
             </Link>
         </div>
 
         <div v-else class="anchors">
-            <Link :href="route('users')" class="a-asclasse"><i class="bi bi-people-fill"></i><span
+            <Link :href="route('users')" title="Usuários" class="a-asclasse"><i class="bi bi-people-fill"></i><span
                 v-if="isExpanded">Usuários</span></Link>
 
-            <Link :href="route('cursos')" class="a-asclasse"><i class="bi bi-c-square-fill"></i><span
+            <Link :href="route('cursos')" title="Cursos" class="a-asclasse"><i class="bi bi-c-square-fill"></i><span
                 v-if="isExpanded">Cursos</span></Link>
 
-            <Link :href="route('disciplinas')" class="a-asclasse"><i class="bi bi-book-half"></i><span
+            <Link :href="route('disciplinas')" title="Disciplinas" class="a-asclasse"><i class="bi bi-book-half"></i><span
                 v-if="isExpanded">Disciplinas</span></Link>
 
-            <Link :href="route('turmas')" class="a-asclasse"><i class="bi bi-easel2-fill"></i><span
+            <Link :href="route('turmas')" title="Turmas" class="a-asclasse"><i class="bi bi-easel2-fill"></i><span
                 v-if="isExpanded">Turmas</span></Link>
 
-            <Link :href="route('requerimentos')" class="a-asclasse"><i class="bi bi-file-earmark-text-fill"></i><span
-                v-if="isExpanded">Requerimentos</span></Link>
+            <Link :href="route('requerimentos')" title="Requerimentos" class="a-asclasse"><i
+                class="bi bi-file-earmark-text-fill"></i><span v-if="isExpanded">Requerimentos</span></Link>
 
-            <!-- <Link :href="route('welcome')" class="logoAsclasse" alt="ass"> -->
-                <!-- </Link> -->
-                <img src="../../../public/assets/img/portal.png" alt="Campus Virtual" class="logoAsclasseImg">
+            <Link :href="route('welcome')" title="Campus Virtual" class="logoAsclasse">
+            <img src="../../../public/assets/img/portal.png" alt="Campus Virtual" class="logoAsclasseExpanded">
+            </Link>
         </div>
     </aside>
 </template>
@@ -93,13 +93,13 @@ aside {
     padding: 1rem;
     background-color: #3065ac;
     min-height: 100vh;
-    width: calc(2rem + 56px);
+    width: calc(2rem + 68px);
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
     font-family: 'Inter', sans-serif;
-    transition: ease-out 0.6s;
+    transition: ease-in-out 0.3s;
 
     &.isExpanded {
-        width: 17%;
+        width: 24%;
         align-items: start;
     }
 }
@@ -197,17 +197,12 @@ aside {
 
 .logoAsclasse {
     width: 4rem;
-    margin-top: 60%;
-    text-align: center;
-    margin-left: 37%;
-    display: block;
-    justify-content: end;
+    align-self: center;
 }
 
 .a-asclasse span:hover {
     letter-spacing: 2px;
 }
-
 
 .dropdown-toggle {
     color: white;
