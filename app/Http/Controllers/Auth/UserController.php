@@ -83,11 +83,11 @@ class UserController extends Controller
                     'endereco' => $request->endereco ? $request->endereco : $user->endereco,
                     'data_nasc' => $request->data_nasc ? $request->data_nasc : $user->data_nasc,
                     'imagem' => $request->imagem ? $request->imagem : $user->imagem,
-                    'curso_id' => $request->curso_id ? $request->curso_id : $user->curso_id,
+                    'curso_id' => $request->curso_id
                 ];
 
                 User::where('id', $id)->update($data);
-                return redirect('/usuarios');
+                return redirect('/users');
             } else {
                 echo "Erro ao atualizar!";
             }
@@ -105,7 +105,7 @@ class UserController extends Controller
         }
 
         $subject->delete();
-        return redirect('/usuarios');
+        return redirect('/users');
     }
 
 	public function search(Request $request)

@@ -22,11 +22,13 @@ class TurmaMethodsController extends Controller
 		$curso = Curso::all()->where('id', $disciplina->curso_id);
 
 		$alunos = DB::table('users')
-			->leftJoin('usuario_turmas', 'users.id', '=', 'usuario_turmas.aluno_id')
-			->whereNull('usuario_turmas.aluno_id')
-			->where('users.curso_id', '=', $disciplina->curso_id)
-			->select('users.*')
-			->get();
+        ->whereNotIn('id', function ($query) use ($id) {
+            $query->select('aluno_id')	// Essa subconsulta retorna os alunos matriculados 
+                ->from('usuario_turmas') // nesse $id da turma fornecido, porem o whereNotIn
+                ->where('turma_id', $id); // , por final retorna o contrario da subconsulta (;
+        })
+        ->where('curso_id', '=', $disciplina->curso_id)
+        ->get();
 
 		return Inertia::render('Adm/Turmas/Alunos', ['alunos' => $alunos, 'user' => $user, 'turma' =>  $turma, 'curso' => $curso]);
 	}

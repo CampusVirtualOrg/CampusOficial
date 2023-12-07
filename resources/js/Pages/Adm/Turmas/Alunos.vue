@@ -12,7 +12,7 @@ defineProps({ curso: Object ,user: Object, alunos: Object, turma: Object });
 	<section>
 		<Aside :nome="user.name" :imagem="user.imagem" :tipo="user.tipo" />
 		<main>
-			<h1>Alunos na turma: </h1>
+			<h1>Alunos disponíveis para turma: </h1>
 			<table>
 				<thead>
 					<tr>

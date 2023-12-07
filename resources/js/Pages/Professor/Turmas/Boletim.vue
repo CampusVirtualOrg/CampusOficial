@@ -28,7 +28,7 @@ defineProps({
                         <th>Unidade 1</th>
                         <th>Unidade 2</th>
                         <th>Média Final</th>
-						<th>config</th>
+						<th>Notas e Faltas</th>
 
                     </tr>
                 </thead>
@@ -41,9 +41,9 @@ defineProps({
                         <td>{{ aluno.nota_unidade2 }}</td>
                         <td class="media" v-if="aluno.media_final >= 7"><span class="text-green-800">{{ aluno.media_final }}</span></td>
                         <td class="media" v-else><span class="text-red-800">{{ aluno.media_final }}</span></td>
-						<td><form :action="'/professor/turmas/editarview/'+aluno.id" method="get">
+						<td><form :action="'/professor/turmas/editar/'+aluno.id" method="get">
 							<input name="turma_id" hidden :value="turma.id">
-							<button type="submit">ir</button>
+							<button type="submit">Lançar</button>
 						</form></td>
                     </tr>
                 </tbody>
@@ -104,7 +104,7 @@ main {
 
 table {
     margin: 2rem 0rem;
-    width: 50%;
+    width: 70%;
     border: 1px solid #000;
     border-collapse: collapse;
 }

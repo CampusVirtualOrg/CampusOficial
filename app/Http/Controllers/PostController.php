@@ -14,7 +14,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $post = Post::all();
+        $post = Post::with(['user'])->get();
         $user = Auth::user();
         return Inertia::render('AvisoAluno' , ['post' => $post, 'user' => $user]);
     }

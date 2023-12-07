@@ -3,38 +3,44 @@ import { Head, Link } from "@inertiajs/vue3";
 import HeaderAluno from "@/Components/HeaderAluno.vue";
 
 defineProps({
-  user: Object,
-  turma: String,
+  authUser: Object,
+  userId: Object,
   alunos: Object,
+  turma: String,
+  turmaObject: Object,
+  userCurrent: Object
 });
 </script>
 
 <template>
   <Head title="Turmas Professor" />
   <header>
-    <!-- <HeaderAluno :nome="user.name" /> -->
+    <HeaderAluno :nome="authUser.name" />
   </header>
 
   <section>
-
     <main>
-      <!-- <h1>Turma: {{ turma.nome }}</h1> -->
-      <!-- <h2>Disciplina: {{ turma.disciplina.nome }}</h2> -->
-     <form :action="'/professor/turmas/editar/'+user" method="post">
+      <h1>Aluno: {{ userCurrent.name }}</h1>
+      <h2>Turma: {{ turmaObject.nome }}</h2>
+      <h2>Disciplina: {{ turmaObject.disciplina.nome }}</h2>
+      <form :action="'/professor/turmas/editar/' + userId" method="post">
+        <div class="inputs">
 
-		<input type="text" placeholder="faltas" name="faltas" :value="alunos.faltas" />
+          <input type="number" placeholder="Faltas" name="faltas" :value="alunos.faltas" />
 
-        <input type="text" placeholder="notas 1°unidade" name="nu1" :value="alunos.nota_unidade1" />
+          <input type="number" step="any" placeholder="Nota 1° unidade" name="nu1" :value="alunos.nota_unidade1" />
 
-        <input type="text" placeholder="notas 2°unidade" name="nu2" :value="alunos.nota_unidade2" />
-		<input hidden  name="turma_id" :value="turma.turma_id" />
+          <input type="number" step="any" placeholder="Nota 2° unidade" name="nu2" :value="alunos.nota_unidade2" />
+          <input hidden name="turma_id" :value="turma.turma_id" />
 
-        <span class="text-green-800">{{ alunos.media_final }}</span>
+          <span class="text-green-800">{{ alunos.media_final }}</span>
 
-        <span class="text-red-800">{{ alunos.media_final }}</span>
+          <span class="text-red-800">{{ alunos.media_final }}</span>
 
-        <button type="submit">atualizar</button>
-	 </form>
+          <button type="submit">Lançar</button>
+        </div>
+        <Link :href="`/professor/turmas`" class="voltarbtn">Voltar para Minhas Turmas</Link>
+      </form>
     </main>
   </section>
 </template>
@@ -51,37 +57,60 @@ header {
   top: 0;
   margin-top: 1rem;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  width: 20%;
+  gap: 2rem;
+}
+
 label {
-    display: block;
-    margin-bottom: 8px;
+  display: block;
+  margin-bottom: 8px;
 }
 
 input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 16px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 button {
-    background-color: white;
-    color: #fff;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
+  background-color: #3065ac;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  color: #fff;
+  font-weight: bolder;
+  transition: ease-in 0.1s;
+}
+
+.voltarbtn {
+  background: none;
+  text-align: center;
+  font-size: 14pt;
+  font-weight: 600;
+  color: var(--main-blue);
+  border-radius: 6px;
+  border: 2px solid var(--main-blue);
+  padding: 0.6rem;
+  width: auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  transition: all 0.2s;
 }
 
 button:hover {
-    background-color: mediumspringgreen;
-}
-button {
-  text-align: center;
-  color: red;
-  font-weight: bolder;
+  background-color: rgb(250, 0, 8);
 }
 
 section {
@@ -114,37 +143,5 @@ main {
   flex-direction: column;
   align-items: center;
   width: 100%;
-}
-
-table {
-  margin: 2rem 0rem;
-  width: 50%;
-  border: 1px solid #000;
-  border-collapse: collapse;
-}
-
-tr,
-td,
-th {
-  border: 1px solid black;
-  text-align: center;
-  padding: 0.4rem;
-  background-color: #fff;
-}
-
-th {
-  padding: 0.6rem;
-  background-color: #3065ac;
-  color: #ffffff;
-  font-size: 14pt;
-}
-
-input {
-  width: 6rem;
-  font-size: 11pt;
-}
-
-.media {
-  font-weight: 800;
 }
 </style>

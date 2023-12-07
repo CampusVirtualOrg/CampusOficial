@@ -27,7 +27,7 @@ const form = useForm({
 const submit = () => {
     const id = props.user.id;
 
-    form.put(`/usuarios/update/${id}`).then(response => {
+    form.put(`/users/update/${id}`).then(response => {
         alert(response.data);
         // Redirecionamento ou atualização da interface após a edição
     }).catch(error => {

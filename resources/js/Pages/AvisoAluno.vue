@@ -1,4 +1,5 @@
 <script setup>
+import { Head, Link } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import HeaderAluno from "@/Components/HeaderAluno.vue";
 
@@ -30,6 +31,8 @@ const handleSubmit = async () => {
 
     const data = await response.json();
     console.log(data);
+
+    
     // Adicione lógica adicional aqui conforme necessário
   } catch (error) {
     console.error('Erro ao enviar dados:', error);
@@ -56,21 +59,26 @@ const handleSubmit = async () => {
         <div class="text">
           <button hidden>{{ item['id'] }}</button>
           <div class="titles">
-            <h1>Nell Barnes</h1>
-            <h2>Sistemas Para Internet</h2>
+            <div class="lado1">
+              <h1>{{ item.user.name }}</h1>
+              <h2>{{ item.user.tipo }}</h2>
+            </div>
           </div>
           <p>{{ item["descr"] }}</p>
-          <!-- <h1>{{ item["titulo"] }}</h1>
-          <h2>{{ item["subtitulo"] }}</h2>
-
-          <div class="imagem" v-if="item.img != ''">
-            <img :src="'assets/img/' + item['url']" alt="img" />
-          </div> -->
-          
+          <div class="actions">
+            <Link class="comment" :href="'aviso' + '/' + item['id']"><i class="bi bi-chat"></i> Comentar</Link>
+          </div>
         </div>
       </a>
     </div>
   </section>
+  <!-- <h1>{{ item["titulo"] }}</h1>
+  <h2>{{ item["subtitulo"] }}</h2>
+
+  <div class="imagem" v-if="item.img != ''">
+    <img :src="'assets/img/' + item['url']" alt="img" />
+  </div> -->
+  
 </template>
 
 <style scoped>
@@ -162,7 +170,7 @@ form textarea:focus {
   flex-direction: column;
   justify-content: center;
   align-items: start;
-  width: 80%;
+  width: 60%;
   height: auto;
   background-color: #fff;
   border: 2px solid #dfdfdf;
@@ -198,13 +206,29 @@ form textarea:focus {
 .text p {
   font-size: 12pt;
   font-weight: 400;
-  color: 252627;
+  color: #252627;
 }
 
 .titles {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.2rem;
+}
+
+.lado1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.2rem;
+  gap: 0.4rem;
+}
+
+.actions {
+  margin-top: 0.4rem;
+}
+.comment {
+  color: #555555;
+  font-size: 12pt;
 }
 </style>

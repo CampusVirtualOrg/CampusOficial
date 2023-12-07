@@ -48,8 +48,8 @@ defineProps({ user: Object, users: Object,cursos: Object })
                             <td v-if="usuario.curso == null">Sem Curso</td>
                             <td v-else>{{ usuario.curso.nome }}</td>
                             <td style="color: #3065ac;">
-                                <Link :href="`/usuarios/edit/${usuario.id}`"><i class="bi bi-pencil-fill mx-2"></i></Link>
-                                <Link :href="`/usuarios/remove/${usuario.id}`"><i class="bi bi-trash-fill mx-2"></i></Link>
+                                <Link :href="`/users/edit/${usuario.id}`"><i class="bi bi-pencil-fill mx-2"></i></Link>
+                                <Link :href="`/users/remove/${usuario.id}`"><i class="bi bi-trash-fill mx-2"></i></Link>
                             </td>
                         </tr>
                     </tbody>
