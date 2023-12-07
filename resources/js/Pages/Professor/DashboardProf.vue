@@ -31,6 +31,13 @@ defineProps({ user: Object })
             route="/requerimento/create"
             icon="bi bi-pencil-square"
         />
+
+        <Button
+            title="Chat"
+            description="Entre no chat ap vivo e interaja com a galera!"
+            route="/chat"
+            icon="bi bi-chat-left-dots"
+        />
     </section>
 
 </template>

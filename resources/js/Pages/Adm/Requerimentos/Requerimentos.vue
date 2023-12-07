@@ -7,8 +7,12 @@ import { RiEdit2Fill } from "oh-vue-icons/icons";
 const props = defineProps({
     user: Object,
     requerimentos: Object
-})
+});
 
+const formatDateAgo = (datetime) => {
+    const date = new Date(datetime);
+    return date.toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+};
 </script>
 
 
@@ -16,7 +20,7 @@ const props = defineProps({
     <Head title="Paniel Administrador" />
 
     <main class="mainAdmin">
-        <Aside :nome="user.name" :imagem="user.imagem" :tipo="user.tipo"/>
+        <Aside :nome="user.name" :imagem="user.imagem" :tipo="user.tipo" />
 
         <section>
             <Header />
@@ -39,13 +43,17 @@ const props = defineProps({
                             <td>{{ requerimento.email_usuario }}</td>
                             <td>{{ requerimento.tipo_requerimento }}</td>
                             <td>{{ requerimento.observacoes }}</td>
-                            <td v-if="requerimento.status == 'Aceito'"><span class="text-green-800 font-bold">{{ requerimento.status }}</span></td>
-                            <td v-else-if="requerimento.status == 'Pendente'"><span class="text-yellow-600 font-bold">{{ requerimento.status }}</span></td>
+                            <td v-if="requerimento.status == 'Aceito'"><span
+                                    class="text-green-800 font-bold">{{ requerimento.status }}</span></td>
+                            <td v-else-if="requerimento.status == 'Pendente'"><span
+                                    class="text-yellow-600 font-bold">{{ requerimento.status }}</span></td>
                             <td v-else><span class="text-red-600 font-bold">{{ requerimento.status }}</span></td>
-                            <td>{{ requerimento.created_at }}</td>
+                            <td>{{ formatDateAgo(requerimento.created_at) }}</td>
                             <td style="color: #3065ac;">
-                                <Link :href="`/requerimentos/edit/${requerimento.id}`"><i class="bi bi-pencil-fill mx-2"></i></Link>
-                                <Link :href="`/requerimentos/remove/${requerimento.id}`"><i class="bi bi-trash-fill mx-2"></i></Link>
+                                <Link :href="`/requerimentos/edit/${requerimento.id}`"><i
+                                    class="bi bi-pencil-fill mx-2"></i></Link>
+                                <Link :href="`/requerimentos/remove/${requerimento.id}`"><i
+                                    class="bi bi-trash-fill mx-2"></i></Link>
                             </td>
                         </tr>
                     </tbody>

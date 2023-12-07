@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LogonController;
 use App\Http\Controllers\RequerimentosController;
 use App\Http\Controllers\AccessibleController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\MessageController;
 

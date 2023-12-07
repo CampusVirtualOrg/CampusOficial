@@ -20,10 +20,11 @@ defineProps({ user: Object });
     <Button title="Boletim" description="Notas e faltas do semestre aparecerão aqui!" route="/boletim"
       icon="bi bi-receipt" />
 
-    <Button title="Requerimentos" description="Faça seus requerimentos pro bloco administrativo!" route="/requerimento/create"
-      icon="bi bi-pencil-square" />
+    <Button title="Requerimentos" description="Faça seus requerimentos pro bloco administrativo!"
+      route="/requerimento/create" icon="bi bi-pencil-square" />
 
-    <Button title="Registro" description="Seus registros estão aqui!" route="" icon="bi bi-check-square" />
+    <Button title="Chat" description="Entre no chat ap vivo e interaja com a galera!" route="/chat"
+      icon="bi bi-chat-left-dots" />
   </section>
 </template>
 

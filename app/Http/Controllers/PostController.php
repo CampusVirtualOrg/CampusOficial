@@ -22,9 +22,10 @@ class PostController extends Controller
 	public function show(String $id)
     {
 
-		$comments = Comment::where('post_id',$id)->get();
-        $post = Post::where('id',$id)->get();
-        return Inertia::render('AvisoAlunoOne' , ['post' => $post , 'comments' => $comments]);
+		$comments = Comment::where('post_id',$id)->with('user')->get();
+        $post = Post::where('id',$id)->with('user')->get();
+		$user = Auth::user();
+        return Inertia::render('AvisoAlunoOne' , ['post' => $post , 'comments' => $comments, 'user' => $user]);
     }
 
     public function create()

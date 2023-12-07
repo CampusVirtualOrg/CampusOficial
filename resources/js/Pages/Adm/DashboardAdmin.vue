@@ -31,6 +31,12 @@ const props = defineProps({ user: Object });
 
                 <Card title="Requerimentos" description="Veja os requerimentos" route="requerimentos"
                     icon="bi bi-file-earmark-text-fill" />
+
+                <Card title="Posts e Avisos" description="Veja os posts da galera!" route="avisos"
+                    icon="bi bi-app-indicator" />
+
+                <Card title="Chat" description="Entre no chat ao vivo!" route="chat"
+                    icon="bi bi-chat-left-dots" />
             </div>
         </section>
     </main>

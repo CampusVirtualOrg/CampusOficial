@@ -27,7 +27,7 @@ class CommentController extends Controller
 			]);
 			$comment->save();
 
-			return redirect('/aviso');
+			return redirect("/aviso/$post");
 
 
 		} catch (\Throwable $th) {
