@@ -154,4 +154,20 @@ i:hover {
   color: #3065ac;
 }
 
+@media screen and (max-width: 678px) {
+  .perfil {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12pt;
+  }
+
+  .img-perfil {
+    width: 3rem;
+    height: 3rem;
+  }
+  .box {
+    display: none;
+  }
+}
 </style>

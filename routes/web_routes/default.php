@@ -30,7 +30,7 @@ Route::get('/aviso/remove/{id}', [PostController::class, 'remove'])->name('aviso
 
 // Comments routes
 Route::post('aviso/comment', [CommentController::class, 'store'])->name('comments.store');
-Route::delete('aviso/comment/id}', [CommentController::class, 'destroy'])->name('comments.remove');
+Route::delete('aviso/comment/{id}', [CommentController::class, 'destroy'])->name('comments.remove');
 
 // Create requeriments routes
 Route::get('/requerimento/create', [RequerimentosController::class, 'index'])->name('requerimento.index');

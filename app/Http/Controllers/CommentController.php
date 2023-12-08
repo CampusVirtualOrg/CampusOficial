@@ -17,14 +17,13 @@ class CommentController extends Controller
 			$user = $user['id'];
 			$post = $credentials['post'];
 			$msg = $credentials['comment'];
-			dump($post,$user,$msg);
-
 
 			$comment = new Comment([
 				'comment' => $msg,
 				'user_id' => $user,
 				'post_id' => $post,
 			]);
+
 			$comment->save();
 
 			return redirect("/aviso/$post");

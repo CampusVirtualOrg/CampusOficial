@@ -23,7 +23,7 @@ class PostController extends Controller
     {
 
 		$comments = Comment::where('post_id',$id)->with('user')->get();
-        $post = Post::where('id',$id)->with('user')->get();
+        $post = Post::where('id',$id)->with('user')->latest()->get();
 		$user = Auth::user();
         return Inertia::render('AvisoAlunoOne' , ['post' => $post , 'comments' => $comments, 'user' => $user]);
     }

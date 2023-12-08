@@ -69,7 +69,7 @@ const formatDateAgo = (datetime) => {
 
     <div class="section-left">
       <form @submit.prevent="handleSubmit">
-        <textarea v-model="formData.descr" :placeholder="`Poste alguma coisa ${props.user.name}!`"></textarea>
+        <textarea v-model="formData.descr" :placeholder="`Poste alguma coisa ${props.user.name}!`" required></textarea>
         <button type="submit" class="buttonCriar">Postar</button>
       </form>
       <!-- <Link :href="route('professor.index')" title="Campus Virtual" class="logoAsclasse">
@@ -88,7 +88,7 @@ const formatDateAgo = (datetime) => {
           </div>
           <p>{{ item["descr"] }}</p>
           <div class="actions">
-            <Link class="comment" :href="'aviso' + '/' + item['id']"><i class="bi bi-chat"></i> Comentar</Link>
+            <Link class="comment" :href="'aviso' + '/' + item['id']" title="Comentar"><i class="bi bi-chat"></i></Link>
             <h2>{{ formatDateAgo(item.created_at) }}</h2>
           </div>
         </div>
@@ -176,6 +176,7 @@ form textarea:focus {
 .logoAsclasse {
   max-width: 4rem;
 }
+
 .section-rigth {
   margin-top: 1rem;
   min-height: 80vh;
@@ -241,15 +242,53 @@ form textarea:focus {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  gap: 0.2rem;
 }
 
 .comment {
   color: #555555;
   font-size: 12pt;
+  display: flex;
+  gap: 0.2rem;
 }
 
 .imagem img {
   max-width: 20%;
   margin: 1rem 0rem;
+}
+
+@media screen and (max-width: 878px) {
+  header {
+    gap: 2rem;
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+  } 
+
+  .section-left {
+    height: auto;
+    align-self: center;
+    width: 100%;
+  }
+
+  form {
+    gap: 0.2rem;
+  }
+  .section-rigth {
+    margin-top: 0;
+    flex-direction: column;
+  }
+
+  .container-post {
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+
 }
 </style>
