@@ -62,7 +62,7 @@ form {
   display: flex;
   flex-direction: column;
   margin-top: 2rem;
-  width: 20%;
+  width: 30%;
   gap: 2rem;
 }
 
@@ -120,6 +120,7 @@ section {
   align-items: start;
   width: 100%;
   gap: 1rem;
+  margin-top: 2rem;
 }
 
 .turmas {
@@ -143,5 +144,21 @@ main {
   flex-direction: column;
   align-items: center;
   width: 100%;
+}
+
+@media screen and (max-width: 672px) {
+  form {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 424px) {
+  h1 {
+    font-size: 14pt;
+  }
+
+  h2 {
+    font-size: 10pt;
+  }
 }
 </style>

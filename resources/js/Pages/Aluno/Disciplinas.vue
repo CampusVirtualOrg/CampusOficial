@@ -20,8 +20,8 @@ defineProps({ user: Object, disciplinas: Object })
             <div class="texts">
                 <h1>Disciplinas</h1>
                 <div class="side">
-                    <h2>Aluno: {{user.name}}</h2>
-                    <h3>Curso: {{user.curso_id}}</h3>
+                    <h2>Aluno: {{ user.name }}</h2>
+                    <h3>Curso: {{ user.curso_id }}</h3>
                 </div>
             </div>
             <table class="styled-table">
@@ -38,9 +38,10 @@ defineProps({ user: Object, disciplinas: Object })
                     <tr>
                         <td>{{ disciplina.nome }}</td>
                         <td>{{ disciplina.sigla }}</td>
-                        <td>{{ disciplina.carga_horaria }}</td>
-                        <td>{{ disciplina.pre_requisito_id }}</td>
-                        <td>{{ disciplina.curso_id }}</td>
+                        <td>{{ disciplina.carga_horaria }}h</td>
+                        <td v-if="disciplina.pre_requisito == null">Sem Pré Requisito</td>
+                            <td v-else>{{ disciplina.pre_requisito.nome }}</td>
+                        <td>{{ disciplina.curso.nome }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -69,9 +70,16 @@ section {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    margin-top: 1rem;
-    width: 100%;
+    margin: 2rem auto;
 }
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 4rem;
+}
+
 
 .texts {
     display: flex;
@@ -86,7 +94,8 @@ h1 {
     color: #3065ac;
 }
 
-h2, h3 {
+h2,
+h3 {
     font-size: 14pt;
     color: #252627;
     font-weight: 600;
@@ -116,4 +125,31 @@ th {
     color: #ffffff;
     font-size: 14pt;
 }
-</style>
+
+@media screen and (max-width: 864px) {
+
+    tr,
+    td,
+    th {
+        border: 1px solid black;
+        text-align: center;
+        padding: 0.1rem;
+        font-size: 11pt;
+    }
+
+    th {
+        padding: 1px;
+        background-color: #3065ac;
+        color: #ffffff;
+        font-size: 12pt;
+    }
+
+    h1 {
+        font-size: 20pt;
+    }
+
+    h2,
+    h3 {
+        font-size: 14pt;
+    }
+}</style>

@@ -22,8 +22,8 @@ defineProps({
     </div>
 
     <div class="buttons">
-      <i class="bi bi-bell-fill"></i>
-      <i class="bi bi-caret-down-square-fill"></i>
+      <!-- <i class="bi bi-bell-fill"></i>
+      <i class="bi bi-caret-down-square-fill"></i> -->
       <Link :href="route('logout')" method="post" as="button">
       <i class="bi bi-door-open-fill"></i>
       </Link>
@@ -109,5 +109,33 @@ defineProps({
 .buttons i {
   font-size: 18pt;
   color: #3065ac;
+}
+
+@media screen and (max-width: 678px) {
+  .header-section {
+    justify-content: space-around;
+  }
+
+  .perfil {
+    display: none;
+  }
+
+  .box .input {
+    padding: 10px;
+    width: 170px;
+    height: 40px;
+  }
+
+  .box:hover input {
+    width: 170px;
+    background: #ffffff;
+    border-radius: 10px;
+  }
+  
+  .box input:focus {
+    width: 170px;
+    background: #ffffff;
+    border-radius: 10px;
+  }
 }
 </style>

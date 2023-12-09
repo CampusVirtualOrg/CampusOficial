@@ -20,15 +20,17 @@ const props = defineProps({
             <span class="title">
                 {{ title }}
             </span>
-            {{ description }}
+            <span class="description">
+                {{ description }}
+            </span>
         </p>
         </Link>
     </button>
 </template>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 .button-section {
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
     font-family: 'Inter', sans-serif;
     display: flex;
     align-items: center;
@@ -44,14 +46,21 @@ const props = defineProps({
 .button-section:hover {
     background-color: #e9e9e9;
 }
+.button-section:focus {
+    background-color: #e9e9e9;
+}
 
 p {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: start;
     margin-left: 10px;
+}
+
+.description {
     font-size: 16px;
     font-weight: 500;
+    text-align: start;
 }
 
 .title {
@@ -63,6 +72,45 @@ p {
 i {
     font-size: 40px;
     color: #3065ac;
+}
+
+@media screen and (max-width: 672px) {
+	.button-section {
+        width: 80%;
+        padding: 0.8rem;
+    }
+
+    .description {
+        font-size: 16px;
+    }
+    
+    .title {
+        color: #3065ac;
+        font-size: 25px;
+        font-weight: 700;
+    }
+    
+    i {
+        font-size: 40px;
+        color: #3065ac;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .description {
+        font-size: 14px;
+    }
+    
+    .title {
+        color: #3065ac;
+        font-size: 18px;
+        font-weight: 700;
+    }
+    
+    i {
+        font-size: 36px;
+        color: #3065ac;
+    }
 }
 </style>
 

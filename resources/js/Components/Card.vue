@@ -83,4 +83,43 @@ const props = defineProps({
 .card:hover {
 	outline: 2px solid #3065ac;
 }
+
+@media screen and (max-width: 672px) {
+	.card {
+		width: 16rem;
+		height: 100px;
+	}
+	.card i {
+		font-size: 20pt;
+		
+	}
+	
+	.card .card-title {
+		font-size: 14pt;
+		
+	}
+	
+	.card .texts {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: start;
+		height: 120px;
+		font-weight: 500;
+		font-size: 16pt;
+		color: #252627;
+		
+	}
+	
+	.card p {
+		font-size: 11pt;
+	}
+}
+
+@media screen and (max-width: 380px) {
+	.card {
+		width: 14rem;
+		height: 100px;
+	}
+}
 </style>

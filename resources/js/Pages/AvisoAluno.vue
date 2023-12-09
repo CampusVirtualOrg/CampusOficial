@@ -84,7 +84,7 @@ const formatDateAgo = (datetime) => {
           <button hidden>{{ item['id'] }}</button>
           <div class="titles">
             <h1>{{ item.user.name }}</h1>
-            <h2>{{ item.user.tipo }}</h2>
+            <h2>{{ item.user.tipo }}(a)</h2>
           </div>
           <p>{{ item["descr"] }}</p>
           <div class="actions">

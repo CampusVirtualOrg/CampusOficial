@@ -175,4 +175,17 @@ h1 {
 .status select {
     width: 100%;
 }
+
+@media screen and (max-width: 912px) {
+    .forms {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 424px) {
+    h1 {
+        font-size: 16pt;
+    }
+}
 </style>

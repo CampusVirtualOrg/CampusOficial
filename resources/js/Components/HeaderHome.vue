@@ -60,4 +60,28 @@ a {
     background-color: var(--main-blue);
     cursor: pointer;
 }
+
+.entrarHeader:focus {
+    color: var(--white);
+    background-color: var(--main-blue);
+    cursor: pointer;
+}
+
+@media screen and (max-width: 722px) {
+    .options {
+        display: none;
+    }
+
+    .entrarHeader {
+        padding: 0.4rem;
+        width: 6rem;
+        font-size: 14pt;
+    }
+}
+
+@media screen and (max-width: 424px) {
+    h1 {
+        font-size: 16pt;
+    }
+}
 </style>

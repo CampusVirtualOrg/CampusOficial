@@ -210,4 +210,22 @@ aside {
     display: flex;
     justify-content: center;
 }
+
+@media screen and (max-width: 1080px) {
+
+    .dropdown-toggle {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 672px) {
+    .logoAsclasse {
+        width: 2rem;
+    }
+
+    .img-perfil {
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+}
 </style>

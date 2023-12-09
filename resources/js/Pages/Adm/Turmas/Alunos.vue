@@ -86,4 +86,30 @@ th {
 	color: #ffffff;
 	font-size: 14pt;
 }
+
+@media screen and (max-width: 724px) {
+	h1 {
+		font-size: 14pt;
+	}
+
+	h2 {
+		font-size: 10pt;
+	}
+
+    tr,
+    td,
+    th {
+        border: 1px solid black;
+        text-align: center;
+        padding: 0.1rem;
+        font-size: 11pt;
+    }
+
+    th {
+        padding: 1px;
+        background-color: #3065ac;
+        color: #ffffff;
+        font-size: 12pt;
+    }
+}
 </style>

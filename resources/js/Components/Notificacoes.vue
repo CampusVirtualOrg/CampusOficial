@@ -44,6 +44,7 @@
   padding: 0.2rem 0.2rem 2rem 0.2rem;
   gap: 1rem;
   z-index: 1;
+  
 }
 
 .notifications-sect {
@@ -106,7 +107,7 @@ i {
   font-size: 25px;
   color: #3065ac;
   cursor: pointer;
-  margin-right: 10vh;
+  margin-right: 4rem;
 }
 
 i:hover {

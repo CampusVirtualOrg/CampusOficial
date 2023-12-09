@@ -147,4 +147,17 @@ h1 {
     height: 100%;
     justify-content: center;
 }
+
+@media screen and (max-width: 912px) {
+    .forms {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 912px) {
+    h1 {
+        font-size: 18pt;
+    }
+}
 </style>

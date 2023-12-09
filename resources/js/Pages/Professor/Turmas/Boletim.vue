@@ -9,7 +9,6 @@ defineProps({
 
 
 <template>
-
     <Head title="Turmas Professor" />
     <header>
         <HeaderAluno :nome="user.name" />
@@ -28,7 +27,7 @@ defineProps({
                         <th>Unidade 1</th>
                         <th>Unidade 2</th>
                         <th>Média Final</th>
-						<th>Notas e Faltas</th>
+                        <th>Notas e Faltas</th>
 
                     </tr>
                 </thead>
@@ -39,12 +38,15 @@ defineProps({
                         <td>{{ aluno.faltas }}</td>
                         <td>{{ aluno.nota_unidade1 }}</td>
                         <td>{{ aluno.nota_unidade2 }}</td>
-                        <td class="media" v-if="aluno.media_final >= 7"><span class="text-green-800">{{ aluno.media_final }}</span></td>
+                        <td class="media" v-if="aluno.media_final >= 7"><span
+                                class="text-green-800">{{ aluno.media_final }}</span></td>
                         <td class="media" v-else><span class="text-red-800">{{ aluno.media_final }}</span></td>
-						<td><form :action="'/professor/turmas/editar/'+aluno.id" method="get">
-							<input name="turma_id" hidden :value="turma.id">
-							<button type="submit">Lançar</button>
-						</form></td>
+                        <td>
+                            <form :action="'/professor/turmas/editar/' + aluno.id" method="get">
+                                <input name="turma_id" hidden :value="turma.id">
+                                <button type="submit">Lançar</button>
+                            </form>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -64,10 +66,11 @@ header {
     top: 0;
     margin-top: 1rem;
 }
-button{
-	text-align: center;
-	color:red;
-	font-weight: bolder;
+
+button {
+    text-align: center;
+    color: red;
+    font-weight: bolder;
 }
 
 section {
@@ -77,6 +80,7 @@ section {
     align-items: start;
     width: 100%;
     gap: 1rem;
+    margin-top: 2rem;
 }
 
 .turmas {
@@ -133,4 +137,23 @@ input {
 .media {
     font-weight: 800;
 }
-</style>
+
+@media screen and (max-width: 612px) {
+
+    tr,
+    td,
+    th {
+        border: 1px solid black;
+        text-align: center;
+        padding: 0.1rem;
+        font-size: 11pt;
+    }
+
+    th {
+        padding: 1px;
+        background-color: #3065ac;
+        color: #ffffff;
+        font-size: 12pt;
+    }
+
+}</style>

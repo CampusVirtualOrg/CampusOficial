@@ -8,26 +8,26 @@ defineProps({
 });
 
 const formatDateAgo = (datetime) => {
-        const currentDate = new Date();
-		const postDate = new Date(datetime);
-		const timeDifference = currentDate - postDate;
-		const seconds = Math.floor(timeDifference / 1000);
-		const minutes = Math.floor(seconds / 60);
-		const hours = Math.floor(minutes / 60);
+	const currentDate = new Date();
+	const postDate = new Date(datetime);
+	const timeDifference = currentDate - postDate;
+	const seconds = Math.floor(timeDifference / 1000);
+	const minutes = Math.floor(seconds / 60);
+	const hours = Math.floor(minutes / 60);
 
-		if(hours < 24) {
-			if(hours > 0) {
-				return `há ${hours} ${hours > 1 ? 'horas' : 'hora' }`;
-			} else if(minutes > 0) {
-				return `há ${minutes} ${minutes > 1 ? 'minutos' : 'minuto' }`;
-			} else if(seconds > 0) {
-				return `há ${seconds} ${seconds > 1 ? 'segundos' : 'segundo' }`;
-			}
-		} else {
-			return postDate.toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+	if (hours < 24) {
+		if (hours > 0) {
+			return `há ${hours} ${hours > 1 ? 'horas' : 'hora'}`;
+		} else if (minutes > 0) {
+			return `há ${minutes} ${minutes > 1 ? 'minutos' : 'minuto'}`;
+		} else if (seconds > 0) {
+			return `há ${seconds} ${seconds > 1 ? 'segundos' : 'segundo'}`;
 		}
+	} else {
+		return postDate.toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+	}
 
-    };
+};
 </script>
 
 <template>
@@ -41,7 +41,7 @@ const formatDateAgo = (datetime) => {
 				<div class="titles">
 					<div class="lado1">
 						<h1>{{ item.user.name }}</h1>
-						<h2>{{ item.user.tipo }}</h2>
+						<h2>{{ item.user.tipo }}(a)</h2>
 					</div>
 					<h2>{{ formatDateAgo(item.created_at) }}</h2>
 				</div>
@@ -63,7 +63,7 @@ const formatDateAgo = (datetime) => {
 					<div class="titlesComment">
 						<div class="textsCom">
 							<h1>{{ comment.user.name }}</h1>
-							<h2>{{ comment.user.tipo }}</h2>
+							<h2>{{ comment.user.tipo }}(a)</h2>
 						</div>
 						<h2>{{ formatDateAgo(comment.created_at) }}</h2>
 					</div>
@@ -95,7 +95,7 @@ section {
 	height: 100%;
 	width: 80%;
 	background-color: white;
-	margin: 4rem;
+	margin: 2rem auto;
 	font-family: "Inter", sans-serif;
 	gap: 0.4rem;
 }
@@ -157,9 +157,17 @@ section {
 	justify-content: space-between;
 }
 
+.titles h2 {
+	text-align: end;
+}
+
 .lado1 {
 	display: flex;
 	flex-direction: column;
+}
+
+.lado1 h2 {
+	text-align: start;
 }
 
 .actions {
@@ -225,14 +233,16 @@ label {
 	display: flex;
 	flex-direction: column;
 	background-color: #fff;
-	border-bottom: 2px solid #dfdfdf;		
+	border-bottom: 2px solid #dfdfdf;
 	padding: 1rem 2rem;
 	gap: 0.8rem;
 	width: 100%;
 }
+
 .commentIndividual p {
 	color: #252627;
 }
+
 .titlesComment {
 	display: flex;
 	align-items: center;
@@ -244,20 +254,80 @@ label {
 	font-size: 11pt;
 	font-weight: 600;
 	color: #555555;
+	text-align: end;
 }
+
 .textsCom {
 	display: flex;
 	align-items: center;
 	gap: 0.4rem;
 }
+
 .textsCom h1 {
 	color: #3065ac;
 	font-weight: 700;
 	font-size: 14pt;
 }
+
 .textsCom h2 {
 	color: #555555;
 	font-weight: 600;
 	font-size: 12pt;
+}
+
+@media screen and (max-width: 872px) {
+	header {
+		gap: 2rem;
+	}
+
+	a {
+		width: 100%;
+	}
+
+	.comentar {
+		width: 100%;
+	}
+
+	.container-post {
+		min-width: 100%;
+		max-width: 100%;
+	}
+
+	.comentarios {
+		width: 100%;
+	}
+
+	.textsCom {
+		display: flex;
+		flex-direction: column;
+		align-items: start;
+		gap: 0.2rem;
+	}
+}
+
+@media screen and (max-width: 468px) {
+	.text h1 {
+		font-size: 14pt;
+	}
+
+	.text h2 {
+		font-size: 11pt;
+	}
+
+	.text p {
+		font-size: 12pt;
+	}
+
+	.textsCom h1 {
+		color: #3065ac;
+		font-weight: 700;
+		font-size: 12pt;
+	}
+
+	.textsCom h2 {
+		color: #555555;
+		font-weight: 600;
+		font-size: 10pt;
+	}
 }
 </style>

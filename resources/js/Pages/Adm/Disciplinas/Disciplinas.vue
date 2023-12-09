@@ -112,4 +112,27 @@ th {
     color: #ffffff;
     font-size: 14pt;
 }
+
+@media screen and (max-width: 724px) {
+    tr,
+    td,
+    th {
+        border: 1px solid black;
+        text-align: center;
+        padding: 0.1rem;
+        font-size: 11pt;
+    }
+
+    th {
+        padding: 1px;
+        background-color: #3065ac;
+        color: #ffffff;
+        font-size: 12pt;
+    }
+
+    .buttonAdd {
+        font-size: 12pt;
+        padding: 0.4rem;
+    }
+}
 </style>

@@ -7,6 +7,7 @@ import { Head, Link } from '@inertiajs/vue3';
 
 <template>
   <main>
+
     <Head title="Welcome" />
     <header>
       <HeaderHome />
@@ -22,7 +23,7 @@ import { Head, Link } from '@inertiajs/vue3';
           Bem vindo ao Campus Virtual, um site que irá lhe ajudar a gerenciar
           os estudos!
         </p>
-          <Link :href="route('login')" id="Button-body-Enter" class="entrar">Entrar</Link>
+        <Link :href="route('login')" id="Button-body-Enter" class="entrar">Entrar</Link>
       </section>
       <Carousel />
     </div>
@@ -116,5 +117,113 @@ p {
   transform: translateY(-7px);
   border: none;
   cursor: pointer;
+}
+
+
+@media screen and (max-width: 916px) {
+  .mainLanding {
+    flex-direction: column;
+    min-height: 100vh;
+  }
+}
+
+@media screen and (max-width: 572px) {
+  .mainLanding {
+    gap: 2rem;
+    margin-top: 0;
+  }
+
+  h1 {
+    font-size: 32pt;
+  }
+
+  h3 {
+    font-size: 20pt;
+  }
+
+  h2 {
+    font-size: 20pt;
+  }
+
+  p {
+    font-size: 14pt;
+    margin-top: 1rem;
+    max-width: 24rem;
+  }
+
+
+  .subtitle {
+    line-height: 2rem;
+  }
+
+  .entrar {
+    font-size: 16pt;
+    width: 8rem;
+  }
+
+  @media screen and (max-width: 468px) {
+    h1 {
+      font-size: 28pt;
+    }
+
+    h3 {
+      font-size: 18pt;
+    }
+
+    h2 {
+      font-size: 18pt;
+    }
+
+    p {
+      font-size: 14pt;
+      margin-top: 1rem;
+      max-width: 24rem;
+    }
+
+    .entrar {
+      font-size: 14pt;
+      width: 6rem;
+    }
+  }
+}
+
+@media screen and (max-width: 420px) {
+  h1 {
+    font-size: 24pt;
+  }
+
+  h3 {
+    font-size: 16pt;
+  }
+
+  h2 {
+    font-size: 16pt;
+  }
+
+  p {
+    font-size: 14pt;
+    margin-top: 1rem;
+    max-width: 24rem;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  h1 {
+    font-size: 22pt;
+  }
+
+  h3 {
+    font-size: 14pt;
+  }
+
+  h2 {
+    font-size: 14pt;
+  }
+
+  p {
+    font-size: 12pt;
+    margin-top: 1rem;
+    max-width: 24rem;
+  }
 }
 </style>
