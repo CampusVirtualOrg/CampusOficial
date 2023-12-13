@@ -268,7 +268,7 @@ form textarea:focus {
     align-items: center;
     justify-content: center;
     max-width: 100%;
-  } 
+  }
 
   .section-left {
     height: auto;

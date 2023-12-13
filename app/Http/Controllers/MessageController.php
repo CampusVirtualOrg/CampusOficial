@@ -2,31 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\Chat\SendMessage;
-use Illuminate\Console\Scheduling\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Pusher\Pusher;
-use Illuminate\Database\Eloquent\Model;
 use App\Models\Message;
 use Inertia\Inertia;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use App\Events\NewMessage;
+
 
 class MessageController extends Controller
 {
     public function index()
     {
 		$user = Auth::user();
-		$users = User::all();
 
-		$messages = DB::table('messages')
-            ->where('from', '=', $user->id)
-            ->orWhere('to', '=', $user->id)
-            ->select('*')
-            ->get();
+		$messages = Message::all();
 
-        return Inertia::render('Chat/DashboardChat', ['user' => $user, 'users' => $users, 'messages' => $messages]);
+        return Inertia::render('Chat/DashboardChat', ['user' => $user,  'messages' => $messages]);
     }
 
     public function create()
@@ -37,34 +30,24 @@ class MessageController extends Controller
 
     public function store(Request $request)
     {
-
 		$user = Auth::user();
 
         $message = new Message([
-			'from' => $user->id,
-			'to' => $request->to,
-			'content' => $request->content
-		]);
+            'from' => $user->id,
+            'content' => $request->content,
+        ]);
 
-		$message->save();
+        $message->save();
 
-		// Event::dispatch(new SendMessage($message, $request->to));
+        // broadcast(new NewMessage($message))->toOthers();
 
-		return redirect(route('chat'));
+        return redirect(route('chat.index'));
     }
 
     public function ListMessage(User $user)
     {
-        $userForm = Auth::user()->id();
-		$userTo = $user->id();
-
-		$messages = Message::where(function($query) use ($userForm, $userTo){
-			$query->where('from', $userForm)->where('to', $userTo);
-		})->orWhere(function($query) use ($userForm, $userTo){
-			$query->where('from', $userTo)->where('to', $userForm);
-		}) ->get();
+		$messages = Message::all();
 	}
-
 
     public function edit(string $id)
     {
@@ -80,4 +63,10 @@ class MessageController extends Controller
     {
         //
     }
+
+	public function api()
+	{
+		$messages = Message::all();
+		return response()->json($messages);
+	}
 }

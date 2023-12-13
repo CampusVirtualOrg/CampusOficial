@@ -1,73 +1,49 @@
-<script>
+<script setup>
+import Message from '@/Components/Message.vue';
+import { defineProps } from 'vue';
 
-// export default {
-// 	data() {
-// 	  return {
-// 		messages: [],
-// 		newMessage: '',
-// 	  };
-// 	},
-// 	methods: {
-// 	  sendMessage() {
-// 		// Simule uma mensagem enviada, você deve enviar para um servidor na realidade
-// 		const newMessageObj = {
-// 		  id: this.messages.length + 1,
-// 		  sender: 'Você',
-// 		  content: this.newMessage,
-// 		};
-// 		this.messages.push(newMessageObj);
-// 		this.newMessage = '';
-// 	  },
-// 	},
-//   };
+const { user, messages } = defineProps(['user', 'messages']);
 </script>
 
 <template>
-	<div class="chat-container">
-	  <div class="messages">
-		<div v-for="message in messages" :key="message.id" class="message">
-		  {{ message.sender }}: {{ message.content }}
-		</div>
-	  </div>
-	  <form class="input-container" action="/chat" method="post">
-		<input v-model="newMessage" placeholder="Digite uma mensagem..." />
-		<button type="submit" @click="sendMessage">Enviar</button>
-	  </form>
-	</div>
-  </template>
+  <div class="chat-container">
+    <Message />
+    <form class="send" action="/chat" method="post">
+      <input type="text" name="content" id="content" placeholder="Digite uma mensagem..." />
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+</template>
 
-  <style scoped>
-  .chat-container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: space-between;
-	width: 300px;
-  }
+<style scoped>
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
 
-  .messages {
-	border: 1px solid #ccc;
-	padding: 10px;
-	max-height: 300px;
-	overflow-y: auto;
-  }
+.messages {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}
 
-  .message {
-	margin-bottom: 8px;
-  }
+.message {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
 
-  .input-container {
-	display: flex;
-	margin-top: 10px;
-  }
+.send {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  input {
-	flex: 1;
-	padding: 5px;
-  }
-
-  button {
-	margin-left: 5px;
-	padding: 5px 10px;
-  }
-  </style>
+input {
+  width: 100%;
+  display: block;
+}
+</style>

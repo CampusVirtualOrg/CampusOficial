@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Aviso;
 
+
 class AvisosController extends Controller
 {
     public function showAll(){
