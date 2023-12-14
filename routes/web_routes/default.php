@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LogonController;
 use App\Http\Controllers\RequerimentosController;
 use App\Http\Controllers\AccessibleController;
+use App\Http\Controllers\ChatsController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\MessageController;
@@ -37,8 +38,15 @@ Route::get('/requerimento/create', [RequerimentosController::class, 'index'])->n
 Route::post('/requerimento/create', [RequerimentosController::class, 'create'])->name('requerimento.create');
 
 // Chat routes
-Route::get('/chat', [MessageController::class, 'index'])->name('chat.index');
-Route::post('/chat', [MessageController::class, 'store'])->name('chat.store');
-Route::get('/chat/{user}', [MessageController::class, 'ListMessage'])->name('chat.list');
+// routes/web.php
+
+
+Route::get('/chat', [ChatsController::class, 'index']);
+Route::get('/messages', [ChatsController::class, 'fetchMessages']);
+Route::post('/messages', [ChatsController::class, 'sendMessage']);
+
+// Route::get('/chat', [MessageController::class, 'index'])->name('chat.index');
+// Route::post('/chat', [MessageController::class, 'store'])->name('chat.store');
+// Route::get('/chat/{user}', [MessageController::class, 'ListMessage'])->name('chat.list');
 
 ?>

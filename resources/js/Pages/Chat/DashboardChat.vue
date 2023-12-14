@@ -1,73 +1,62 @@
-<script>
+<script setup>
+import ChatMessages from '@/Components/ChatMessages.vue';
+import ChatForm from '@/Components/ChatForm.vue';
+import { ref } from 'vue'; // Importe 'ref' para criar reatividade
 
-// export default {
-// 	data() {
-// 	  return {
-// 		messages: [],
-// 		newMessage: '',
-// 	  };
-// 	},
-// 	methods: {
-// 	  sendMessage() {
-// 		// Simule uma mensagem enviada, você deve enviar para um servidor na realidade
-// 		const newMessageObj = {
-// 		  id: this.messages.length + 1,
-// 		  sender: 'Você',
-// 		  content: this.newMessage,
-// 		};
-// 		this.messages.push(newMessageObj);
-// 		this.newMessage = '';
-// 	  },
-// 	},
-//   };
+defineProps({
+	user: Object,
+	messages: Object
+})
+
+// Método para adicionar mensagem à lista de mensagens
+const addMessage = (message) => {
+	messages.value.push({
+		user: user.value,
+		text: message
+	});
+};
 </script>
 
 <template>
-	<div class="chat-container">
-	  <div class="messages">
-		<div v-for="message in messages" :key="message.id" class="message">
-		  {{ message.sender }}: {{ message.content }}
-		</div>
-	  </div>
-	  <form class="input-container" action="/chat" method="post">
-		<input v-model="newMessage" placeholder="Digite uma mensagem..." />
-		<button type="submit" @click="sendMessage">Enviar</button>
-	  </form>
-	</div>
-  </template>
+	<div class="container">
+		<div class="panel-heading">Chat do Campus Virtual</div>
 
-  <style scoped>
-  .chat-container {
+		<div class="panel-body">
+			<ChatMessages :messages="messages" :user="user"/>
+		</div>
+		<div class="panel-footer">
+			<ChatForm @message-sent="addMessage" :user="user" />
+		</div>
+	</div>
+</template>
+  
+<style>
+.container {
+	font-family: 'Inter', sans-serif;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: space-between;
-	width: 300px;
-  }
+	justify-content: center;
+	gap: 1rem;
+	margin-bottom: 6rem;
+}
 
-  .messages {
-	border: 1px solid #ccc;
-	padding: 10px;
-	max-height: 300px;
-	overflow-y: auto;
-  }
+.panel-body {
+	width: 100%;
+}
 
-  .message {
-	margin-bottom: 8px;
-  }
+.panel-footer {
+	width: 80%;
+	position: fixed;
+	bottom: 0;
+	margin-bottom: 1rem;
+}
 
-  .input-container {
-	display: flex;
-	margin-top: 10px;
-  }
-
-  input {
-	flex: 1;
-	padding: 5px;
-  }
-
-  button {
-	margin-left: 5px;
-	padding: 5px 10px;
-  }
-  </style>
+.panel-heading {
+	color: #3065ac;
+	font-weight: 800;
+	font-size: 24pt;
+}
+</style>
+	

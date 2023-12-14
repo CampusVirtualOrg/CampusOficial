@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -33,9 +33,9 @@ class User extends Authenticatable
     ];
 
     public function curso()
-	{
-		return $this->belongsTo(Curso::class);
-	}
+    {
+        return $this->belongsTo(Curso::class);
+    }
 
     public function matricula()
     {
@@ -51,6 +51,21 @@ class User extends Authenticatable
             'turma_id'
         );
     }
+
+    // app/User.php
+
+    /**
+     * A user can have many messages
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function userMessages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
+
+
 
     /**
      * The attributes that should be hidden for serialization.

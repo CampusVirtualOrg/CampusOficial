@@ -48,14 +48,14 @@ class MessageController extends Controller
 
 		$message->save();
 
-		// Event::dispatch(new SendMessage($message, $request->to));
+		Event::dispatch(new SendMessage($message, $request->to));
 
-		return redirect(route('chat'));
+		return redirect('/chat');
     }
 
     public function ListMessage(User $user)
     {
-        $userForm = Auth::user()->id();
+        $userForm = Auth::user()->id;
 		$userTo = $user->id();
 
 		$messages = Message::where(function($query) use ($userForm, $userTo){
