@@ -21,7 +21,6 @@ defineProps({
             <table>
                 <thead>
                     <tr>
-                        <th>Id do Aluno</th>
                         <th>Aluno</th>
                         <th>Faltas</th>
                         <th>Unidade 1</th>
@@ -33,7 +32,6 @@ defineProps({
                 </thead>
                 <tbody v-for="aluno in alunos">
                     <tr>
-                        <td>{{ aluno.id }}</td>
                         <td>{{ aluno.name }}</td>
                         <td>{{ aluno.faltas }}</td>
                         <td>{{ aluno.nota_unidade1 }}</td>

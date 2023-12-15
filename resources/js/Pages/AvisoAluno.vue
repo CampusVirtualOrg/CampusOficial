@@ -179,11 +179,11 @@ form textarea:focus {
 
 .section-rigth {
   margin-top: 1rem;
-  min-height: 80vh;
+  min-height: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: start;
-  align-items: center;
+  align-items: start;
   gap: 1rem;
 }
 
@@ -193,8 +193,8 @@ form textarea:focus {
   flex-direction: column;
   justify-content: center;
   align-items: start;
-  min-width: 30%;
-  max-width: 40%;
+  min-width: 28%;
+  max-width: 32%;
   height: auto;
   background-color: #fff;
   border: 2px solid #dfdfdf;
