@@ -12,8 +12,8 @@ defineProps({ user: Object })
 
     <section>
         <Button
-            title="Avisos"
-            description="Veja e publique seus avisos mais recentes!"
+            title="Posts"
+            description="Veja os posts da galera e publique também!"
             route="/avisos"
             icon="bi bi-app-indicator"
         />

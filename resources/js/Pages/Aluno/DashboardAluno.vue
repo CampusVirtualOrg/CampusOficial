@@ -11,7 +11,7 @@ defineProps({ user: Object });
   </header>
 
   <section>
-    <Button title="Avisos" description="Veja os avisos mais recentes publicados pelos professores!" route="avisos"
+    <Button title="Posts" description="Veja os posts da galera e publique também!" route="avisos"
       icon="bi bi-app-indicator" />
 
     <Button title="Disciplina" description="Veja as disciplinas do seu curso!" route="/minhasdisciplinas"
